@@ -1,0 +1,4053 @@
+<ExplanatoryNote xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:noNamespaceSchemaLocation="explanatorynote-01-05.xsd" SchemaVersion="01.05">
+  <ExplanatoryNoteNumber>014-2024-ПЗ</ExplanatoryNoteNumber>
+  <ExplanatoryNoteYear>2025</ExplanatoryNoteYear>
+  <IssueAuthor>
+    <IP>
+      <FamilyName>Шипулин</FamilyName>
+      <FirstName>Максим</FirstName>
+      <SecondName>Петрович</SecondName>
+      <OGRNIP>318237500330719</OGRNIP>
+      <PostAddress>
+        <Region>23</Region>
+        <PostIndex>353440</PostIndex>
+        <City>г. Анапа</City>
+        <Street>ул. Краснодарская</Street>
+        <Building>66В</Building>
+        <Room>оф. 36</Room>
+      </PostAddress>
+    </IP>
+  </IssueAuthor>
+  <Signers>
+    <ChiefProjectEngineer>
+      <FamilyName>Шипулина</FamilyName>
+      <FirstName>Кристина</FirstName>
+      <SecondName>Ивановна</SecondName>
+      <SNILS>126-540-580 47</SNILS>
+      <NOPRIZ>П-031090</NOPRIZ>
+    </ChiefProjectEngineer>
+  </Signers>
+  <Developer>
+    <Organization>
+      <OrgFullName>Общество с ограниченной ответственностью "Специализированный застройщик "Браво"</OrgFullName>
+      <OrgOGRN>1242300046450</OrgOGRN>
+      <OrgINN>2301114051</OrgINN>
+      <OrgKPP>230101001</OrgKPP>
+      <Address>
+        <Region>23</Region>
+        <District>Город-курорт Анапа</District>
+        <Settlement>с. Сукко</Settlement>
+        <Street>ул. Мирная</Street>
+        <Building>д. 9 к. 3</Building>
+        <Room>офис 2</Room>
+      </Address>
+    </Organization>
+  </Developer>
+  <UsedNorms>
+    <UsedNorm>Приказ от  2.11.2022 года №928/пр об утверждение классификатора объектов капитального строительства по их назначению и функционально-технологическим особенностям;</UsedNorm>
+    <UsedNorm>Федеральный закон №123-Ф3 от 22.07.2008г «Технический регламент о требованиях пожарной безопасности»</UsedNorm>
+    <UsedNorm>Федеральный закон  N 384-ФЗ  от 30.12.2009 «Технический регламент о безопасности зданий и сооружений»</UsedNorm>
+    <UsedNorm>СП 12.13130.2009 «Определение категорий помещений, зданий и наружный установок по взрывопожарной и пожарной опасности»</UsedNorm>
+  </UsedNorms>
+  <ProjectDecisionDocuments>
+    <Document>
+      <DocType>05.03</DocType>
+      <DocName>Задание на проектирование</DocName>
+      <DocNumber>1</DocNumber>
+      <DocDate>2024-10-09</DocDate>
+      <DocIssueAuthor>ООО УКИФ «Профит» Д.У. ЗПИФ комбинированный «СКИФ»</DocIssueAuthor>
+      <File>
+        <FileName>2025_08_14-ЗП05569_Версия 1.xml</FileName>
+        <FileFormat>xml</FileFormat>
+        <FileChecksum>1C2BAF49</FileChecksum>
+      </File>
+    </Document>
+  </ProjectDecisionDocuments>
+  <ProjectInitialDocuments>
+    <Document>
+      <DocType>17.01</DocType>
+      <DocName>Выписка из Единого государственного реестра недвижимости на земельный участок с кадастровым номером 23:37:1006000:14934</DocName>
+      <DocNumber>б.н.</DocNumber>
+      <DocDate>2024-09-16</DocDate>
+      <DocIssueAuthor>Федеральная служба государственной регистрации, кадастра и картографии</DocIssueAuthor>
+      <File>
+        <FileName>23 37 1006000 14934 Варваровка, ул Калинина.pdf</FileName>
+        <FileFormat>pdf</FileFormat>
+        <FileChecksum>32E3CDBB</FileChecksum>
+        <SignFile>
+          <FileName>23 37 1006000 14934 Варваровка, ул Калинина.pdf.sig</FileName>
+          <FileFormat>sig</FileFormat>
+          <FileChecksum>D9147B64</FileChecksum>
+        </SignFile>
+      </File>
+    </Document>
+    <Document>
+      <DocType>17.01</DocType>
+      <DocName>Выписка из Единого государственного реестра недвижимости на земельный участок с кадастровым номером 23:37:1006000:14935</DocName>
+      <DocNumber>б.н.</DocNumber>
+      <DocDate>2024-09-16</DocDate>
+      <DocIssueAuthor>Федеральная служба государственной регистрации, кадастра и картографии</DocIssueAuthor>
+      <File>
+        <FileName>23 37 1006000 14935 Варваровка, ул Калинина.pdf</FileName>
+        <FileFormat>pdf</FileFormat>
+        <FileChecksum>08F859E9</FileChecksum>
+        <SignFile>
+          <FileName>23 37 1006000 14935 Варваровка, ул Калинина.pdf.sig</FileName>
+          <FileFormat>sig</FileFormat>
+          <FileChecksum>6E51F98A</FileChecksum>
+        </SignFile>
+      </File>
+    </Document>
+    <Document>
+      <DocType>17.01</DocType>
+      <DocName>Выписка из Единого государственного реестра недвижимости на земельный участок с кадастровым номером 23:37:1006000:14873</DocName>
+      <DocNumber>б.н.</DocNumber>
+      <DocDate>2024-07-09</DocDate>
+      <DocIssueAuthor>Федеральная служба государственной регистрации, кадастра и картографии</DocIssueAuthor>
+      <File>
+        <FileName>Выписка ЕГРН после раздела ЗУ 23_37_1006000_14873 зона РО.pdf</FileName>
+        <FileFormat>pdf</FileFormat>
+        <FileChecksum>34F69C1C</FileChecksum>
+        <SignFile>
+          <FileName>Выписка ЕГРН после раздела ЗУ 23_37_1006000_14873 зона РО.pdf.sig</FileName>
+          <FileFormat>sig</FileFormat>
+          <FileChecksum>B0B04B8F</FileChecksum>
+        </SignFile>
+      </File>
+    </Document>
+    <Document>
+      <DocType>03.02</DocType>
+      <DocName>Градостроительный план земельного участка с кадастровыми номерами 23:37:1006000:14934, 23:37:1006000:14935</DocName>
+      <DocNumber>РФ-23-2-01-0-00-2025-1325-0</DocNumber>
+      <DocDate>2025-08-12</DocDate>
+      <DocIssueAuthor>Управление архитектуры и градостроительства администрации муниципального образования г.-к Анапа</DocIssueAuthor>
+      <File>
+        <FileName>Градплан.pdf</FileName>
+        <FileFormat>pdf</FileFormat>
+        <FileChecksum>F09B7216</FileChecksum>
+        <SignFile>
+          <FileName>Градплан.pdf.sig</FileName>
+          <FileFormat>sig</FileFormat>
+          <FileChecksum>42D6BEED</FileChecksum>
+        </SignFile>
+      </File>
+    </Document>
+    <Document>
+      <DocType>04.01</DocType>
+      <DocName>Технические условия на присоединение к электрическим сетям</DocName>
+      <DocNumber>30/09/24ТУ</DocNumber>
+      <DocDate>2024-09-30</DocDate>
+      <DocIssueAuthor>ООО «ЭксТех»</DocIssueAuthor>
+      <File>
+        <FileName>ТУ_электрика_3084кВт_Анаполис 3.pdf</FileName>
+        <FileFormat>pdf</FileFormat>
+        <FileChecksum>3EB5C6DB</FileChecksum>
+        <SignFile>
+          <FileName>ТУ_электрика_3084кВт_Анаполис 3.pdf.sig</FileName>
+          <FileFormat>sig</FileFormat>
+          <FileChecksum>5917611F</FileChecksum>
+        </SignFile>
+      </File>
+    </Document>
+    <Document>
+      <DocType>04.01</DocType>
+      <DocName>Технические условия на теплоснабжение объекта</DocName>
+      <DocNumber>1575</DocNumber>
+      <DocDate>2025-02-06</DocDate>
+      <DocIssueAuthor>АО «ТЕПЛОЭНЕРГО»</DocIssueAuthor>
+      <File>
+        <FileName>ТУ тепло Анаполис 3.pdf</FileName>
+        <FileFormat>pdf</FileFormat>
+        <FileChecksum>8646C761</FileChecksum>
+        <SignFile>
+          <FileName>ТУ тепло Анаполис 3.pdf.sig</FileName>
+          <FileFormat>sig</FileFormat>
+          <FileChecksum>AE67E86E</FileChecksum>
+        </SignFile>
+      </File>
+    </Document>
+    <Document>
+      <DocType>04.01</DocType>
+      <DocName>Технические условия на диспетчеризацию лифтов</DocName>
+      <DocNumber>1915-07</DocNumber>
+      <DocDate>2025-07-31</DocDate>
+      <DocIssueAuthor>ООО «Комплексные поставки»</DocIssueAuthor>
+      <File>
+        <FileName>ТУ_диспетчеризации_Анаполис 3.pdf</FileName>
+        <FileFormat>pdf</FileFormat>
+        <FileChecksum>CAA59B10</FileChecksum>
+        <SignFile>
+          <FileName>ТУ_диспетчеризации_Анаполис 3.pdf.sig</FileName>
+          <FileFormat>sig</FileFormat>
+          <FileChecksum>F3B189AC</FileChecksum>
+        </SignFile>
+      </File>
+    </Document>
+    <Document>
+      <DocType>04.01</DocType>
+      <DocName>Технические условия на подключение объекта к сетям связи</DocName>
+      <DocNumber>ЮГ 01-1.3/00209и</DocNumber>
+      <DocDate>2024-10-23</DocDate>
+      <DocIssueAuthor>ПАО «МТС»</DocIssueAuthor>
+      <File>
+        <FileName>Исходящий документ № ЮГ 01-1.3_00209и от 23.10.2024 Согласование ТУ (Анапа Анаполис 3).pdf</FileName>
+        <FileFormat>pdf</FileFormat>
+        <FileChecksum>380704CF</FileChecksum>
+        <SignFile>
+          <FileName>Исходящий документ № ЮГ 01-1.3_00209и от 23.10.2024 Согласование ТУ (Анапа Анаполис 3).pdf.sig</FileName>
+          <FileFormat>sig</FileFormat>
+          <FileChecksum>4EADF85C</FileChecksum>
+        </SignFile>
+      </File>
+    </Document>
+    <Document>
+      <DocType>04.01</DocType>
+      <DocName>Технические условия на водоснабжение и водоотведение</DocName>
+      <DocNumber>40</DocNumber>
+      <DocDate>2025-04-25</DocDate>
+      <DocIssueAuthor>АО «Анапа Водоканал»</DocIssueAuthor>
+      <File>
+        <FileName>ТУ № 40 Водоканал Анаполис 14935 14934.pdf</FileName>
+        <FileFormat>pdf</FileFormat>
+        <FileChecksum>40CE6007</FileChecksum>
+        <SignFile>
+          <FileName>ТУ № 40 Водоканал Анаполис 14935 14934.pdf.sig</FileName>
+          <FileFormat>sig</FileFormat>
+          <FileChecksum>9772B1F0</FileChecksum>
+        </SignFile>
+      </File>
+    </Document>
+    <Document>
+      <DocType>04.01</DocType>
+      <DocName>Технические условия на подключение объектовых систем оповещения</DocName>
+      <DocNumber>41-09-198/25</DocNumber>
+      <DocDate>2025-04-30</DocDate>
+      <DocIssueAuthor>УПРАВЛЕНИЕ ИНФОРМАТИЗАЦИИ И СВЯЗИ АДМИНИСТРАЦИИ МУНИЦИПАЛЬНОГО ОБРАЗОВАНИЯ ГОРОД-КУРОРТ АНАПА</DocIssueAuthor>
+      <File>
+        <FileName>№ 41-09-198_25 от 30.04.2025 ТУ на МАСЦО Анаполис 3.pdf</FileName>
+        <FileFormat>pdf</FileFormat>
+        <FileChecksum>6564A8ED</FileChecksum>
+        <SignFile>
+          <FileName>№ 41-09-198_25 от 30.04.2025 ТУ на МАСЦО Анаполис 3.pdf.sig</FileName>
+          <FileFormat>sig</FileFormat>
+          <FileChecksum>11D5B4D9</FileChecksum>
+        </SignFile>
+      </File>
+    </Document>
+    <Document>
+      <DocType>04.01</DocType>
+      <DocName>Технические условия на подключение локальных систем видеонаблюдения</DocName>
+      <DocNumber>60-55-308/25</DocNumber>
+      <DocDate>2025-04-30</DocDate>
+      <DocIssueAuthor>МБУ Учреждение «Цифровая Анапа»</DocIssueAuthor>
+      <File>
+        <FileName>№ 60-55-308_25 от 30.04.2025 ТУ на АПК БГ Анаполис 2 и 3.pdf</FileName>
+        <FileFormat>pdf</FileFormat>
+        <FileChecksum>6D8B7CFF</FileChecksum>
+        <SignFile>
+          <FileName>№ 60-55-308_25 от 30.04.2025 ТУ на АПК БГ Анаполис 2 и 3.pdf.sig</FileName>
+          <FileFormat>sig</FileFormat>
+          <FileChecksum>3E7A15FD</FileChecksum>
+        </SignFile>
+      </File>
+    </Document>
+    <Document>
+      <DocType>03.99</DocType>
+      <DocName>Письмо по определению, планово-высотного положения объекта</DocName>
+      <DocNumber>799</DocNumber>
+      <DocDate>2025-04-30</DocDate>
+      <DocIssueAuthor>Управление Архитектуры и Градостроительства муниципального образования г.-к. Анапа.</DocIssueAuthor>
+      <File>
+        <FileName>Ответ аэропорт.pdf</FileName>
+        <FileFormat>pdf</FileFormat>
+        <FileChecksum>B7DA48B7</FileChecksum>
+        <SignFile>
+          <FileName>Ответ аэропорт.pdf.sig</FileName>
+          <FileFormat>sig</FileFormat>
+          <FileChecksum>DE1388DD</FileChecksum>
+        </SignFile>
+      </File>
+    </Document>
+    <Document>
+      <DocType>03.99</DocType>
+      <DocName>Акт-заключение о производстве обследования территории на предмет наличия взрывоопасных предметов времен ВОВ</DocName>
+      <DocNumber>01/2024-ВОП</DocNumber>
+      <DocDate>2024-07-01</DocDate>
+      <DocIssueAuthor>ИП Шарин С.С</DocIssueAuthor>
+      <File>
+        <FileName>ВОП.pdf</FileName>
+        <FileFormat>pdf</FileFormat>
+        <FileChecksum>F728846D</FileChecksum>
+        <SignFile>
+          <FileName>ВОП.pdf.sig</FileName>
+          <FileFormat>sig</FileFormat>
+          <FileChecksum>BF090E04</FileChecksum>
+        </SignFile>
+      </File>
+    </Document>
+  </ProjectInitialDocuments>
+  <NonIndustrialObject Placement="1" ObjectID="G_nMjNr4">
+    <Name>«Гостиничный комплекс 4*», расположенный по адресу: Краснодарский край, Анапский район, село Варваровка, ул. Калинина, на земельных участках с КН 23:37:1006000:14934, 23:37:1006000:14935, 23:36:1006000:14873»</Name>
+    <ConstructionType>1</ConstructionType>
+    <ConstructionDuration>132</ConstructionDuration>
+    <Address>
+      <Region>23</Region>
+      <District>Анапский район</District>
+      <Settlement>село Варваровка</Settlement>
+      <Street>ул. Калинина</Street>
+      <Note>на земельных участках с КН 23:37:1006000:14934, 23:37:1006000:14935, 23:36:1006000:14873</Note>
+    </Address>
+    <Functions>
+      <FunctionsClass>03.02.001.005</FunctionsClass>
+    </Functions>
+    <FunctionsFeatures>
+      <Text>не принадлежит</Text>
+    </FunctionsFeatures>
+    <PowerIndicator>
+      <Name>Вместимость</Name>
+      <Measure>698</Measure>
+      <Value>1796</Value>
+    </PowerIndicator>
+    <TEI>
+      <Name>Вид строительства</Name>
+      <Measure>-</Measure>
+      <Value>новое</Value>
+    </TEI>
+    <TEI>
+      <Name>Сейсмостойкость зданий и сооружений</Name>
+      <Measure>-</Measure>
+      <Value>7-8</Value>
+    </TEI>
+    <TEI>
+      <Name>Площадь участка </Name>
+      <Measure>055</Measure>
+      <Value>61603</Value>
+    </TEI>
+    <TEI>
+      <Name>Площадь застройки </Name>
+      <Measure>055</Measure>
+      <Value>13650,4</Value>
+    </TEI>
+    <TEI>
+      <Name>Количество номеров</Name>
+      <Measure>796</Measure>
+      <Value>1197</Value>
+    </TEI>
+    <TEI>
+      <Name>Вместимость</Name>
+      <Measure>792</Measure>
+      <Value>1796</Value>
+    </TEI>
+    <TEI>
+      <Name>Площадь застройки бассейна – по гп 2.2</Name>
+      <Measure>055</Measure>
+      <Value>258,4</Value>
+    </TEI>
+    <TEI>
+      <Name>Площадь застройки бассейна – по гп 4</Name>
+      <Measure>055</Measure>
+      <Value>171,6</Value>
+    </TEI>
+    <TEI>
+      <Name>Площадь застройки бассейна – по гп 7.2</Name>
+      <Measure>055</Measure>
+      <Value>272,8</Value>
+    </TEI>
+    <TEI>
+      <Name>Площадь застройки ТП</Name>
+      <Measure>055</Measure>
+      <Value>25,0</Value>
+    </TEI>
+    <TEI>
+      <Name>Площадь застройки 2БКТП</Name>
+      <Measure>055</Measure>
+      <Value>55,0</Value>
+    </TEI>
+    <EnergyEfficiency>
+      <EnergyEfficiencyClass>B</EnergyEfficiencyClass>
+    </EnergyEfficiency>
+    <ObjectParts>
+      <OKS ObjectID="H_o2b4rk">
+        <Name>Корпус 1</Name>
+        <Address>
+          <Region>23</Region>
+          <District>Анапский район</District>
+          <Settlement>село Варваровка</Settlement>
+          <Street>ул. Калинина</Street>
+          <Note>на земельных участках с КН 23:37:1006000:14934, 23:37:1006000:14935, 23:36:1006000:14873</Note>
+        </Address>
+        <FunctionsClass>03.02.001.005</FunctionsClass>
+        <FunctionsFeatures>
+          <Text>не принадлежит</Text>
+        </FunctionsFeatures>
+        <PowerIndicator>
+          <Name>Вместимость</Name>
+          <Measure>792</Measure>
+          <Value>84</Value>
+        </PowerIndicator>
+        <TEI>
+          <Name>Площадь застройки</Name>
+          <Measure>055</Measure>
+          <Value>561,5</Value>
+        </TEI>
+        <TEI>
+          <Name>Этажность</Name>
+          <Measure>796</Measure>
+          <Value>9</Value>
+        </TEI>
+        <TEI>
+          <Name>Этажей</Name>
+          <Measure>796</Measure>
+          <Value>9</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>4253,4</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе ниже отм.0,000</Name>
+          <Measure>055</Measure>
+          <Value>-</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе выше отм.0,000 (без учета балконов)</Name>
+          <Measure>055</Measure>
+          <Value>3462,1</Value>
+        </TEI>
+        <TEI>
+          <Name>в т.ч. площадь открытых неотапливаемых элементов    здания (балконы)</Name>
+          <Measure>055</Measure>
+          <Value>791,3</Value>
+        </TEI>
+        <TEI>
+          <Name>Полезная площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>2725,3</Value>
+        </TEI>
+        <TEI>
+          <Name>Расчетная площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>2192,7</Value>
+        </TEI>
+        <TEI>
+          <Name>Строительный объем</Name>
+          <Measure>113</Measure>
+          <Value>12055,7</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе выше отм. 0,000</Name>
+          <Measure>113</Measure>
+          <Value>12055,7</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе ниже отм. 0,000</Name>
+          <Measure>113</Measure>
+          <Value>-</Value>
+        </TEI>
+        <TEI>
+          <Name>Высота здания (предельная)</Name>
+          <Measure>006</Measure>
+          <Value>31,92</Value>
+        </TEI>
+        <TEI>
+          <Name>Количество номеров</Name>
+          <Measure>796</Measure>
+          <Value>56</Value>
+        </TEI>
+        <TEI>
+          <Name>в т. ч. однокомнатных</Name>
+          <Measure>796</Measure>
+          <Value>49</Value>
+        </TEI>
+        <TEI>
+          <Name>в т. ч. двухкомнатных</Name>
+          <Measure>796</Measure>
+          <Value>7</Value>
+        </TEI>
+        <TEI>
+          <Name>в т.ч одноместных</Name>
+          <Measure>796</Measure>
+          <Value>28</Value>
+        </TEI>
+        <TEI>
+          <Name>в т.ч двухместных</Name>
+          <Measure>796</Measure>
+          <Value>28</Value>
+        </TEI>
+        <TEI>
+          <Name>Вместимость (проживающие в гостинице)</Name>
+          <Measure>792</Measure>
+          <Value>84</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь номеров  (без учета балконов)</Name>
+          <Measure>055</Measure>
+          <Value>1626,9</Value>
+        </TEI>
+        <TEI>
+          <Name> Общая площадь номеров (с учетом балконов)</Name>
+          <Measure>055</Measure>
+          <Value>2319,6</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь балконов номеров</Name>
+          <Measure>055</Measure>
+          <Value>692,8</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь МОП</Name>
+          <Measure>055</Measure>
+          <Value>1464,0</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь помещений обслуживания номеров</Name>
+          <Measure>055</Measure>
+          <Value>38,3</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь номерного фонда (с учетом помещений обслуживания номеров) (без учета балконов)</Name>
+          <Measure>055</Measure>
+          <Value>1665,2</Value>
+        </TEI>
+        <EnergyEfficiency>
+          <EnergyEfficiencyClass>B</EnergyEfficiencyClass>
+        </EnergyEfficiency>
+        <DangerousIndustrialObject>Не относится к опасным производственным объектам</DangerousIndustrialObject>
+        <FireDangerCategory>Категория не устанавливается</FireDangerCategory>
+        <PeoplePermanentStay>
+          <Text>предусмотрены</Text>
+        </PeoplePermanentStay>
+        <ResponsibilityLevel>нормальный</ResponsibilityLevel>
+      </OKS>
+      <OKS ObjectID="x_dhbRUX">
+        <Name>Корпус 2</Name>
+        <Address>
+          <Region>23</Region>
+          <District>Анапский район</District>
+          <Settlement>село Варваровка</Settlement>
+          <Street>ул. Калинина</Street>
+          <Note>на земельных участках с КН 23:37:1006000:14934, 23:37:1006000:14935, 23:36:1006000:14873</Note>
+        </Address>
+        <FunctionsClass>03.02.001.005</FunctionsClass>
+        <FunctionsFeatures>
+          <Text>не принадлежит</Text>
+        </FunctionsFeatures>
+        <PowerIndicator>
+          <Name>Вместимость</Name>
+          <Measure>792</Measure>
+          <Value>525</Value>
+        </PowerIndicator>
+        <TEI>
+          <Name>Площадь застройки</Name>
+          <Measure>055</Measure>
+          <Value>3144,3</Value>
+        </TEI>
+        <TEI>
+          <Name>Этажность</Name>
+          <Measure>796</Measure>
+          <Value>9-9-9-9</Value>
+        </TEI>
+        <TEI>
+          <Name>Этажей</Name>
+          <Measure>796</Measure>
+          <Value>9-10-10-10</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>26608,5</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе ниже отм.0,000</Name>
+          <Measure>055</Measure>
+          <Value>1847,6</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе выше отм.0,000</Name>
+          <Measure>055</Measure>
+          <Value>20416,2</Value>
+        </TEI>
+        <TEI>
+          <Name>в т.ч. площадь открытых неотапливаемых элементов    здания (балконы)</Name>
+          <Measure>055</Measure>
+          <Value>4344,7</Value>
+        </TEI>
+        <TEI>
+          <Name>Полезная площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>19075,2</Value>
+        </TEI>
+        <TEI>
+          <Name>Расчетная площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>15426,8</Value>
+        </TEI>
+        <TEI>
+          <Name>Строительный объем</Name>
+          <Measure>113</Measure>
+          <Value>78802,4</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе выше отм. 0,000</Name>
+          <Measure>113</Measure>
+          <Value>71403,0</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе ниже отм. 0,000</Name>
+          <Measure>113</Measure>
+          <Value>7399,4</Value>
+        </TEI>
+        <TEI>
+          <Name>Высота здания (предельная)</Name>
+          <Measure>006</Measure>
+          <Value>33,07</Value>
+        </TEI>
+        <TEI>
+          <Name>Количество номеров</Name>
+          <Measure>796</Measure>
+          <Value>350</Value>
+        </TEI>
+        <TEI>
+          <Name>в т. ч. однокомнатных</Name>
+          <Measure>796</Measure>
+          <Value>234</Value>
+        </TEI>
+        <TEI>
+          <Name>в т. ч. двухкомнатных</Name>
+          <Measure>796</Measure>
+          <Value>116</Value>
+        </TEI>
+        <TEI>
+          <Name>в т.ч одноместных</Name>
+          <Measure>796</Measure>
+          <Value>175</Value>
+        </TEI>
+        <TEI>
+          <Name>в т.ч двухместных</Name>
+          <Measure>796</Measure>
+          <Value>175</Value>
+        </TEI>
+        <TEI>
+          <Name>Вместимость (проживающие в гостинице)</Name>
+          <Measure>792</Measure>
+          <Value>525</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь номеров  (без учета балконов)</Name>
+          <Measure>055</Measure>
+          <Value>11697,8</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь номеров (с учетом балконов)</Name>
+          <Measure>055</Measure>
+          <Value>15697,4</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь балконов номеров</Name>
+          <Measure>055</Measure>
+          <Value>3999,6</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь МОП</Name>
+          <Measure>055</Measure>
+          <Value>8293,1</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь помещений обслуживания номеров</Name>
+          <Measure>055</Measure>
+          <Value>201,6</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь номерного фонда (с учетом помещений обслуживания номеров) (без учета балконов)</Name>
+          <Measure>055</Measure>
+          <Value>11899,4</Value>
+        </TEI>
+        <EnergyEfficiency>
+          <EnergyEfficiencyClass>B</EnergyEfficiencyClass>
+        </EnergyEfficiency>
+        <DangerousIndustrialObject>Не относится к опасным производственным объектам</DangerousIndustrialObject>
+        <FireDangerCategory>Категория не устанавливается</FireDangerCategory>
+        <PeoplePermanentStay>
+          <Text>предусмотрены</Text>
+        </PeoplePermanentStay>
+        <ResponsibilityLevel>нормальный</ResponsibilityLevel>
+      </OKS>
+      <OKS ObjectID="G_JvKTX6">
+        <Name>Корпус 2.1 (подземная парковка)</Name>
+        <Address>
+          <Region>23</Region>
+          <District>Анапский район</District>
+          <Settlement>село Варваровка</Settlement>
+          <Street>ул. Калинина</Street>
+          <Note>на земельных участках с КН 23:37:1006000:14934, 23:37:1006000:14935, 23:36:1006000:14873</Note>
+        </Address>
+        <FunctionsClass>04.01.002.002</FunctionsClass>
+        <FunctionsFeatures>
+          <Text>не принадлежит</Text>
+        </FunctionsFeatures>
+        <PowerIndicator>
+          <Name>Вместимость</Name>
+          <Measure>698</Measure>
+          <Value>55</Value>
+        </PowerIndicator>
+        <TEI>
+          <Name>Площадь застройки</Name>
+          <Measure>055</Measure>
+          <Value>51,3</Value>
+        </TEI>
+        <TEI>
+          <Name>Этажность</Name>
+          <Measure>796</Measure>
+          <Value>0</Value>
+        </TEI>
+        <TEI>
+          <Name>Этажей</Name>
+          <Measure>796</Measure>
+          <Value>1</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>1853</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе ниже отм.0,000 </Name>
+          <Measure>055</Measure>
+          <Value>1853</Value>
+        </TEI>
+        <TEI>
+          <Name>Полезная площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>1762,1</Value>
+        </TEI>
+        <TEI>
+          <Name>Расчетная площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>1661,6</Value>
+        </TEI>
+        <TEI>
+          <Name>Строительный объем</Name>
+          <Measure>113</Measure>
+          <Value>8316,6</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе выше отм. 0,000</Name>
+          <Measure>113</Measure>
+          <Value>549,1</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе ниже отм. 0,000</Name>
+          <Measure>113</Measure>
+          <Value>7767,5</Value>
+        </TEI>
+        <TEI>
+          <Name>Высота здания (предельная)</Name>
+          <Measure>006</Measure>
+          <Value>3,9</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь МОП</Name>
+          <Measure>055</Measure>
+          <Value>152,1</Value>
+        </TEI>
+        <TEI>
+          <Name>Количество машино-мест</Name>
+          <Measure>698</Measure>
+          <Value>55</Value>
+        </TEI>
+        <EnergyEfficiency>
+          <EnergyEfficiencyClass>Не классифицируется</EnergyEfficiencyClass>
+        </EnergyEfficiency>
+        <DangerousIndustrialObject>Не относится к опасным производственным объектам</DangerousIndustrialObject>
+        <FireDangerCategory>Категория не устанавливается</FireDangerCategory>
+        <PeoplePermanentStay>
+          <Text>не предусмотрены</Text>
+        </PeoplePermanentStay>
+        <ResponsibilityLevel>нормальный</ResponsibilityLevel>
+      </OKS>
+      <OKS ObjectID="i_gVBHCp">
+        <Name>Корпус 3</Name>
+        <Address>
+          <Region>23</Region>
+          <District>Анапский район</District>
+          <Settlement>село Варваровка</Settlement>
+          <Street>ул. Калинина</Street>
+          <Note>на земельных участках с КН 23:37:1006000:14934, 23:37:1006000:14935, 23:36:1006000:14873</Note>
+        </Address>
+        <FunctionsClass>03.02.001.005</FunctionsClass>
+        <FunctionsFeatures>
+          <Text>не принадлежит</Text>
+        </FunctionsFeatures>
+        <PowerIndicator>
+          <Name>Вместимость</Name>
+          <Measure>792</Measure>
+          <Value>170</Value>
+        </PowerIndicator>
+        <TEI>
+          <Name>Площадь застройки</Name>
+          <Measure>055</Measure>
+          <Value>1647,7</Value>
+        </TEI>
+        <TEI>
+          <Name>Этажность</Name>
+          <Measure>796</Measure>
+          <Value>8</Value>
+        </TEI>
+        <TEI>
+          <Name>Этажей</Name>
+          <Measure>796</Measure>
+          <Value>9</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>12279,6</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе ниже отм.0,000 </Name>
+          <Measure>055</Measure>
+          <Value>776,4</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе выше отм.0,000 </Name>
+          <Measure>055</Measure>
+          <Value>9291,5</Value>
+        </TEI>
+        <TEI>
+          <Name>в т.ч. площадь открытых неотапливаемых элементов    здания (балконы) </Name>
+          <Measure>055</Measure>
+          <Value>2211,7</Value>
+        </TEI>
+        <TEI>
+          <Name>Полезная площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>8511,6</Value>
+        </TEI>
+        <TEI>
+          <Name>Расчетная площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>6926,1</Value>
+        </TEI>
+        <TEI>
+          <Name>Строительный объем</Name>
+          <Measure>113</Measure>
+          <Value>40290,4</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе выше отм. 0,000</Name>
+          <Measure>113</Measure>
+          <Value>37589,6</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе ниже отм. 0,000</Name>
+          <Measure>113</Measure>
+          <Value>2700,8</Value>
+        </TEI>
+        <TEI>
+          <Name>Высота здания (предельная)</Name>
+          <Measure>006</Measure>
+          <Value>29,88</Value>
+        </TEI>
+        <TEI>
+          <Name>Количество номеров</Name>
+          <Measure>796</Measure>
+          <Value>113</Value>
+        </TEI>
+        <TEI>
+          <Name>в т. ч. однокомнатных</Name>
+          <Measure>796</Measure>
+          <Value>57</Value>
+        </TEI>
+        <TEI>
+          <Name>в т. ч. двухкомнатных</Name>
+          <Measure>796</Measure>
+          <Value>56</Value>
+        </TEI>
+        <TEI>
+          <Name>в т.ч одноместных</Name>
+          <Measure>796</Measure>
+          <Value>56</Value>
+        </TEI>
+        <TEI>
+          <Name>в т.ч двухместных</Name>
+          <Measure>796</Measure>
+          <Value>57</Value>
+        </TEI>
+        <TEI>
+          <Name>Вместимость (проживающие в гостинице)</Name>
+          <Measure>792</Measure>
+          <Value>170</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь номеров  (без учета балконов)</Name>
+          <Measure>055</Measure>
+          <Value>4481,3</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь номеров (с учетом балконов)</Name>
+          <Measure>055</Measure>
+          <Value>6127,0</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь балконов номеров</Name>
+          <Measure>055</Measure>
+          <Value>1645,7</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь МОП</Name>
+          <Measure>055</Measure>
+          <Value>4839,2</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь помещений обслуживания номеров</Name>
+          <Measure>055</Measure>
+          <Value>103,6</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь номерного фонда (с учетом помещений обслуживания номеров) (без учета балконов)</Name>
+          <Measure>055</Measure>
+          <Value>4584,9</Value>
+        </TEI>
+        <EnergyEfficiency>
+          <EnergyEfficiencyClass>B</EnergyEfficiencyClass>
+        </EnergyEfficiency>
+        <DangerousIndustrialObject>Не относится к опасным производственным объектам</DangerousIndustrialObject>
+        <FireDangerCategory>Категория не устанавливается</FireDangerCategory>
+        <PeoplePermanentStay>
+          <Text>предусмотрены</Text>
+        </PeoplePermanentStay>
+        <ResponsibilityLevel>нормальный</ResponsibilityLevel>
+      </OKS>
+      <OKS ObjectID="Q_D7GdMY">
+        <Name>Корпус 4</Name>
+        <Address>
+          <Region>23</Region>
+          <District>Анапский район</District>
+          <Settlement>село Варваровка</Settlement>
+          <Street>ул. Калинина</Street>
+          <Note>на земельных участках с КН 23:37:1006000:14934, 23:37:1006000:14935, 23:36:1006000:14873</Note>
+        </Address>
+        <FunctionsClass>03.02.001.005</FunctionsClass>
+        <FunctionsFeatures>
+          <Text>не принадлежит</Text>
+        </FunctionsFeatures>
+        <PowerIndicator>
+          <Name>Вместимость</Name>
+          <Measure>792</Measure>
+          <Value>327</Value>
+        </PowerIndicator>
+        <TEI>
+          <Name>Площадь застройки</Name>
+          <Measure>055</Measure>
+          <Value>2371,2</Value>
+        </TEI>
+        <TEI>
+          <Name>Этажность</Name>
+          <Measure>796</Measure>
+          <Value>9-9-9</Value>
+        </TEI>
+        <TEI>
+          <Name>Этажей</Name>
+          <Measure>796</Measure>
+          <Value>9-10-10</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>19761,6</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе ниже отм.0,000</Name>
+          <Measure>055</Measure>
+          <Value>1059,1</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе выше отм.0,000 (без учета балконов)</Name>
+          <Measure>055</Measure>
+          <Value>15307,7</Value>
+        </TEI>
+        <TEI>
+          <Name>в т.ч. площадь открытых неотапливаемых элементов    здания (балконы)</Name>
+          <Measure>055</Measure>
+          <Value>3394,8</Value>
+        </TEI>
+        <TEI>
+          <Name>Полезная площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>14024,6</Value>
+        </TEI>
+        <TEI>
+          <Name>Расчетная площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>11536</Value>
+        </TEI>
+        <TEI>
+          <Name>Строительный объем</Name>
+          <Measure>113</Measure>
+          <Value>62047,8</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе выше отм. 0,000</Name>
+          <Measure>113</Measure>
+          <Value>58451,1</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе ниже отм. 0,000</Name>
+          <Measure>113</Measure>
+          <Value>3596,7</Value>
+        </TEI>
+        <TEI>
+          <Name>Высота здания (предельная)</Name>
+          <Measure>006</Measure>
+          <Value>32,56</Value>
+        </TEI>
+        <TEI>
+          <Name>Количество номеров</Name>
+          <Measure>796</Measure>
+          <Value>218</Value>
+        </TEI>
+        <TEI>
+          <Name>в т. ч. однокомнатных</Name>
+          <Measure>796</Measure>
+          <Value>141</Value>
+        </TEI>
+        <TEI>
+          <Name>в т. ч. двухкомнатных</Name>
+          <Measure>796</Measure>
+          <Value>77</Value>
+        </TEI>
+        <TEI>
+          <Name>в т.ч одноместных</Name>
+          <Measure>796</Measure>
+          <Value>109</Value>
+        </TEI>
+        <TEI>
+          <Name>в т.ч двухместных</Name>
+          <Measure>796</Measure>
+          <Value>109</Value>
+        </TEI>
+        <TEI>
+          <Name>Вместимость (проживающие в гостинице)</Name>
+          <Measure>792</Measure>
+          <Value>327</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь номеров  (без учета балконов)</Name>
+          <Measure>055</Measure>
+          <Value>8067,7</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь номеров (с учетом балконов)</Name>
+          <Measure>055</Measure>
+          <Value>10828,1</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь балконов номеров</Name>
+          <Measure>055</Measure>
+          <Value>2760,4</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь МОП</Name>
+          <Measure>055</Measure>
+          <Value>7006,7</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь помещений обслуживания номеров</Name>
+          <Measure>055</Measure>
+          <Value>166,2</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь номерного фонда (с учетом помещений обслуживания номеров) (без учета балконов)</Name>
+          <Measure>055</Measure>
+          <Value>8233,9</Value>
+        </TEI>
+        <EnergyEfficiency>
+          <EnergyEfficiencyClass>B</EnergyEfficiencyClass>
+        </EnergyEfficiency>
+        <DangerousIndustrialObject>Не относится к опасным производственным объектам</DangerousIndustrialObject>
+        <FireDangerCategory>Категория не устанавливается</FireDangerCategory>
+        <PeoplePermanentStay>
+          <Text>предусмотрены</Text>
+        </PeoplePermanentStay>
+        <ResponsibilityLevel>нормальный</ResponsibilityLevel>
+      </OKS>
+      <OKS ObjectID="S_Nz3BpZ">
+        <Name>Корпус 5</Name>
+        <Address>
+          <Region>23</Region>
+          <District>Анапский район</District>
+          <Settlement>село Варваровка</Settlement>
+          <Street>ул. Калинина</Street>
+          <Note>на земельных участках с КН 23:37:1006000:14934, 23:37:1006000:14935, 23:36:1006000:14873</Note>
+        </Address>
+        <FunctionsClass>03.02.001.005</FunctionsClass>
+        <FunctionsFeatures>
+          <Text>не принадлежит</Text>
+        </FunctionsFeatures>
+        <PowerIndicator>
+          <Name>Вместимость</Name>
+          <Measure>792</Measure>
+          <Value>174</Value>
+        </PowerIndicator>
+        <TEI>
+          <Name>Площадь застройки</Name>
+          <Measure>055</Measure>
+          <Value>1341</Value>
+        </TEI>
+        <TEI>
+          <Name>Этажность</Name>
+          <Measure>796</Measure>
+          <Value>8</Value>
+        </TEI>
+        <TEI>
+          <Name>Этажей</Name>
+          <Measure>796</Measure>
+          <Value>9</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>9849,2</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе ниже отм.0,000</Name>
+          <Measure>055</Measure>
+          <Value>492,6</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе выше отм.0,000 (без учета балконов)</Name>
+          <Measure>055</Measure>
+          <Value>7496,0</Value>
+        </TEI>
+        <TEI>
+          <Name>в т.ч. площадь открытых неотапливаемых элементов    здания (балконы)</Name>
+          <Measure>055</Measure>
+          <Value>1860,6</Value>
+        </TEI>
+        <TEI>
+          <Name>Полезная площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>6720,8</Value>
+        </TEI>
+        <TEI>
+          <Name>Расчетная площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>5668,5</Value>
+        </TEI>
+        <TEI>
+          <Name>Строительный объем</Name>
+          <Measure>113</Measure>
+          <Value>29743,7</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе выше отм. 0,000</Name>
+          <Measure>113</Measure>
+          <Value>27927,7</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе ниже отм. 0,000</Name>
+          <Measure>113</Measure>
+          <Value>1816,0</Value>
+        </TEI>
+        <TEI>
+          <Name>Высота здания (предельная)</Name>
+          <Measure>006</Measure>
+          <Value>29,03</Value>
+        </TEI>
+        <TEI>
+          <Name>Количество номеров</Name>
+          <Measure>796</Measure>
+          <Value>116</Value>
+        </TEI>
+        <TEI>
+          <Name>в т. ч. однокомнатных</Name>
+          <Measure>796</Measure>
+          <Value>76</Value>
+        </TEI>
+        <TEI>
+          <Name>в т. ч. двухкомнатных</Name>
+          <Measure>796</Measure>
+          <Value>40</Value>
+        </TEI>
+        <TEI>
+          <Name>в т.ч одноместных</Name>
+          <Measure>796</Measure>
+          <Value>58</Value>
+        </TEI>
+        <TEI>
+          <Name>в т.ч двухместных</Name>
+          <Measure>796</Measure>
+          <Value>58</Value>
+        </TEI>
+        <TEI>
+          <Name>Вместимость (проживающие в гостинице)</Name>
+          <Measure>792</Measure>
+          <Value>174</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь номеров  (без учета балконов)</Name>
+          <Measure>055</Measure>
+          <Value>4150,9</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь номеров (с учетом балконов)</Name>
+          <Measure>055</Measure>
+          <Value>5724,6</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь балконов номеров</Name>
+          <Measure>055</Measure>
+          <Value>1573,7</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь МОП</Name>
+          <Measure>055</Measure>
+          <Value>3141,3</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь помещений обслуживания номеров</Name>
+          <Measure>055</Measure>
+          <Value>102,9</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь номерного фонда (с учетом помещений обслуживания номеров) (без учета балконов)</Name>
+          <Measure>055</Measure>
+          <Value>4253,8</Value>
+        </TEI>
+        <EnergyEfficiency>
+          <EnergyEfficiencyClass>B</EnergyEfficiencyClass>
+        </EnergyEfficiency>
+        <DangerousIndustrialObject>Не относится к опасным производственным объектам</DangerousIndustrialObject>
+        <FireDangerCategory>Категория не устанавливается</FireDangerCategory>
+        <PeoplePermanentStay>
+          <Text>предусмотрены</Text>
+        </PeoplePermanentStay>
+        <ResponsibilityLevel>нормальный</ResponsibilityLevel>
+      </OKS>
+      <OKS ObjectID="b_WxlRPn">
+        <Name>Корпус 6</Name>
+        <Address>
+          <Region>23</Region>
+          <District>Анапский район</District>
+          <Settlement>село Варваровка</Settlement>
+          <Street>ул. Калинина</Street>
+          <Note>на земельных участках с КН 23:37:1006000:14934, 23:37:1006000:14935, 23:36:1006000:14873</Note>
+        </Address>
+        <FunctionsClass>03.02.001.005</FunctionsClass>
+        <FunctionsFeatures>
+          <Text>не принадлежит</Text>
+        </FunctionsFeatures>
+        <PowerIndicator>
+          <Name>Вместимость</Name>
+          <Measure>792</Measure>
+          <Value>99</Value>
+        </PowerIndicator>
+        <TEI>
+          <Name>Площадь застройки</Name>
+          <Measure>055</Measure>
+          <Value>842,7</Value>
+        </TEI>
+        <TEI>
+          <Name>Этажность</Name>
+          <Measure>796</Measure>
+          <Value>8</Value>
+        </TEI>
+        <TEI>
+          <Name>Этажей</Name>
+          <Measure>796</Measure>
+          <Value>8</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>5776,6</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе ниже отм.0,000</Name>
+          <Measure>055</Measure>
+          <Value>-</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе выше отм.0,000 (без учета балконов)</Name>
+          <Measure>055</Measure>
+          <Value>4502,6</Value>
+        </TEI>
+        <TEI>
+          <Name>в т.ч. площадь открытых неотапливаемых элементов    здания (балконы)</Name>
+          <Measure>055</Measure>
+          <Value>1274,0</Value>
+        </TEI>
+        <TEI>
+          <Name>Полезная площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>3781,1</Value>
+        </TEI>
+        <TEI>
+          <Name>Расчетная площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>3200,6</Value>
+        </TEI>
+        <TEI>
+          <Name>Строительный объем</Name>
+          <Measure>113</Measure>
+          <Value>16567,8</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе выше отм. 0,000</Name>
+          <Measure>113</Measure>
+          <Value>16567,8</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе ниже отм. 0,000</Name>
+          <Measure>113</Measure>
+          <Value>-</Value>
+        </TEI>
+        <TEI>
+          <Name>Высота здания (предельная)</Name>
+          <Measure>006</Measure>
+          <Value>27,86</Value>
+        </TEI>
+        <TEI>
+          <Name>Количество номеров</Name>
+          <Measure>796</Measure>
+          <Value>66</Value>
+        </TEI>
+        <TEI>
+          <Name>в т. ч. однокомнатных</Name>
+          <Measure>796</Measure>
+          <Value>42</Value>
+        </TEI>
+        <TEI>
+          <Name>в т. ч. двухкомнатных</Name>
+          <Measure>796</Measure>
+          <Value>24</Value>
+        </TEI>
+        <TEI>
+          <Name>в т.ч одноместных</Name>
+          <Measure>796</Measure>
+          <Value>33</Value>
+        </TEI>
+        <TEI>
+          <Name>в т.ч двухместных</Name>
+          <Measure>796</Measure>
+          <Value>33</Value>
+        </TEI>
+        <TEI>
+          <Name>Вместимость (проживающие в гостинице)</Name>
+          <Measure>792</Measure>
+          <Value>99</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь номеров  (без учета балконов)</Name>
+          <Measure>055</Measure>
+          <Value>2224,8</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь номеров (с учетом балконов)</Name>
+          <Measure>055</Measure>
+          <Value>3216,0</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь балконов номеров</Name>
+          <Measure>055</Measure>
+          <Value>991,2</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь МОП</Name>
+          <Measure>055</Measure>
+          <Value>1978,8</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь помещений обслуживания номеров</Name>
+          <Measure>055</Measure>
+          <Value>36,5</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь номерного фонда (с учетом помещений обслуживания номеров) (без учета балконов)</Name>
+          <Measure>055</Measure>
+          <Value>2261,3</Value>
+        </TEI>
+        <EnergyEfficiency>
+          <EnergyEfficiencyClass>B</EnergyEfficiencyClass>
+        </EnergyEfficiency>
+        <DangerousIndustrialObject>Не относится к опасным производственным объектам</DangerousIndustrialObject>
+        <FireDangerCategory>Категория не устанавливается</FireDangerCategory>
+        <PeoplePermanentStay>
+          <Text>предусмотрены</Text>
+        </PeoplePermanentStay>
+        <ResponsibilityLevel>нормальный</ResponsibilityLevel>
+      </OKS>
+      <OKS ObjectID="B_I4ePhq">
+        <Name>Корпус 7</Name>
+        <Address>
+          <Region>23</Region>
+          <District>Анапский район</District>
+          <Settlement>село Варваровка</Settlement>
+          <Street>ул. Калинина</Street>
+          <Note>на земельных участках с КН 23:37:1006000:14934, 23:37:1006000:14935, 23:36:1006000:14873</Note>
+        </Address>
+        <FunctionsClass>03.02.001.005</FunctionsClass>
+        <FunctionsFeatures>
+          <Text>не принадлежит</Text>
+        </FunctionsFeatures>
+        <PowerIndicator>
+          <Name>Вместимость</Name>
+          <Measure>792</Measure>
+          <Value>417</Value>
+        </PowerIndicator>
+        <TEI>
+          <Name>Площадь застройки</Name>
+          <Measure>055</Measure>
+          <Value>3350</Value>
+        </TEI>
+        <TEI>
+          <Name>Этажность</Name>
+          <Measure>796</Measure>
+          <Value>8-8-7-8-9-9</Value>
+        </TEI>
+        <TEI>
+          <Name>Этажей</Name>
+          <Measure>796</Measure>
+          <Value>9-8-7-8-10-10</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>29122,6</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе ниже отм.0,000 </Name>
+          <Measure>055</Measure>
+          <Value>1369,3</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе выше отм.0,000 (без учета балконов)</Name>
+          <Measure>055</Measure>
+          <Value>23143,7</Value>
+        </TEI>
+        <TEI>
+          <Name>в т.ч. площадь открытых неотапливаемых элементов    здания (балконы)</Name>
+          <Measure>055</Measure>
+          <Value>4609,6</Value>
+        </TEI>
+        <TEI>
+          <Name>Полезная площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>21093,4</Value>
+        </TEI>
+        <TEI>
+          <Name>Расчетная площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>17173,8</Value>
+        </TEI>
+        <TEI>
+          <Name>Строительный объем</Name>
+          <Measure>113</Measure>
+          <Value>93188,4</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе выше отм. 0,000</Name>
+          <Measure>113</Measure>
+          <Value>88533,3</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе ниже отм. 0,000</Name>
+          <Measure>113</Measure>
+          <Value>4655,1</Value>
+        </TEI>
+        <TEI>
+          <Name>Высота здания (предельная) для  3 линии (зоны В)</Name>
+          <Measure>006</Measure>
+          <Value>29,64</Value>
+        </TEI>
+        <TEI>
+          <Name>Высота здания (предельная) для  4 линии</Name>
+          <Measure>006</Measure>
+          <Value>33,66</Value>
+        </TEI>
+        <TEI>
+          <Name>Количество номеров</Name>
+          <Measure>796</Measure>
+          <Value>278</Value>
+        </TEI>
+        <TEI>
+          <Name>в т. ч. однокомнатных</Name>
+          <Measure>796</Measure>
+          <Value>185</Value>
+        </TEI>
+        <TEI>
+          <Name>в т. ч. двухкомнатных</Name>
+          <Measure>796</Measure>
+          <Value>88</Value>
+        </TEI>
+        <TEI>
+          <Name>в т. ч. трехкомнатных</Name>
+          <Measure>796</Measure>
+          <Value>5</Value>
+        </TEI>
+        <TEI>
+          <Name>в т.ч одноместных</Name>
+          <Measure>796</Measure>
+          <Value>139</Value>
+        </TEI>
+        <TEI>
+          <Name>в т.ч двухместных</Name>
+          <Measure>796</Measure>
+          <Value>139</Value>
+        </TEI>
+        <TEI>
+          <Name>Вместимость (проживающие в гостинице)</Name>
+          <Measure>792</Measure>
+          <Value>417</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь номеров (без учета балконов)</Name>
+          <Measure>055</Measure>
+          <Value>9736,7</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь номеров (с учетом балконов)</Name>
+          <Measure>055</Measure>
+          <Value>13154,0</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь балконов номеров</Name>
+          <Measure>055</Measure>
+          <Value>3417,3</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь МОП в т.ч. площадь открытых неотапливаемых элементов здания (балконы)</Name>
+          <Measure>055</Measure>
+          <Value>12826,3</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь помещений обслуживания номеров</Name>
+          <Measure>055</Measure>
+          <Value>683,4</Value>
+        </TEI>
+        <TEI>
+          <Name>Площадь номерного фонда (с учетом помещений обслуживания номеров) (без учета балконов)</Name>
+          <Measure>055</Measure>
+          <Value>10420,1</Value>
+        </TEI>
+        <EnergyEfficiency>
+          <EnergyEfficiencyClass>B</EnergyEfficiencyClass>
+        </EnergyEfficiency>
+        <DangerousIndustrialObject>Не относится к опасным производственным объектам</DangerousIndustrialObject>
+        <FireDangerCategory>Категория не устанавливается</FireDangerCategory>
+        <PeoplePermanentStay>
+          <Text>предусмотрены</Text>
+        </PeoplePermanentStay>
+        <ResponsibilityLevel>нормальный</ResponsibilityLevel>
+      </OKS>
+      <OKS ObjectID="K_qX2KYL">
+        <Name>Корупс 7.1 (подземная парковка)</Name>
+        <Address>
+          <Region>23</Region>
+          <District>Анапский район</District>
+          <Settlement>село Варваровка</Settlement>
+          <Street>ул. Калинина</Street>
+          <Note>на земельных участках с КН 23:37:1006000:14934, 23:37:1006000:14935, 23:36:1006000:14873</Note>
+        </Address>
+        <FunctionsClass>04.01.002.002</FunctionsClass>
+        <FunctionsFeatures>
+          <Text>не принадлежит</Text>
+        </FunctionsFeatures>
+        <PowerIndicator>
+          <Name>Вместимость</Name>
+          <Measure>698</Measure>
+          <Value>79</Value>
+        </PowerIndicator>
+        <TEI>
+          <Name>Площадь застройки</Name>
+          <Measure>055</Measure>
+          <Value>427,8</Value>
+        </TEI>
+        <TEI>
+          <Name>В том числе площадь застройки бассейна</Name>
+          <Measure>055</Measure>
+          <Value>272,8</Value>
+        </TEI>
+        <TEI>
+          <Name>Этажность</Name>
+          <Measure>796</Measure>
+          <Value>0</Value>
+        </TEI>
+        <TEI>
+          <Name>Этажей</Name>
+          <Measure>796</Measure>
+          <Value>1</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>2918,7</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе ниже отм.0,000 </Name>
+          <Measure>055</Measure>
+          <Value>2918,7</Value>
+        </TEI>
+        <TEI>
+          <Name>Полезная площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>2847</Value>
+        </TEI>
+        <TEI>
+          <Name>Расчетная площадь здания</Name>
+          <Measure>055</Measure>
+          <Value>2584</Value>
+        </TEI>
+        <TEI>
+          <Name>Строительный объем</Name>
+          <Measure>113</Measure>
+          <Value>12104,5</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе выше отм. 0,000</Name>
+          <Measure>113</Measure>
+          <Value>397,1</Value>
+        </TEI>
+        <TEI>
+          <Name>в том числе ниже отм. 0,000</Name>
+          <Measure>113</Measure>
+          <Value>11707,4</Value>
+        </TEI>
+        <TEI>
+          <Name>Высота здания (предельная)</Name>
+          <Measure>006</Measure>
+          <Value>3,55</Value>
+        </TEI>
+        <TEI>
+          <Name>Общая площадь МОП</Name>
+          <Measure>055</Measure>
+          <Value>256</Value>
+        </TEI>
+        <TEI>
+          <Name>Количество машино-мест</Name>
+          <Measure>698</Measure>
+          <Value>79</Value>
+        </TEI>
+        <EnergyEfficiency>
+          <EnergyEfficiencyClass>Не классифицируется</EnergyEfficiencyClass>
+        </EnergyEfficiency>
+        <DangerousIndustrialObject>Не относится к опасным производственным объектам</DangerousIndustrialObject>
+        <FireDangerCategory>Категория не устанавливается</FireDangerCategory>
+        <PeoplePermanentStay>
+          <Text>не предусмотрены</Text>
+        </PeoplePermanentStay>
+        <ResponsibilityLevel>нормальный</ResponsibilityLevel>
+      </OKS>
+    </ObjectParts>
+    <Resources>
+      <Note>
+        <Text>Электроснабжение  общее –3084кВт; 
+Водопотребление – 590,78 м3/сут; 
+Водоотведение – 605,12 м3/сут; 
+Расход на горячее водоснабжение –2,23Гкал/ч;
+Отопление –5,192 Гкал/ч;
+ТХ–0,162 Гкал/ч;</Text>
+      </Note>
+    </Resources>
+    <LandCategory>2</LandCategory>
+    <SpecialRequirements>
+      <Text>- Специальные технические условия на обеспечение противопожарной защиты объекта (Корпус 2), выполненные ИП Бабкин В.А., утвержденные управлением МЧС России по Краснодарскому краю от 18.12.2024г ;
+- Специальные технические условия на обеспечение противопожарной защиты объекта (Корпус 3), выполненные ИП Бабкин В.А., утвержденные управлением МЧС России по Краснодарскому краю от 18.12.2024г;
+- Специальные технические условия на обеспечение противопожарной защиты объекта (Корпус 5), выполненные ИП Бабкин В.А., утвержденные управлением МЧС России по Краснодарскому краю от 18.12.2024г;
+- Специальные технические условия на обеспечение противопожарной защиты объекта (Корпус 6), выполненные ИП Бабкин В.А., утвержденные управлением МЧС России по Краснодарскому краю от 18.12.2024г
+</Text>
+    </SpecialRequirements>
+    <StaffNote>
+      <Text>Количество сотрудников, работающий в гостиничном комплексе – 35 рабочих мест.</Text>
+    </StaffNote>
+    <SoftwareUsed>
+      <SoftwareNote>
+        <Text>Статический и динамический расчет объектов гостиничного комплекса выполнен в лицензионном программном комплексе STARK ES 2025.
+</Text>
+      </SoftwareNote>
+    </SoftwareUsed>
+    <StagesInfo>
+      <ReasonNote>
+        <Text>По заданию на проектирования строительство будит производиться в один этап</Text>
+      </ReasonNote>
+    </StagesInfo>
+    <DestroyFunds>
+      <Text>Демонтаж не требуется.</Text>
+    </DestroyFunds>
+    <ProjectDocumentation>
+      <Section2>
+        <SectionContent>
+          <Document>
+            <DocName>Раздел 2. «Схема планировочной организации земельного участка»</DocName>
+            <DocNumber>014-2024-ПЗУ</DocNumber>
+            <ProjectDocParticipants>
+              <ProjectDocParticipant role="Согласование">
+                <FamilyName>Шипулина</FamilyName>
+                <FirstName>Кристина</FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>126-540-580 47</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Соляник</FamilyName>
+                <FirstName>Елена </FirstName>
+                <SecondName>Геннадьевна</SecondName>
+                <SNILS>216-964-710 90</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Нормоконтроль">
+                <FamilyName>Алипова </FamilyName>
+                <FirstName>Екатерина </FirstName>
+                <SecondName>Игоревна</SecondName>
+                <SNILS>145-899-796 48</SNILS>
+              </ProjectDocParticipant>
+            </ProjectDocParticipants>
+            <File>
+              <FileName>014-2024-ПЗУ_18.08.2025.pdf</FileName>
+              <FileFormat>pdf</FileFormat>
+              <FileChecksum>46003694</FileChecksum>
+              <SignFile>
+                <FileName>014-2024-ПЗУ_18.08.2025.pdf.sig</FileName>
+                <FileFormat>sig</FileFormat>
+                <FileChecksum>9E6BCEDF</FileChecksum>
+              </SignFile>
+            </File>
+          </Document>
+        </SectionContent>
+      </Section2>
+      <Section3>
+        <SectionContent>
+          <Document>
+            <DocName>Книга 1 Корпус 1</DocName>
+            <DocNumber>014-2024-1-АР</DocNumber>
+            <ProjectDocParticipants>
+              <ProjectDocParticipant role="Согласование">
+                <FamilyName>Шипулина </FamilyName>
+                <FirstName>Кристина </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>126-540-580 47</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Голубева </FamilyName>
+                <FirstName>Ольга </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>136-605-474 60</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Иванова </FamilyName>
+                <FirstName>Ирина </FirstName>
+                <SecondName>Александровна</SecondName>
+                <SNILS>165-941-027 80</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Нормоконтроль">
+                <FamilyName>Алипова </FamilyName>
+                <FirstName>Екатерина </FirstName>
+                <SecondName>Игоревна</SecondName>
+                <SNILS>145-899-796 48</SNILS>
+              </ProjectDocParticipant>
+            </ProjectDocParticipants>
+            <File>
+              <FileName>014-2024-1-АР.pdf</FileName>
+              <FileFormat>pdf</FileFormat>
+              <FileChecksum>D2156C47</FileChecksum>
+              <SignFile>
+                <FileName>014-2024-1-АР.pdf.sig</FileName>
+                <FileFormat>sig</FileFormat>
+                <FileChecksum>2F2635DB</FileChecksum>
+              </SignFile>
+            </File>
+          </Document>
+          <Document>
+            <DocName>Книга 2 Корпус 2, Корпус 2.1- Автопарковка</DocName>
+            <DocNumber>014-2024-2,2.1-АР</DocNumber>
+            <ProjectDocParticipants>
+              <ProjectDocParticipant role="Согласование">
+                <FamilyName>Шипулина </FamilyName>
+                <FirstName>Кристина </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>126-540-580 47</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Голубева </FamilyName>
+                <FirstName>Ольга </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>136-605-474 60</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Иванова </FamilyName>
+                <FirstName>Ирина </FirstName>
+                <SecondName>Александровна</SecondName>
+                <SNILS>165-941-027 80</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Нормоконтроль">
+                <FamilyName>Алипова </FamilyName>
+                <FirstName>Екатерина </FirstName>
+                <SecondName>Игоревна</SecondName>
+                <SNILS>145-899-796 48</SNILS>
+              </ProjectDocParticipant>
+            </ProjectDocParticipants>
+            <File>
+              <FileName>014-2024-2,2.1-АР.pdf</FileName>
+              <FileFormat>pdf</FileFormat>
+              <FileChecksum>7F411FE2</FileChecksum>
+              <SignFile>
+                <FileName>014-2024-2,2.1-АР.pdf.sig</FileName>
+                <FileFormat>sig</FileFormat>
+                <FileChecksum>4E3A4AF2</FileChecksum>
+              </SignFile>
+            </File>
+          </Document>
+          <Document>
+            <DocName>Книга 3 Корпус 3</DocName>
+            <DocNumber>014-2024-3-АР</DocNumber>
+            <ProjectDocParticipants>
+              <ProjectDocParticipant role="Согласование">
+                <FamilyName>Шипулина </FamilyName>
+                <FirstName>Кристина </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>126-540-580 47</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Голубева </FamilyName>
+                <FirstName>Ольга </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>136-605-474 60</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Иванова </FamilyName>
+                <FirstName>Ирина </FirstName>
+                <SecondName>Александровна</SecondName>
+                <SNILS>165-941-027 80</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Нормоконтроль">
+                <FamilyName>Алипова </FamilyName>
+                <FirstName>Екатерина </FirstName>
+                <SecondName>Игоревна</SecondName>
+                <SNILS>145-899-796 48</SNILS>
+              </ProjectDocParticipant>
+            </ProjectDocParticipants>
+            <File>
+              <FileName>014-2024-3-АР.pdf</FileName>
+              <FileFormat>pdf</FileFormat>
+              <FileChecksum>26B9EF83</FileChecksum>
+              <SignFile>
+                <FileName>014-2024-3-АР.pdf.sig</FileName>
+                <FileFormat>sig</FileFormat>
+                <FileChecksum>63CBAE6D</FileChecksum>
+              </SignFile>
+            </File>
+          </Document>
+          <Document>
+            <DocName>Книга 4 Корпус 4, Корпус 4.1- Автопарковка</DocName>
+            <DocNumber>014-2024-4,4.1-АР</DocNumber>
+            <ProjectDocParticipants>
+              <ProjectDocParticipant role="Согласование">
+                <FamilyName>Шипулина </FamilyName>
+                <FirstName>Кристина </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>126-540-580 47</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Голубева </FamilyName>
+                <FirstName>Ольга </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>136-605-474 60</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Иванова </FamilyName>
+                <FirstName>Ирина </FirstName>
+                <SecondName>Александровна</SecondName>
+                <SNILS>165-941-027 80</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Нормоконтроль">
+                <FamilyName>Алипова </FamilyName>
+                <FirstName>Екатерина </FirstName>
+                <SecondName>Игоревна</SecondName>
+                <SNILS>145-899-796 48</SNILS>
+              </ProjectDocParticipant>
+            </ProjectDocParticipants>
+            <File>
+              <FileName>014-2024-4,4.1-АР.pdf</FileName>
+              <FileFormat>pdf</FileFormat>
+              <FileChecksum>3C29E058</FileChecksum>
+              <SignFile>
+                <FileName>014-2024-4,4.1-АР.pdf.sig</FileName>
+                <FileFormat>sig</FileFormat>
+                <FileChecksum>D8037C9D</FileChecksum>
+              </SignFile>
+            </File>
+          </Document>
+          <Document>
+            <DocName>Книга 5 Корпус 5</DocName>
+            <DocNumber>014-2024-5-АР</DocNumber>
+            <ProjectDocParticipants>
+              <ProjectDocParticipant role="Согласование">
+                <FamilyName>Шипулина </FamilyName>
+                <FirstName>Кристина </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>126-540-580 47</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Голубева </FamilyName>
+                <FirstName>Ольга </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>136-605-474 60</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Иванова </FamilyName>
+                <FirstName>Ирина </FirstName>
+                <SecondName>Александровна</SecondName>
+                <SNILS>165-941-027 80</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Нормоконтроль">
+                <FamilyName>Алипова </FamilyName>
+                <FirstName>Екатерина </FirstName>
+                <SecondName>Игоревна</SecondName>
+                <SNILS>145-899-796 48</SNILS>
+              </ProjectDocParticipant>
+            </ProjectDocParticipants>
+            <File>
+              <FileName>014-2024-5-АР.pdf</FileName>
+              <FileFormat>pdf</FileFormat>
+              <FileChecksum>6563953B</FileChecksum>
+              <SignFile>
+                <FileName>014-2024-5-АР.pdf.sig</FileName>
+                <FileFormat>sig</FileFormat>
+                <FileChecksum>5428BA26</FileChecksum>
+              </SignFile>
+            </File>
+          </Document>
+          <Document>
+            <DocName>Книга 6 Корпус 6</DocName>
+            <DocNumber>014-2024-6-АР</DocNumber>
+            <ProjectDocParticipants>
+              <ProjectDocParticipant role="Согласование">
+                <FamilyName>Шипулина </FamilyName>
+                <FirstName>Кристина </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>126-540-580 47</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Голубева </FamilyName>
+                <FirstName>Ольга </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>136-605-474 60</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Иванова </FamilyName>
+                <FirstName>Ирина </FirstName>
+                <SecondName>Александровна</SecondName>
+                <SNILS>165-941-027 80</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Нормоконтроль">
+                <FamilyName>Алипова </FamilyName>
+                <FirstName>Екатерина </FirstName>
+                <SecondName>Игоревна</SecondName>
+                <SNILS>145-899-796 48</SNILS>
+              </ProjectDocParticipant>
+            </ProjectDocParticipants>
+            <File>
+              <FileName>014-2024-6-АР.pdf</FileName>
+              <FileFormat>pdf</FileFormat>
+              <FileChecksum>31DB7197</FileChecksum>
+              <SignFile>
+                <FileName>014-2024-6-АР.pdf.sig</FileName>
+                <FileFormat>sig</FileFormat>
+                <FileChecksum>C244AEE1</FileChecksum>
+              </SignFile>
+            </File>
+          </Document>
+          <Document>
+            <DocName>Книга 7 Корпус 7, Корпус 7.1- Автопарковка</DocName>
+            <DocNumber>014-2024-7,7.1-АР</DocNumber>
+            <ProjectDocParticipants>
+              <ProjectDocParticipant role="Согласование">
+                <FamilyName>Шипулина </FamilyName>
+                <FirstName>Кристина </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>126-540-580 47</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Голубева </FamilyName>
+                <FirstName>Ольга </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>136-605-474 60</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Иванова </FamilyName>
+                <FirstName>Ирина </FirstName>
+                <SecondName>Александровна</SecondName>
+                <SNILS>165-941-027 80</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Нормоконтроль">
+                <FamilyName>Алипова </FamilyName>
+                <FirstName>Екатерина </FirstName>
+                <SecondName>Игоревна</SecondName>
+                <SNILS>145-899-796 48</SNILS>
+              </ProjectDocParticipant>
+            </ProjectDocParticipants>
+            <File>
+              <FileName>014-2024-7,7.1-АР.pdf</FileName>
+              <FileFormat>pdf</FileFormat>
+              <FileChecksum>8753052D</FileChecksum>
+              <SignFile>
+                <FileName>014-2024-7,7.1-АР.pdf.sig</FileName>
+                <FileFormat>sig</FileFormat>
+                <FileChecksum>6C226FD3</FileChecksum>
+              </SignFile>
+            </File>
+          </Document>
+        </SectionContent>
+      </Section3>
+      <Section4>
+        <SectionContent>
+          <Document>
+            <DocName>Книга 1 Корпус 1</DocName>
+            <DocNumber>014-2024-1-КР</DocNumber>
+            <ProjectDocParticipants>
+              <ProjectDocParticipant role="Согласование">
+                <FamilyName>Шипулина </FamilyName>
+                <FirstName>Кристина </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>126-540-580 47</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Контарева </FamilyName>
+                <FirstName>Ирина </FirstName>
+                <SecondName>Владимировна </SecondName>
+                <SNILS>163-598-388 16</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Нормоконтроль">
+                <FamilyName>Алипова </FamilyName>
+                <FirstName>Екатерина </FirstName>
+                <SecondName>Игоревна</SecondName>
+                <SNILS>145-899-796 48</SNILS>
+              </ProjectDocParticipant>
+            </ProjectDocParticipants>
+            <File>
+              <FileName>014-2024-1-КР.pdf</FileName>
+              <FileFormat>pdf</FileFormat>
+              <FileChecksum>65D7D496</FileChecksum>
+              <SignFile>
+                <FileName>014-2024-1-КР.pdf.sig</FileName>
+                <FileFormat>sig</FileFormat>
+                <FileChecksum>3BAD86F9</FileChecksum>
+              </SignFile>
+            </File>
+          </Document>
+          <Document>
+            <DocName>Книга 2 Корпус 2, Корпус 2.1- Автопарковка</DocName>
+            <DocNumber>014-2024-2,2.1-КР</DocNumber>
+            <ProjectDocParticipants>
+              <ProjectDocParticipant role="Согласование">
+                <FamilyName>Шипулина </FamilyName>
+                <FirstName>Кристина </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>126-540-580 47</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Бочкова </FamilyName>
+                <FirstName>Ярослава </FirstName>
+                <SecondName>Дмитриевна</SecondName>
+                <SNILS>154-125-171 30</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Лазутченко </FamilyName>
+                <FirstName>Екатерина </FirstName>
+                <SecondName>Витальевна </SecondName>
+                <SNILS>190-714-525 67</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Сергиенко </FamilyName>
+                <FirstName>Михаил </FirstName>
+                <SecondName>Андреевич</SecondName>
+                <SNILS>192-177-590 96</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Нормоконтроль">
+                <FamilyName>Алипова </FamilyName>
+                <FirstName>Екатерина </FirstName>
+                <SecondName>Игоревна</SecondName>
+                <SNILS>145-899-796 48</SNILS>
+              </ProjectDocParticipant>
+            </ProjectDocParticipants>
+            <File>
+              <FileName>014-2024-2,2.1-КР.pdf</FileName>
+              <FileFormat>pdf</FileFormat>
+              <FileChecksum>B391C6DD</FileChecksum>
+              <SignFile>
+                <FileName>014-2024-2,2.1-КР.pdf.sig</FileName>
+                <FileFormat>sig</FileFormat>
+                <FileChecksum>3299D276</FileChecksum>
+              </SignFile>
+            </File>
+          </Document>
+          <Document>
+            <DocName>Книга 3 Корпус 3</DocName>
+            <DocNumber>014-2024-3-КР</DocNumber>
+            <ProjectDocParticipants>
+              <ProjectDocParticipant role="Согласование">
+                <FamilyName>Шипулина </FamilyName>
+                <FirstName>Кристина </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>126-540-580 47</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Светличный </FamilyName>
+                <FirstName>Владимир </FirstName>
+                <SecondName>Владимирович</SecondName>
+                <SNILS>158-046-439 75</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Нормоконтроль">
+                <FamilyName>Алипова </FamilyName>
+                <FirstName>Екатерина </FirstName>
+                <SecondName>Игоревна</SecondName>
+                <SNILS>145-899-796 48</SNILS>
+              </ProjectDocParticipant>
+            </ProjectDocParticipants>
+            <File>
+              <FileName>014-2024-3-КР.pdf</FileName>
+              <FileFormat>pdf</FileFormat>
+              <FileChecksum>4DA4C635</FileChecksum>
+              <SignFile>
+                <FileName>014-2024-3-КР.pdf.sig</FileName>
+                <FileFormat>sig</FileFormat>
+                <FileChecksum>1E3E3D01</FileChecksum>
+              </SignFile>
+            </File>
+          </Document>
+          <Document>
+            <DocName>Книга 4 Корпус 4, Корпус 4.1- Автопарковка</DocName>
+            <DocNumber>014-2024-4,4.1-КР</DocNumber>
+            <ProjectDocParticipants>
+              <ProjectDocParticipant role="Согласование">
+                <FamilyName>Шипулина </FamilyName>
+                <FirstName>Кристина </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>126-540-580 47</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Сергиенко </FamilyName>
+                <FirstName>Михаил </FirstName>
+                <SecondName>Андреевич</SecondName>
+                <SNILS>192-177-590 96</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Лазутченко </FamilyName>
+                <FirstName>Екатерина </FirstName>
+                <SecondName>Витальевна </SecondName>
+                <SNILS>190-714-525 67</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Нормоконтроль">
+                <FamilyName>Алипова </FamilyName>
+                <FirstName>Екатерина </FirstName>
+                <SecondName>Игоревна</SecondName>
+                <SNILS>145-899-796 48</SNILS>
+              </ProjectDocParticipant>
+            </ProjectDocParticipants>
+            <File>
+              <FileName>014-2024-4,4.1-КР.pdf</FileName>
+              <FileFormat>pdf</FileFormat>
+              <FileChecksum>76375CAA</FileChecksum>
+              <SignFile>
+                <FileName>014-2024-4,4.1-КР.pdf.sig</FileName>
+                <FileFormat>sig</FileFormat>
+                <FileChecksum>350F0690</FileChecksum>
+              </SignFile>
+            </File>
+          </Document>
+          <Document>
+            <DocName>Книга 5 Корпус 5</DocName>
+            <DocNumber>014-2024-5-КР</DocNumber>
+            <ProjectDocParticipants>
+              <ProjectDocParticipant role="Согласование">
+                <FamilyName>Шипулина </FamilyName>
+                <FirstName>Кристина </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>126-540-580 47</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Светличный </FamilyName>
+                <FirstName>Владимир </FirstName>
+                <SecondName>Владимирович</SecondName>
+                <SNILS>158-046-439 75</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Лукша </FamilyName>
+                <FirstName>Алексей </FirstName>
+                <SecondName>Алексеевич</SecondName>
+                <SNILS>185-794-790 48</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Нормоконтроль">
+                <FamilyName>Алипова </FamilyName>
+                <FirstName>Екатерина </FirstName>
+                <SecondName>Игоревна</SecondName>
+                <SNILS>145-899-796 48</SNILS>
+              </ProjectDocParticipant>
+            </ProjectDocParticipants>
+            <File>
+              <FileName>014-2024-5-КР.pdf</FileName>
+              <FileFormat>pdf</FileFormat>
+              <FileChecksum>8CF8C0A4</FileChecksum>
+              <SignFile>
+                <FileName>014-2024-5-КР.pdf.sig</FileName>
+                <FileFormat>sig</FileFormat>
+                <FileChecksum>5C41D3F2</FileChecksum>
+              </SignFile>
+            </File>
+          </Document>
+          <Document>
+            <DocName>Книга 6 Корпус 6</DocName>
+            <DocNumber>014-2024-6-КР</DocNumber>
+            <ProjectDocParticipants>
+              <ProjectDocParticipant role="Согласование">
+                <FamilyName>Шипулина </FamilyName>
+                <FirstName>Кристина </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>126-540-580 47</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Баркалов </FamilyName>
+                <FirstName>Максим </FirstName>
+                <SecondName>Сергеевич</SecondName>
+                <SNILS>166-879-195 42</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Нормоконтроль">
+                <FamilyName>Алипова </FamilyName>
+                <FirstName>Екатерина </FirstName>
+                <SecondName>Игоревна</SecondName>
+                <SNILS>145-899-796 48</SNILS>
+              </ProjectDocParticipant>
+            </ProjectDocParticipants>
+            <File>
+              <FileName>014-2024-6-КР, rev.1.pdf</FileName>
+              <FileFormat>pdf</FileFormat>
+              <FileChecksum>5BDADC84</FileChecksum>
+              <SignFile>
+                <FileName>014-2024-6-КР, rev.1.pdf.sig</FileName>
+                <FileFormat>sig</FileFormat>
+                <FileChecksum>355397D9</FileChecksum>
+              </SignFile>
+            </File>
+          </Document>
+          <Document>
+            <DocName>Книга 7 Корпус 7, Корпус 7.1- Автопарковка</DocName>
+            <DocNumber>014-2024-7,7.1-КР</DocNumber>
+            <ProjectDocParticipants>
+              <ProjectDocParticipant role="Согласование">
+                <FamilyName>Шипулина </FamilyName>
+                <FirstName>Кристина </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>126-540-580 47</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Светличный </FamilyName>
+                <FirstName>Владимир </FirstName>
+                <SecondName>Владимирович</SecondName>
+                <SNILS>158-046-439 75</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Мойсияди </FamilyName>
+                <FirstName>Феофан </FirstName>
+                <SecondName>Юрьевич  </SecondName>
+                <SNILS>192-312-829 62</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Нормоконтроль">
+                <FamilyName>Алипова </FamilyName>
+                <FirstName>Екатерина </FirstName>
+                <SecondName>Игоревна</SecondName>
+                <SNILS>145-899-796 48</SNILS>
+              </ProjectDocParticipant>
+            </ProjectDocParticipants>
+            <File>
+              <FileName>014-2024-7,7.1-КР.pdf</FileName>
+              <FileFormat>pdf</FileFormat>
+              <FileChecksum>B4AC1115</FileChecksum>
+              <SignFile>
+                <FileName>014-2024-7,7.1-КР.pdf.sig</FileName>
+                <FileFormat>sig</FileFormat>
+                <FileChecksum>F57A1026</FileChecksum>
+              </SignFile>
+            </File>
+          </Document>
+        </SectionContent>
+      </Section4>
+      <Section5>
+        <SectionContent>
+          <ElectricitySupply>
+            <Document>
+              <DocName>Книга 1 Электроснабжение и наружное электроосвещение</DocName>
+              <DocNumber>014-2024-ИОС1.1</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Бурлак </FamilyName>
+                  <FirstName>Владимир </FirstName>
+                  <SecondName>Геннадиевич</SecondName>
+                  <SNILS>167-896-400 33</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-ИОС1.1.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>2EF0AC87</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-ИОС1.1.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>71B1F7CF</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 2 Корпус 1</DocName>
+              <DocNumber>014-2024-1-ИОС1.2</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Бурлак </FamilyName>
+                  <FirstName>Владимир </FirstName>
+                  <SecondName>Геннадиевич</SecondName>
+                  <SNILS>167-896-400 33</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-1-ИОС1.2.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>701BEAD1</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-1-ИОС1.2.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>B9486716</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 3 Корпус 2, Корпус 2.1- Автопарковка</DocName>
+              <DocNumber>014-2024-2,2.1- ИОС1.3</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Бурлак </FamilyName>
+                  <FirstName>Владимир </FirstName>
+                  <SecondName>Геннадиевич</SecondName>
+                  <SNILS>167-896-400 33</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-2,2.1-ИОС1.3.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>BAAD6665</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-2,2.1-ИОС1.3.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>7D9EE11D</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 4 Корпус 3</DocName>
+              <DocNumber>014-2024-3-ИОС1.4</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Бурлак </FamilyName>
+                  <FirstName>Владимир </FirstName>
+                  <SecondName>Геннадиевич</SecondName>
+                  <SNILS>167-896-400 33</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-3-ИОС1.4.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>C4BE02D8</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-3-ИОС1.4.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>5160D535</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 5 Корпус 4, Корпус 4.1- Автопарковка</DocName>
+              <DocNumber>014-2024-4,4.1-ИОС1.5</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Бурлак </FamilyName>
+                  <FirstName>Владимир </FirstName>
+                  <SecondName>Геннадиевич</SecondName>
+                  <SNILS>167-896-400 33</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-4,4.1-ИОС1.5.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>8C69BFDD</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-4,4.1-ИОС1.5.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>E30BC19C</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 6 Корпус 5</DocName>
+              <DocNumber>014-2024-5-ИОС1.6</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Бурлак </FamilyName>
+                  <FirstName>Владимир </FirstName>
+                  <SecondName>Геннадиевич</SecondName>
+                  <SNILS>167-896-400 33</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-5-ИОС1.6.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>26CC9E03</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-5-ИОС1.6.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>9F1A99D2</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 7 Корпус 6</DocName>
+              <DocNumber>014-2024-6-ИОС1.7</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Бурлак </FamilyName>
+                  <FirstName>Владимир </FirstName>
+                  <SecondName>Геннадиевич</SecondName>
+                  <SNILS>167-896-400 33</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-6-ИОС1.7.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>D1EB92FB</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-6-ИОС1.7.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>12B2FFB6</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 8 Корпус 7, Корпус 7.1- Автопарковка</DocName>
+              <DocNumber>014-2024-7,7.1- ИОС1.8</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Бурлак </FamilyName>
+                  <FirstName>Владимир </FirstName>
+                  <SecondName>Геннадиевич</SecondName>
+                  <SNILS>167-896-400 33</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-7,7.1-ИОС1.8.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>5F3C264A</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-7,7.1-ИОС1.8.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>3DA882F6</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+          </ElectricitySupply>
+          <WaterSupply>
+            <Document>
+              <DocName>Книга 1 Наружные сети водоснабжения и водоотведения</DocName>
+              <DocNumber>014-2024-ИОС 2,3.1</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Щербаха </FamilyName>
+                  <FirstName>Сергей  </FirstName>
+                  <SecondName>Александрович</SecondName>
+                  <SNILS>127-670-197 72</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-ИОС2,3.1.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>49222A75</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-ИОС2,3.1.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>17C58C80</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 2 Корпус 1</DocName>
+              <DocNumber>014-2024-1-ИОС 2,3.2</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Погоян </FamilyName>
+                  <FirstName>Андрей  </FirstName>
+                  <SecondName>Петрович</SecondName>
+                  <SNILS>127-670-209 59</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-1-ИОС2,3.2.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>0BE665D3</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-1-ИОС2,3.2.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>8B85BF10</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 3 Корпус 2, Корпус 2.1- Автопарковка</DocName>
+              <DocNumber>014-2024-2,2.1-ИОС 2,3.3</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Щербаха </FamilyName>
+                  <FirstName>Сергей </FirstName>
+                  <SecondName>Александрович</SecondName>
+                  <SNILS>127-670-197 72</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-2,2.1-ИОС2,3.3.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>B9B6CEF6</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-2,2.1-ИОС2,3.3.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>8167D9FC</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 4 Корпус 3</DocName>
+              <DocNumber>014-2024-3-ИОС 2,3.4</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Погоян </FamilyName>
+                  <FirstName>Андрей </FirstName>
+                  <SecondName>Петрович</SecondName>
+                  <SNILS>127-670-209 59</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-3-ИОС2,3.4.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>81A400AF</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-3-ИОС2,3.4.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>560A46D3</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 5 Корпус 4, Корпус 4.1- Автопарковка</DocName>
+              <DocNumber>014-2024-4,4.1-ИОС 2,3.5</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Погоян </FamilyName>
+                  <FirstName>Андрей </FirstName>
+                  <SecondName>Петрович</SecondName>
+                  <SNILS>127-670-209 59</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-4,4.1-ИОС2,3.5.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>DF5C2CAD</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-4,4.1-ИОС2,3.5.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>EE8A844C</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 6 Корпус 5</DocName>
+              <DocNumber>014-2024-5-ИОС 2,3.6</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Погоян </FamilyName>
+                  <FirstName>Андрей </FirstName>
+                  <SecondName>Петрович</SecondName>
+                  <SNILS>127-670-209 59</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-5-ИОС2,3.6.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>02660CDB</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-5-ИОС2,3.6.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>D469E79B</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 7 Корпус 6</DocName>
+              <DocNumber>014-2024-6-ИОС 2,3.7</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Канилова </FamilyName>
+                  <FirstName>Анна </FirstName>
+                  <SecondName>Сейрановна</SecondName>
+                  <SNILS>081-595-319 85</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-6-ИОС2,3.7.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>CC694680</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-6-ИОС2,3.7.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>685EBA84</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 8 Корпус 7, Корпус 7.1- Автопарковка</DocName>
+              <DocNumber>014-2024-7,7.1-ИОС 2,3.8</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Щербаха </FamilyName>
+                  <FirstName>Сергей </FirstName>
+                  <SecondName>Александрович</SecondName>
+                  <SNILS>127-670-197 72</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-7,7.1-ИОС2,3.8.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>BBF94D78</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-7,7.1-ИОС2,3.8.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>20C8726E</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+          </WaterSupply>
+          <HeatingVentilation>
+            <Document>
+              <DocName>Книга 1 «Тепловые сети»</DocName>
+              <DocNumber>014-2024-ИОС4.1</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Сотникова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Викторовна </SecondName>
+                  <SNILS>076-468-087 05</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-ИОС4.1.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>8C0C98B9</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-ИОС4.1.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>8F25D04C</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 2 Корпус 1</DocName>
+              <DocNumber>014-2024-1-ИОС4.2</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Сотникова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Викторовна </SecondName>
+                  <SNILS>076-468-087 05</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-1-ИОС4.2.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>426A0DD9</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-1-ИОС4.2.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>F5BC0F1C</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 3 Корпус 2, Корпус 2.1- Автопарковка</DocName>
+              <DocNumber>014-2024-2,2.1-ИОС4.3</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Сотникова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Викторовна </SecondName>
+                  <SNILS>076-468-087 05</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-2,2.1-ИОС4.3.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>66ECFE33</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-2,2.1-ИОС4.3.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>29FCD508</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 4 Корпус 3</DocName>
+              <DocNumber>014-2024-3-ИОС4.4</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Сотникова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Викторовна </SecondName>
+                  <SNILS>076-468-087 05</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-3-ИОС4.4.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>85324D1C</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-3-ИОС4.4.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>64DF6CC2</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 5 Корпус 4, Корпус 4.1- Автопарковка</DocName>
+              <DocNumber>014-2024-4,4.1-ИОС4.5</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Сотникова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Викторовна </SecondName>
+                  <SNILS>076-468-087 05</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-4,4.1-ИОС4.5.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>CB628DD3</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-4,4.1-ИОС4.5.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>7B500D92</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 6 Корпус 5</DocName>
+              <DocNumber>014-2024-5-ИОС4.6</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Сотникова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Викторовна </SecondName>
+                  <SNILS>076-468-087 05</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-5-ИОС4.6.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>E3EC35B3</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-5-ИОС4.6.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>B455B037</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 7 Корпус 6</DocName>
+              <DocNumber>014-2024-6-ИОС4.7</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Сотникова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Викторовна </SecondName>
+                  <SNILS>076-468-087 05</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-6-ИОС4.7.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>0EA5D79F</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-6-ИОС4.7.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>F6636C03</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 8 Корпус 7, Корпус 7.1- Автопарковка</DocName>
+              <DocNumber>014-2024-7,7.1-ИОС4.8</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Сотникова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Викторовна </SecondName>
+                  <SNILS>076-468-087 05</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-7,7.1-ИОС4.8.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>C7C3E90D</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-7,7.1-ИОС4.8.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>5469B422</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+          </HeatingVentilation>
+          <Communication>
+            <Document>
+              <DocName>Книга 1 «Наружные сети связи»</DocName>
+              <DocNumber>014-2021-ИОС5.1</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Мохначев </FamilyName>
+                  <FirstName>Максим </FirstName>
+                  <SecondName>Витальевич </SecondName>
+                  <SNILS>156-359-971 10</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-ИОС5.1.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>8E9D3179</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-ИОС5.1.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>25E250D9</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 2 Корпус 1</DocName>
+              <DocNumber>014-2024-1-ИОС5.2</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Мохначев </FamilyName>
+                  <FirstName>Максим </FirstName>
+                  <SecondName>Витальевич </SecondName>
+                  <SNILS>156-359-971 10</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-1-ИОС5.2.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>81312351</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-1-ИОС5.2.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>41904038</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 3 Корпус 2, Корпус 2.1- Автопарковка</DocName>
+              <DocNumber>014-2024-2,2.1-ИОС5.3</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Мохначев </FamilyName>
+                  <FirstName>Максим </FirstName>
+                  <SecondName>Витальевич </SecondName>
+                  <SNILS>156-359-971 10</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-2,2.1-ИОС5.3.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>48DF02BB</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-2,2.1-ИОС5.3.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>7220B33A</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 4 Корпус 3</DocName>
+              <DocNumber>014-2024-3-ИОС5.4</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Мохначев </FamilyName>
+                  <FirstName>Максим </FirstName>
+                  <SecondName>Витальевич </SecondName>
+                  <SNILS>156-359-971 10</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-3-ИОС5.4.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>BD5D296B</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-3-ИОС5.4.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>515D29DE</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 5 Корпус 4, Корпус 4.1- Автопарковка</DocName>
+              <DocNumber>014-2024-4,4.1-ИОС5.5</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Мохначев </FamilyName>
+                  <FirstName>Максим </FirstName>
+                  <SecondName>Витальевич </SecondName>
+                  <SNILS>156-359-971 10</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-4,4.1-ИОС5.5.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>86FCC84C</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-4,4.1-ИОС5.5.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>1EA016C0</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 6 Корпус 5</DocName>
+              <DocNumber>014-2024-5-ИОС5.6</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Мохначев </FamilyName>
+                  <FirstName>Максим </FirstName>
+                  <SecondName>Витальевич </SecondName>
+                  <SNILS>156-359-971 10</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-5-ИОС5.6.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>F627B269</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-5-ИОС5.6.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>53568C65</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 7 Корпус 6</DocName>
+              <DocNumber>014-2024-6-ИОС5.7</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Мохначев </FamilyName>
+                  <FirstName>Максим </FirstName>
+                  <SecondName>Витальевич </SecondName>
+                  <SNILS>156-359-971 10</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-6-ИОС5.7.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>5A499933</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-6-ИОС5.7.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>CC6C1452</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 8 Корпус 7, Корпус 7.1- Автопарковка</DocName>
+              <DocNumber>014-2024-7,7.1-ИОС5.8</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Мохначев </FamilyName>
+                  <FirstName>Максим </FirstName>
+                  <SecondName>Витальевич </SecondName>
+                  <SNILS>156-359-971 10</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-7,7.1-ИОС5.8.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>3BAAACDE</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-7,7.1-ИОС5.8.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>FE423DE2</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+            <Document>
+              <DocName>Книга 9 Автоматизация комплексная</DocName>
+              <DocNumber>014-2024-ИОС5.9</DocNumber>
+              <ProjectDocParticipants>
+                <ProjectDocParticipant role="Согласование">
+                  <FamilyName>Шипулина </FamilyName>
+                  <FirstName>Кристина </FirstName>
+                  <SecondName>Ивановна</SecondName>
+                  <SNILS>126-540-580 47</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Разработка">
+                  <FamilyName>Полапа </FamilyName>
+                  <FirstName>Андрей </FirstName>
+                  <SecondName>Александрович</SecondName>
+                  <SNILS>187-008-944 92</SNILS>
+                </ProjectDocParticipant>
+                <ProjectDocParticipant role="Нормоконтроль">
+                  <FamilyName>Алипова </FamilyName>
+                  <FirstName>Екатерина </FirstName>
+                  <SecondName>Игоревна</SecondName>
+                  <SNILS>145-899-796 48</SNILS>
+                </ProjectDocParticipant>
+              </ProjectDocParticipants>
+              <File>
+                <FileName>014-2024-ИОС5.9.pdf</FileName>
+                <FileFormat>pdf</FileFormat>
+                <FileChecksum>F9407E2A</FileChecksum>
+                <SignFile>
+                  <FileName>014-2024-ИОС5.9.pdf.sig</FileName>
+                  <FileFormat>sig</FileFormat>
+                  <FileChecksum>500380BB</FileChecksum>
+                </SignFile>
+              </File>
+            </Document>
+          </Communication>
+        </SectionContent>
+      </Section5>
+      <Section6>
+        <NotDeveloped>Раздел не разрабатывался</NotDeveloped>
+      </Section6>
+      <Section7>
+        <SectionContent>
+          <Document>
+            <DocName>Раздел 7   «Проект организации строительства»</DocName>
+            <DocNumber>014-2024-ПОС</DocNumber>
+            <ProjectDocParticipants>
+              <ProjectDocParticipant role="Согласование">
+                <FamilyName>Шипулина </FamilyName>
+                <FirstName>Кристина </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>126-540-580 47</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Уваров </FamilyName>
+                <FirstName>Антон </FirstName>
+                <SecondName>Геннадьевич</SecondName>
+                <SNILS>103-775-772 63</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Нормоконтроль">
+                <FamilyName>Алипова </FamilyName>
+                <FirstName>Екатерина </FirstName>
+                <SecondName>Игоревна</SecondName>
+                <SNILS>145-899-796 48</SNILS>
+              </ProjectDocParticipant>
+            </ProjectDocParticipants>
+            <File>
+              <FileName>Том 7. 014-2024-ПОС.pdf</FileName>
+              <FileFormat>pdf</FileFormat>
+              <FileChecksum>3DCC4901</FileChecksum>
+              <SignFile>
+                <FileName>Том 7. 014-2024-ПОС.pdf.sig</FileName>
+                <FileFormat>sig</FileFormat>
+                <FileChecksum>A9CB59BC</FileChecksum>
+              </SignFile>
+            </File>
+          </Document>
+        </SectionContent>
+      </Section7>
+      <Section8>
+        <SectionContent>
+          <Document>
+            <DocName>Раздел 8  «Перечень мероприятий по охране окружающей среды»</DocName>
+            <DocNumber>014-2024-ООС</DocNumber>
+            <ProjectDocParticipants>
+              <ProjectDocParticipant role="Согласование">
+                <FamilyName>Шипулина </FamilyName>
+                <FirstName>Кристина </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>126-540-580 47</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Нормоконтроль">
+                <FamilyName>Алипова </FamilyName>
+                <FirstName>Екатерина </FirstName>
+                <SecondName>Игоревна</SecondName>
+                <SNILS>145-899-796 48</SNILS>
+              </ProjectDocParticipant>
+            </ProjectDocParticipants>
+            <File>
+              <FileName>014-2024-ООС.pdf</FileName>
+              <FileFormat>pdf</FileFormat>
+              <FileChecksum>53C5A0AB</FileChecksum>
+              <SignFile>
+                <FileName>014-2024-ООС.pdf.sig</FileName>
+                <FileFormat>sig</FileFormat>
+                <FileChecksum>DD9D292F</FileChecksum>
+              </SignFile>
+            </File>
+          </Document>
+        </SectionContent>
+      </Section8>
+      <Section9>
+        <SectionContent>
+          <Document>
+            <DocName>Книга 1 Корпус 2, Корпус 2.1- Автопарковка, Корпус 3, Корпус 5, Корпус 6</DocName>
+            <DocNumber>014-2024-ПБ.1</DocNumber>
+            <ProjectDocParticipants>
+              <ProjectDocParticipant role="Согласование">
+                <FamilyName>Шипулина </FamilyName>
+                <FirstName>Кристина </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>126-540-580 47</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Луганский </FamilyName>
+                <FirstName>Николай </FirstName>
+                <SecondName>Николаевич</SecondName>
+                <SNILS>175-606-372 84</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Нормоконтроль">
+                <FamilyName>Алипова </FamilyName>
+                <FirstName>Екатерина </FirstName>
+                <SecondName>Игоревна</SecondName>
+                <SNILS>145-899-796 48</SNILS>
+              </ProjectDocParticipant>
+            </ProjectDocParticipants>
+            <File>
+              <FileName>014-2024-ПБ1.pdf</FileName>
+              <FileFormat>pdf</FileFormat>
+              <FileChecksum>7A0775B5</FileChecksum>
+              <SignFile>
+                <FileName>014-2024-ПБ1.pdf.sig</FileName>
+                <FileFormat>sig</FileFormat>
+                <FileChecksum>99C7AF8D</FileChecksum>
+              </SignFile>
+            </File>
+          </Document>
+          <Document>
+            <DocName>Книга 1 Корпус 1, Корпус 4, Корпус 4.1- Автопарковка, Корпус 7, Корпус 7.1- Автопарковка</DocName>
+            <DocNumber>014-2024-ПБ.2</DocNumber>
+            <ProjectDocParticipants>
+              <ProjectDocParticipant role="Согласование">
+                <FamilyName>Шипулина </FamilyName>
+                <FirstName>Кристина </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>126-540-580 47</SNILS>
+              </ProjectDocParticipant>
+            </ProjectDocParticipants>
+            <File>
+              <FileName>014-2024-ПБ2.pdf</FileName>
+              <FileFormat>pdf</FileFormat>
+              <FileChecksum>46B44E8C</FileChecksum>
+              <SignFile>
+                <FileName>014-2024-ПБ2.pdf.sig</FileName>
+                <FileFormat>sig</FileFormat>
+                <FileChecksum>0D8936A0</FileChecksum>
+              </SignFile>
+            </File>
+          </Document>
+        </SectionContent>
+      </Section9>
+      <Section10>
+        <SectionContent>
+          <Document>
+            <DocName>Раздел 10 «Требования к обеспечению безопасной эксплуатации объекта капитального строительства»</DocName>
+            <DocNumber>014-2024-ТБ</DocNumber>
+            <ProjectDocParticipants>
+              <ProjectDocParticipant role="Согласование">
+                <FamilyName>Шипулина </FamilyName>
+                <FirstName>Кристина </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>126-540-580 47</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Нормоконтроль">
+                <FamilyName>Алипова </FamilyName>
+                <FirstName>Екатерина </FirstName>
+                <SecondName>Игоревна</SecondName>
+                <SNILS>145-899-796 48</SNILS>
+              </ProjectDocParticipant>
+            </ProjectDocParticipants>
+            <File>
+              <FileName>014-2024-ТБ.pdf</FileName>
+              <FileFormat>pdf</FileFormat>
+              <FileChecksum>7A672990</FileChecksum>
+              <SignFile>
+                <FileName>014-2024-ТБ.pdf.sig</FileName>
+                <FileFormat>sig</FileFormat>
+                <FileChecksum>8ABEB6D1</FileChecksum>
+              </SignFile>
+            </File>
+          </Document>
+        </SectionContent>
+      </Section10>
+      <Section11>
+        <SectionContent>
+          <Document>
+            <DocName>Раздел 11  «Мероприятия по обеспечению доступа инвалидов»</DocName>
+            <DocNumber>014-2024-ОДИ</DocNumber>
+            <ProjectDocParticipants>
+              <ProjectDocParticipant role="Согласование">
+                <FamilyName>Шипулина </FamilyName>
+                <FirstName>Кристина </FirstName>
+                <SecondName>Ивановна</SecondName>
+                <SNILS>126-540-580 47</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Разработка">
+                <FamilyName>Чернышов </FamilyName>
+                <FirstName>Алексей </FirstName>
+                <SecondName>Константинович</SecondName>
+                <SNILS>167-271-830 86</SNILS>
+              </ProjectDocParticipant>
+              <ProjectDocParticipant role="Нормоконтроль">
+                <FamilyName>Алипова </FamilyName>
+                <FirstName>Екатерина </FirstName>
+                <SecondName>Игоревна</SecondName>
+                <SNILS>145-899-796 48</SNILS>
+              </ProjectDocParticipant>
+            </ProjectDocParticipants>
+            <File>
+              <FileName>014-2024-ОДИ.pdf</FileName>
+              <FileFormat>pdf</FileFormat>
+              <FileChecksum>B5461292</FileChecksum>
+              <SignFile>
+                <FileName>014-2024-ОДИ.pdf.sig</FileName>
+                <FileFormat>sig</FileFormat>
+                <FileChecksum>E601128A</FileChecksum>
+              </SignFile>
+            </File>
+          </Document>
+        </SectionContent>
+      </Section11>
+      <Section12>
+        <NotDeveloped>Раздел не разрабатывался</NotDeveloped>
+      </Section12>
+      <Section13>
+        <NotDeveloped>Раздел не разрабатывался</NotDeveloped>
+      </Section13>
+    </ProjectDocumentation>
+  </NonIndustrialObject>
+  <DesignerNote>
+    <SubTitle>сведения о категории земель, на которых будет располагаться объект капитального строительства</SubTitle>
+    <Text>Основные виды разрешенного использования земельного участка: Территориальная зона Р-2 – зона отдыха
+Вид разрешенного использования: Гостиничное обслуживание
+Категория земель: Земли населенных пунктов</Text>
+    <SubTitle>Нормативные и расчетные плотности застройки номерного фонда, отношение мест общего пользования к общей площади зданий</SubTitle>
+    <Text>Нормативная предельная плотность застройки номерного фонда, технических и вспомогательных помещений персонала равна:
+-для 3 линии  8000 м.кв на 1 га
+                     9810,4 м.кв на 1,1138 га
+-для 4 линии  9000 м.кв на 1 га
+                      45418,5 м.кв на 5,0465 га
+Общая нормативная предельная плотность застройки номерного фонда равна – 9810,4 +45418,5 =55 228,9 
+
+Расчетная плотность застройки номерного фонда  равна:
+1665,2 (Корпус 1)+ 11899,4(Корпус 2)+ 4584,9(Корпус 3)+ 8233,9(Корпус 4)+ 4253,8(Корпус 5)+ 2261,3(Корпус 6)+ 10420,1(Корпус 7)= 43 318,6
+
+
+Расчетная плотность застройки номерного фонда для зоны В (3 линия) равна:
+4763,7 + 304,3 м.кв. = 5 068,0 м.кв   (Корпус 7, блок 1, блок 2, блок 3) – не превышает нормативную предельную плотность застройки номерного фонда
+
+Расчетная плотность застройки номерного фонда для 4 линия  равна:
+1665,2  (Корпус 1) + 11899,4 (Корпус 2)+ 4584,9  (Корпус 3)+ 8233,9 (Корпус 4)+ 4253,8 (Корпус 5)+ 2261,3 (Корпус 6)+ 4 973 + 379,1  (Корпус 7, блок 4, блок 5, блок 6) =38250,6  – не превышает нормативную предельную плотность застройки номерного фонда 
+
+
+Нормативная предельная плотность застройки равна:
+
+-для зоны В (2 линия)16000 м.кв на 1 га
+17820,8 м.кв на 1,1138 га
+
+-для зоны В (3 линия)18000 м.кв на 1 га
+90837  м.кв на 5,0465 га
+
+Общая нормативная предельная плотность застройки равна - 17820,8+90837=108 657,8 м.кв.
+
+Расчетная предельная плотность застройки равна: 4224,4 (Корпус 1)+26608,5 (Корпус 2) + 12279,6 (Корпус 3)+ 19761,6 (Корпус 4)+ 9849,2(Корпус 5)+ 5776,6 (Корпус 6)+ 29122,6 (Корпус 7) = 83 619,8 м.кв
+
+Расчетная плотность застройки для зоны В (3 линия) равна:
+11201,1 м.кв.  (Корпус 7, блок 1, блок 2, блок 3) – не превышает нормативную предельную плотность застройки
+
+Расчетная плотность застройки  для 4 линия  равна:
+3462,1  (Корпус 1) + 20416,2 (Корпус 2)+ 9291,5 (Корпус 3)+ 15307,7 (Корпус 4)+ 7496 (Корпус 5)+ 4502,6 (Корпус 6)+ 11942,6  (Корпус 7, блок 4, блок 5, блок 6) =72 418,7– не превышает нормативную предельную плотность застройки номерного фонда 
+
+
+Минимальное отношение мест общего пользования к общей площади зданий. (min 35%)
+
+ Общая площадь здания  по проекту равна: 4224,4(Корпус 1)+ 26608,5(Корпус 2)+ 12279,6 (Корпус 3)+ 19761,6(Корпус 4)+ 9849,2(Корпус 5)+ 5776,6 (Корпус 6)+ 29122,6(Корпус 7)+ 1843 (Корпус 2.1)+ 2771,9 (Корпус 4.1) +2918,7 (Корпус 7.1)= 115 156,1м.кв  (100%)
+
+Общая площадь МОП равна: 1464+8293,1+4839,2+7006,7+3141,3+1978,8+12826,3+152,1+352,4+256= 40 309,9 м.кв  (35,0%)
+</Text>
+    <SubTitle>идентификационные признаки объекта капитального строительства </SubTitle>
+    <Text>1) назначение – вид объекта - здание гостиницы, код 03.02.001.005 (согласно приказа Министерства строительства и жилищно-коммунального хозяйства РФ от 02.11 2022 года №928/пр);
+2) принадлежность к объектам транспортной инфраструктуры и к другим объектам, функционально-технологические особенности, которых влияют на их безопасность
+- не принадлежит;
+3) возможность опасных природных процессов и явлений и техногенных воздействий на территории, на которой будут осуществляться строительство, реконструкция и эксплуатация здания или сооружения;
+ - не оказывает 
+4) принадлежность к опасным производственным объектам
+- не принадлежит;
+5) пожарная и взрывопожарная опасность
+- Класс функциональной пожарной опасности объектов в соответствии со статьей 32 Федерального закона №123-Ф3 от 22.07.2008г.- Ф1.2,
+ Проектируемы объекты не относится к взрывоопасным предметам;
+6) наличие помещений с постоянным пребыванием - людей не предусмотрено;
+7) уровень ответственности - нормальный
+</Text>
+    <SubTitle>сведения о назначении и функционально-технологических особенностях объекта капитального строительства в соответствии с заданием на проектирование и классификатором объектов капитального строительства по их назначению и функционально-технологическим особенностям</SubTitle>
+    <Text>Запроектирован Гостиничный комплекс в составе которого семь спальных корпусов с пристроенными подземными автостоянками. На территории гостиничного комплекса так же располагаются бассейны, зоны отдыха и досуга
+
+Корпус 1 в плане имеет простую квадратную форму. Здание корпуса девятиэтажное с плоской неэксплуатируемой кровлей, без подвала. 
+Высота 1 этажа равна – 4,04 м. 
+Высота 2-9 этажей 3,3 м
+
+За проектную отметку 0,000 принят уровень чистого пола первого этажа, соответствующий абсолютной отметке +72,500.
+Проектируемый корпус гостиницы– здание с жилыми помещениями, предназначенными для временного проживания, в виде гостиничных комфортабельных 1-но и 2-х комнатных жилых номеров.
+Здание гостиницы включает следующие группы помещений: 
+-помещения вестибюльной зоны
+-группу жилых помещений
+- процедурная зона;
+-коммерческое помещение;
+-служебные помещения для персонала;
+-группу технических и служебных помещений
+
+Поэтажная компоновка здания выполнена следующим образом:
+При входе в корпус 1 запроектирован тамбур и просторный коридор. На первом этаже корпуса располагаются технические и служебные помещения: серверная, электрощитовая, ИТП, склады чистого и грязного белья и ПУИ. 
+Прямо от входа расположен лифтовой холл с 2-мя лифтами и 2 отдельные лестницы. Коммерческое помещение имеет отдельный вход с другого фасада здания. Так же на 1 этаже с отдельным выходами располагаются насосная и мусоросборная камера.
+На 2 этаже располагается процедурная зона включающая в себя кабинеты массажа, косметологии, стоунтерапии, аромотерапевтического массажа и скрабирования, а так же кабинеты персонала и подсобные помещения.
+На типовых этажах с 3 по 9 этажи располагается номерной фонд. Запроектированы одно и двухкомнатные номера
+Расположение номеров коридорного типа. 
+Однокомнатные номера имеют в своём составе комнату, санузел и балкон.
+Двухкомнатные номера имеют в своём составе гостиную, комнату, санузел (или 2 санузла) и балкон.
+
+Общий номерной фонд корпуса 1 – 48 номера (24 из них одноместные)
+в том числе: 
+- 1-но комнатных– 34 номера;
+- 2-х комнатных– 14 номеров;
+
+В данном корпусе гостиничного комплекса номера для проживания МГН (М4) не предусмотрено, так как они предусмотрены в корпусе 7.
+
+Всего проживающих в корпусе 1 - 72 человек.
+
+Для вертикального сообщения запроектирован лестнично-лифтовой узел с двумя грузопассажирскими лифтами. Один, грузоподъемностью 1000кг с размером кабины 2100 х 1100 мм., подходит для перевозки пожарных подразделений. Второй грузоподъемностью 630кг с размером кабины 1100 х 1400 мм. Ширина лифтового тамбур-шлюза позволяет осуществить транспортировку больного на носилках скорой помощи и составляет более 2,15м 
+Для эвакуации предусмотрены две обособленные лестничные клетки. В одну из них можно попасть из коридора, в другую - из лифтового тамбур-шлюза.
+
+Кровля здания плоская не эксплуатируемая. Водосток - внутренний, организованный. 
+По периметру не эксплуатируемой кровли предусмотрено ограждение (парапет) высотой не менее 0,6м.
+Выход на кровлю  обеспечен по маршам лестничной клетки через противопожарную дверь 2-го типа (ЕI30).
+
+Общественные помещения данного корпуса не имеют доступ для МГН, так как все общественные помещения различного функционального назначения с доступностью для всех групп МГН предусмотрены в корпусе 7.
+Все выходы (входы) на прилегающую территорию имеют площадки с водоотведением и козырьки.  
+Корпус 2 в плане имеет сложную змееобразную форму. Здание поделено на 4 секции, разделенных между собой деформационными швами. Корпус 2.1 состоит из двух секий примыкающих к 1 и 2 секциям корпуса 2
+
+Корпус 2 запроектирован с переменой этажностью:
+Блок 1 – девятиэтажный без подвала,
+Блоки 2,3 – девятиэтажныес подземным этажом
+Блок 4 –десятиэтажное без подвала
+
+Высота подземного этажа в блоке2 равна- 2,97м
+Высота подземного этажа в блоке3 равна- 3,3м
+Высота подземного этажа в блоке 4 равна- 3,6м
+
+Высота потолка подземной автопарковки – 4,15 м
+
+Высота 1 этажа в секции 1 равна- 4,3 м
+Высота 1 этажа в секции 2 – 4,3 м
+Высота 1 этажа в секции 3 равна -4,6 м
+Высота 1 этажа в секции 4 равна -4,3 м
+
+Высота 2-9 этажей в секциях 1-4 равна -3,3 м
+Высота этажа корпуса 2.1 автостоянки равна - 4,3 м
+
+За проектную отметку 0,000 принят уровень чистого пола первого этажа первой секции, соответствующий абсолютной отметке +54,500.
+Проектируемый корпус гостиницы– здание с жилыми помещениями, предназначенными для временного проживания, в виде гостиничных комфортабельных 1-но и 2-х комнатных жилых номеров.
+Здание 2 корпуса включает следующие группы помещений: 
+-помещения вестибюльной зоны
+-группу жилых помещений
+-игровые
+-ремонтные мастерские
+-СПА-зона с бассейном;
+-коммерческие помещения;
+-служебные помещения для персонала;
+-складские помещения;
+-группу технических и служебных помещений
+
+Поэтажная компоновка здания выполнена следующим образом:
+
+Корпус 2 гостиничного комплекса располагается на крутом рельефе перпендикулярно склону. На первом уровне, на отметке 0.000 расположен 1 этаж 1 блоки подземный этаж 2 блока с выходом в корпус 2.1 автопарковку. На уровне 2 этажа 1 блока расположен 1 этаж 2 блока и подземный этаж 3 блока. На уровне 3 этажа 1 блока – 2 этаж 2 блока, 1 этаж 3 блока и подземный этаж 4 блока.
+В подземном этаже 2 блока располагаются игровые, технические помещения, а так же выход в корпус 2.1 автостоянку. В подземном этаже 3 блока расположена электрощитовая и технические помещения бассейна. Подземный этаж 4 блока расположен на уровне с 1 этажом 3 блока и в нем расположены помещения СПА зоны при бассейне, а так же технические помещения.
+
+На 1 этаже каждой секции запроектирована входная группа, с вестибюлем, коридором и лифтовым тамбур-шлюзом, а так же лестничными клетками. 1 этажи включают в себя группы служебных и технических помещений, таких как: электрощитовые, венткамеры, насосные, серверные, складские помещения прачечной. В 3 секции на 1 этаже располагается бассейн и СПА. Коммерческие помещения имеют отдельные входы с улицы. В 4 секции располагаются административные помещения: переговорные, рабочие кабинеты и комнаты отдыха
+На 2 этаже 1 секции расположены ремонтные мастерские. Номерной фонд гостиницы начинается с 3 по 9 этаж 1 секции и со 2 по 9 этаж в остальных секциях.
+Запроектированы одно и двухкомнатные номера
+Расположение номеров коридорного типа. 
+Однокомнатные номера имеют в своём составе комнату, санузел и балкон.
+Двухкомнатные номера имеют в своём составе гостиную, комнату, санузел (или 2 санузла) и балкон.
+
+Общий номерной фонд корпуса 2 – 358 номера (179 из них одноместные)
+в том числе: 
+- 1-но комнатных– 234 номера;
+- 2-х комнатных– 124 номеров;
+
+В данном корпусе гостиничного комплекса номера для проживания МГН (М4) не предусмотрено, так как они предусмотрены в корпусе 7.
+
+Всего проживающих в корпусе 2 - 537 человек.
+
+Для вертикального сообщения  в каждой секции запроектирован лестнично-лифтовой узел с двумя грузопассажирскими лифтами. Один, грузоподъемностью 1000кг с размером кабины 2100 х 1100 мм. Второй грузоподъемностью 630кг с размером кабины 1100 х 1400 мм. В 4 секции предусмотрен так же лифт для перевозки пожарных подразделений. Ширина лифтового тамбур-шлюза позволяет осуществить транспортировку больного на носилках скорой помощи и составляет более 2,15м.
+Для эвакуации предусмотрены обособленные лестничные клетки, в которые можно попасть из лифтового тамбур-шлюза через открытый балкон.
+
+Кровля здания плоская не эксплуатируемая. Водосток - внутренний, организованный. 
+По периметру не эксплуатируемой кровли предусмотрено ограждение (парапет) высотой не менее 0,6м.
+Выход на кровлю  обеспечен по маршам лестничной клетки через противопожарную дверь 2-го типа (ЕI30).
+
+Общественные помещения данного корпуса не имеют доступ для МГН, так как все общественные помещения различного функционального назначения с доступностью для всех групп МГН предусмотрены в корпусе 7.
+
+Все выходы (входы) на прилегающую территорию имеют площадки с водоотведением и козырьки.  
+
+Корпус 3
+
+корпус 3. Данное здание имеет в плане угловую форму и состоит из двух блоков. Так как здание располагается на рельефе, оно имеет переменную этажность: 
+Блок 1 – восьмиэтажный без подвала
+Блок 2 – девятиэтажный без подвала.
+
+Высота 1 этажа в блоке 1 равна- 3,3 м
+Высота 1 этажа в блоке 2 – 2,97 м
+
+Высота 2-9 этажей в обеих блоках равна -3,3 м
+
+За проектную отметку 0,000 принят уровень чистого пола первого этажа первогоблока, соответствующий абсолютной отметке +73,900.
+Проектируемый корпус гостиницы– здание с жилыми помещениями, предназначенными для временного проживания, в виде гостиничных комфортабельных 1-но и 2-х комнатных жилых номеров.
+Здание 3 корпуса включает следующие группы помещений: 
+-помещения вестибюльной зоны
+-группу жилых помещений
+-СПА-зона с бассейном;
+-коммерческие помещения;
+-тренажёрные залы
+-складские помещения;
+-группу технических и служебных помещений
+
+Поэтажная компоновка здания выполнена следующим образом:
+3 корпус гостиничного комплекса расположен на рельефе и состоит из двух блоков расположенных под развернутым углом относительно друг друга. 
+На 1 этаже в1блоке запроектирована входная группа, с вестибюлем, коридором и лифтовым тамбур-шлюзом, а так же лестничными клетками. 1 этажи включают в себя группы служебных и технических помещений, таких как: электрощитовые, венткамеры, насосные, серверные, складские помещения прачечной. На 1 этаже2 блока расположены спортивные и тренажёрные помещения, кладовые инвентаря и помещения для персонала. А так же технические помещения, обслуживающие бассейн. Сам бассейн, а также входная вестибюльная зона, помещения СПА зоны, раздевалки, административные и служебные помещения расположены на 2 этаже 2 блока.
+На 2 и 3 этажах располагаются кабинеты массажа, процедурные и косметологические кабинеты, а так же комнаты отдыха и приёма пищи для персонала, инвентарные и подсобные помещения.
+С 4 по 8 этаж 1 блока и с 4 по 9 этаж 2 блока располагаются жилые номера.
+
+Запроектированы одно и двухкомнатные номера
+Расположение номеров коридорного типа. 
+Однокомнатные номера имеют в своём составе комнату,санузел и балкон.
+Двухкомнатные номера имеют в своём составе гостиную, комнату, санузел(или 2 санузла) и балкон.
+
+Общий номерной фонд корпуса 3 – 113номеров(57 из них одноместные)
+в том числе: 
+- 1-но комнатных–57номера;
+- 2-х комнатных–56 номеров;
+
+В данном корпусе гостиничного комплекса номера для проживания МГН (М4) не предусмотрено, так как они предусмотрены в корпусе 7.
+
+Всего проживающих в корпусе 3 -169 человек.
+
+Для вертикального сообщения  в каждомблокезапроектирован лестнично-лифтовой узелс двумя грузопассажирскими лифтами. Один,грузоподъемностью 1000кг с размером кабины 2100 х 1100 мм.. Второйгрузоподъемностью 630кг с размером кабины 1100 х 1400 мм. Ширина лифтового тамбур-шлюза позволяет осуществить транспортировку больного на носилках скорой помощи и составляет более 2,15м.
+Для эвакуации предусмотрены обособленные лестничные клетки, в которые можно попасть из лифтового тамбур-шлюза через открытый балкон. А так же одна лестничная клетка во 2 блоке, выходящая в коридор.
+
+Кровля здания плоская не эксплуатируемая.Водосток - внутренний, организованный.
+По периметру не эксплуатируемой кровли предусмотрено ограждение (парапет) высотой не менее 0,6м.
+Выход на кровлю  обеспечен по маршам лестничной клетки через противопожарную дверь 2-го типа (ЕI30).
+
+Общественные помещения данного корпуса не имеют доступ для МГН, так как все общественные помещения различного функционального назначения с доступностью для всех групп МГН предусмотрены в корпусе 7.
+Все выходы (входы) на прилегающую территорию имеют площадки с водоотведением и козырьки.  
+
+Корпус 4
+
+корпус 4. Данное здание имеет в плане сложную форму и состоит из трёх секций. Так как здание располагается на рельефе, оно имеет переменную этажность: 
+Блок 1 – девятиэтажны без подвала
+Блок 2 – девятиэтажный с подземным этажом
+Блок 3 – девятиэтажный с подземным этажом
+Проектируемый корпус гостиницы– здание с жилыми помещениями, предназначенными для временного проживания, в виде гостиничных комфортабельных 1-но и 2-х комнатных жилых номеров.
+Здание 4 корпуса включает следующие группы помещений: 
+-помещения вестибюльной зоны
+-группу жилых помещений
+-СПА-зона с бассейном;
+-группа помещений оказания медицинских услуг;
+-коммерческие помещения;
+-тренажёрные залы
+-складские помещения;
+-группу технических и служебных помещений
+
+Поэтажная компоновка здания выполнена следующим образом:
+4 корпус гостиничного комплекса расположен на рельефе и состоит из трёх блоков расположенных перпендикулярно уклона. 
+На 1 этаже каждогоблока запроектирована входная группа, с вестибюлем, коридором и лифтовым тамбур-шлюзом, а так же лестничными клетками. На 1 этаже 1 блока находятся комерческие торговые помещения, которые имеют обособленные входные группы с улицы. Так же 1 этажи всех блоков включают в себя группы служебных и технических помещений, таких как: электрощитовые, венткамеры, насосные, серверные, складские помещения прачечной. 
+В уровне 1 этажа 1 блока расположен подземный этаж 2 блока. Там расположены технические помещения: насосная, электрощитовая, ИТП; техниеское помещение бассейна, венткамера и подсобное помещение бассейна. Так же располагается лестничный и лифтовой узел с тамбур-шлюзами и выход в корпус 4.1 подземную автостоянку.
+На 2 этаже 1 блока располагаются кабинеты медицинских и косметологических услуг, приёмная, процедурные, кабинеты главного врача, медсестёр и комнаты отдыха и приёма пищи для персонала. В этом же уровне расположен 1 этаж 2 блока, где расположены две входные вестибюльные зоны. Из одного вестибюля можно попасть в лестничный и лифтовой тамбур-шлюзы, а так же в коридор 1 блока и во второй вестибюль. Второй вестибюль относится к зоне бассейна. Зона бассейна включает в себя: входную зону, помещение администратора, раздевалки, сауну и хамам, бассейн. Так же соляная комната, комната отдыха и инвентарная расположены в подземном этаже 3 блока в том же уровне что и 1 этаж 2 блока. Там же помимо помещений зоны бассейна расположены раздевалки и два спортивных зала: тренажёрный и для индивидуальных занятий. Так же в 3 блоке расположены две лестничных клетки и лифты с тамбур-шлюзом.
+3 этаж 1 блока и 2 этаж 2 блока занимают медицинские процедурные кабинеты: кабинеты реабилитолога, иммунолога, остеопта, психолога, дерматолога, фитотерапевта, нутрициолога, стоматологические и массажные кабинеты. Так же кабинеты медсестёр и комнаты отдыха персонала.
+С 4 по 9 этаж 1 блока, с 3 по 9 этаж 2 блока и со 2 по 9 этаж 3 блока располагаются жилые номера.
+
+Запроектированы одно и двухкомнатные номера
+Расположение номеров коридорного типа. 
+Однокомнатные номера имеют в своём составе комнату, санузел и балкон.
+Двухкомнатные номера имеют в своём составе гостиную, комнату, санузел (или 2 санузла) и балкон.
+Общий номерной фонд корпуса 4 – 179номеров(89 из них одноместные)
+в том числе: 
+- 1-но комнатных–118номера;
+- 2-х комнатных–61 номеров;
+
+В данном корпусе гостиничного комплекса номера для проживания МГН (М4) не предусмотрено, так как они предусмотрены в корпусе 7.
+
+Всего проживающих в корпусе 4 -269человек.
+
+Для вертикального сообщения  в каждомблокезапроектирован лестнично-лифтовой узелс двумя грузопассажирскими лифтами. Один,грузоподъемностью 1000кг с размером кабины 2100 х 1100 мм.. Второйгрузоподъемностью 630кг с размером кабины 1100 х 1400 мм. Ширина лифтового тамбур-шлюза позволяет осуществить транспортировку больного на носилках скорой помощи и составляет более 2,15м.
+Для эвакуации  в каждомблокепредусмотрены обособленные лестничные клетки, в которые можно попасть из лифтового тамбур-шлюза через открытый балкон. А так же лестничная клетка в 1 и 3блоке, выходящая в коридор.
+
+Кровля здания плоская не эксплуатируемая.Водосток - внутренний, организованный.
+По периметру не эксплуатируемой кровли предусмотрено ограждение (парапет) высотой не менее 0,6м.
+Выход на кровлю  обеспечен по маршам лестничной клетки через противопожарную дверь 2-го типа (ЕI30).
+
+Общественные помещения данного корпуса не имеют доступ для МГН, так как все общественные помещения различного функционального назначения с доступностью для всех групп МГН предусмотрены в корпусе 7.
+
+Все выходы (входы) на прилегающую территорию имеют площадки с водоотведением и козырьки.  
+
+Корпус 4.1 состоит из 4 блоков разделённых деформационным швом. Корпус полностью расположен в одном уровне и примыкает к корпусу 2. Въезд в корпус автопарковки предусмотрен по рампе со стороны 1 секции, а так же вход возможен из подвала 2 секции корпуса 4 либо с улицы по лестнице в 3 и 4 секциях. Помимо автопарковки во 2 секции корпуса 4.1 расположены технические помещения уличного бассейна, а так же насосная пожаротушения и венткамера
+
+Корпус 5. 
+В составе гостиничного комплекса запроектировано здание спального корпуса – корпус 5. Данное здание имеет в плане простую прямоугольную форму и состоит из двух блоков. Так как здание располагается на рельефе, оно имеет переменную этажность: 
+Блок 1 – восьмиэтажный без подвала
+Блок 2 – восьмиэтажный с подземным этажом.
+Проектируемый корпус гостиницы– здание с жилыми помещениями, предназначенными для временного проживания, в виде гостиничных комфортабельных 1-но и 2-х комнатных жилых номеров.
+Здание 5 корпуса включает следующие группы помещений: 
+-помещения вестибюльной зоны
+-группу жилых помещений
+-коммерческие помещения;
+-прачечная;
+-группу технических и служебных помещений
+
+Поэтажная компоновка здания выполнена следующим образом:
+5 корпус гостиничного комплекса расположен на рельефе и состоит из двух блоков.
+На 1 этаже каждом блоке запроектирована входная группа, с вестибюлем, коридором и лифтовым тамбур-шлюзом, а так же лестничными клетками. В 1 блоке запроектирован 1 тамбур-шлюз с двумя лифтовыми шахтами и лестничная клетка, выход на которую предполагается через переходную лоджию. 1 этажи включают в себя группы служебных и технических помещений, таких как: электрощитовые, венткамеры, насосные, серверные. 
+На 1 этажах расположены коммерческие торговые помещения с индивидуальными входами с улицы.
+В уровне 1 этажа 1 блока расположен подземный этаж 2 блока. Там расположены помещения прачечной: Склад чистого белья и сортировка грязного, сушильно-постирочный цех, гладильная, индивидуальная постирочная и помещение администрации. А так же технические помещения: ИТП и насосная, электрощитовая, помещение хранения отходов. Все помещения  объеденены коридором.
+С 3 этажа1 блока и 2 этажа 2блолка располагаются жилые номера.
+Запроектированы одно и двухкомнатные номера
+Расположение номеров коридорного типа. 
+Однокомнатные номера имеют в своём составе комнату, санузел и балкон.
+Двухкомнатные номера имеют в своём составе гостиную, комнату, санузел (или 2 санузла) и балкон.
+Общий номерной фонд корпуса 5 – 116номеров(58 из них одноместные)
+в том числе: 
+- 1-но комнатных–76номера;
+- 2-х комнатных–40 номеров;
+
+В данном корпусе гостиничного комплекса номера для проживания МГН (М4) не предусмотрено, так как они предусмотрены в корпусе 7.
+
+Всего проживающих в корпусе 4 -269человек.
+
+Для вертикального сообщения  в каждомблокезапроектирован лестнично-лифтовой узелс двумя грузопассажирскими лифтами. Один,грузоподъемностью 1000кг с размером кабины 2100 х 1100 мм.. Второйгрузоподъемностью 630кг с размером кабины 1100 х 1400 мм. Ширина лифтового тамбур-шлюза позволяет осуществить транспортировку больного на носилках скорой помощи и составляет более 2,15м.
+Для эвакуации  в каждомблокепредусмотрены обособленные лестничные клетки, в которые можно попасть из лифтового тамбур-шлюза через открытый балкон. А так же лестничная клетка во 2блоке, выходящая в коридор.
+
+Кровля здания плоская не эксплуатируемая.Водосток - внутренний, организованный.
+По периметру не эксплуатируемой кровли предусмотрено ограждение (парапет) высотой не менее 0,6м.
+Выход на кровлю  обеспечен по маршам лестничной клетки через противопожарную дверь 2-го типа (ЕI30).
+
+Общественные помещения данного корпуса не имеют доступ для МГН, так как все общественные помещения различного функционального назначения с доступностью для всех групп МГН предусмотрены в корпусе 7.
+
+Все выходы (входы) на прилегающую территорию имеют площадки с водоотведением и козырьки.  
+
+Корпус 6. 
+
+Данное здание имеет в плане простую прямоугольную форму и состоит из 1 блока. 
+Проектируемый корпус гостиницы– здание с жилыми помещениями, предназначенными для временного проживания, в виде гостиничных комфортабельных 1-но и 2-х комнатных жилых номеров.
+Здание 6 корпуса включает следующие группы помещений: 
+-помещения вестибюльной зоны
+-группу жилых помещений
+-коммерческие помещения;
+-тренажёрные залы
+-складские помещения;
+-группу технических и служебных помещений
+
+Поэтажная компоновка здания выполнена следующим образом:
+
+На 1 этаже запроектирована входная группа, с вестибюлем, коридором и лифтовым холлом, а так же лестничная клетка. 1 этаж включает в себя группы служебных и технических помещений, таких как: электрощитовая, насосная и ИТП, серверная, складские помещения прачечной, помещение временного хранения отходов. Коммерческое помещение имеет индивидуальный вход с улицы.
+Так же на 1 этаже с двумя отдельными входами располагается группа спортивных помещений, включающая в себя: тренажерный зал, раздевалки с душевыми и санузлами, тренерскую и инвентарную.
+На 2 этаже располагаются творческие мастерские: студия рисования, вышивания,рукоделия и шахматный клуб, а так же кабинет директора с приёмной, комнаты отдыха и приёма пищи для персонала, инвентарные и подсобные помещения. Так же с отметки +2,450  и выше предусмотрена вторая лестничная клетка.
+С 3 по 8 этаж располагаются жилые номера.
+
+Запроектированы одно и двухкомнатные номера
+Расположение номеров коридорного типа. 
+Однокомнатные номера имеют в своём составе комнату, санузел и балкон.
+Двухкомнатные номера имеют в своём составе гостиную, комнату, санузел (или 2 санузла) и балкон.
+Общий номерной фонд корпуса 6 – 66номеров(33 из них одноместные)
+в том числе: 
+- 1-но комнатных–42номера;
+- 2-х комнатных–24 номеров;
+
+В данном корпусе гостиничного комплекса номера для проживания МГН (М4) не предусмотрено, так как они предусмотрены в корпусе 7.
+
+Всего проживающих в корпусе 6 -99человек.
+
+Для вертикального сообщения запроектирован лестнично-лифтовой узелс двумя грузопассажирскими лифтами. Один,грузоподъемностью 1000кг с размером кабины 2100 х 1100 мм.. Второйгрузоподъемностью 630кг с размером кабины 1100 х 1400 мм. Ширина лифтового тамбур-шлюза позволяет осуществить транспортировку больного на носилках скорой помощи и составляет более 2,15м.
+Для эвакуациипредусмотрены обособленные лестничные клетки, в которые можно попасть из лифтового тамбур-шлюза через открытый балкон. А так же лестничная клетка выходящая в коридор.
+
+Кровля здания плоская не эксплуатируемая.Водосток - внутренний, организованный.
+По периметру не эксплуатируемой кровли предусмотрено ограждение (парапет) высотой не менее 0,6м.
+Выход на кровлю  обеспечен по маршам лестничной клетки через противопожарную дверь 2-го типа (ЕI30).
+Общественные помещения данного корпуса не имеют доступ для МГН, так как все общественные помещения различного функционального назначения с доступностью для всех групп МГН предусмотрены в корпусе 7.
+
+Все выходы (входы) на прилегающую территорию имеют площадки с водоотведением и козырьки.  
+
+Корпус 7. 
+
+В составе гостиничного комплекса запроектировано здание спального корпуса – корпус 7. Данное здание имеет в плане сложную изогнутую форму и состоит из 6 блоков. Так как здание располагается на рельефе, оно имеет переменную этажность: 
+Блок 1 – восьмиэтажный с подземным этажом
+Блок 2 – восьмиэтажный без подвала.
+Блок 3 – семиэтажный без подвала
+Блок 4 – восьмиэтажный без подвала
+Блок 5 – девятиэтажный с подвалом
+Блок 6 – девятиэтажный с подвалом
+
+Высота подвала в блоке5 равна- 3,7м
+Высота подвала в блоке6 равна- 3,7м
+Высота потолка подземной автопарковки – 3,4 м
+
+Высота 1 этажа равна- 4,12 м
+
+Высота типовых этажей равна -3,3 м
+
+
+
+Проектируемый корпус гостиницы– здание с жилыми помещениями, предназначенными для временного проживания, в виде гостиничных комфортабельных 1-но , 2-х и 3-х  комнатных жилых номеров.
+Здание 7 корпуса включает следующие группы помещений: 
+-помещения вестибюльной зоны
+-группу жилых помещений
+-помещения общественного питания
+-СПА-зона с бассейном;
+-коммерческие помещения;
+-тренажёрные залы
+-складские помещения;
+-группу технических и служебных помещений
+
+Поэтажная компоновка здания выполнена следующим образом:
+7 корпус гостиничного комплекса расположен на рельефе и состоит из 6 блоков разной этажности. 
+На 1 этаже каждогоблока запроектирована входная группа, с вестибюлем, коридором и лифтовым тамбур-шлюзом, а так же лестничными клетками. 1 этажи включают в себя группы служебных и технических помещений, таких как: электрощитовые, венткамеры, насосные, серверные, складские помещения прачечной. 
+В 1 блокев подземном этаже располагаются помещения кухни: Горячий и холодный цеха, Гардеробная персонала с душевыми и санузлами, загрузочная и помещение хранения продуктов, моечные кухонной и столовой посуды, доготовочный цех. А так же венткамера кухни, электрощитовая и помещение временного хранения отходов. Со2 блоком кухню соединяет дверь в зону раздачи и коридор в лифтовой тамбур-шлюз. Зал кафе запроектирован во 2 блоке и имеет отдельную венткамеру и санузлы.
+На 1 этаже 1 блока расположена вестибюльная зона, раздевалки и тренажёрный зал, а так же помещение администрации, инвентарная и технические помещения. Лифтовой холл на 2 лифта а так же две лестничные клетки.
+На 2 этаже расположены гардеробные, комнаты отдыха и приёма пищи для персонала кухни кафе и тренажёрного зала.
+Во 2 блоке на 1 этаже запроектирована вестибюльная зона с баром, подсобные и складские помещения, электрощитовая. В 3 блоке так же располагается большая вестибюльная зона, санузлы, лестнично-лифтовой холл. А так же кабинет службы приёма и размещения, кадинет администрации, электрощитовая, помещение связи и подсобное помещение бара и торговое коммерческое помещение.
+На 2 этаже 2 блока расположены вестибюльная зона с лифтовым холломи лестничной клеткой, а так же второй зал кафе. Вестибюль и зал кафе имеют второй свет. Так же на этаже расположены рабочие кабинеты и конференц зал. 2 этаж 3 блока так же занимает просторный вестибюль со вторым светом на 1 этаж, рабочие кабинеты, три торговых коммерческих помещения с выходами на улицу и санузлы. Так же в 3 блоке имеется лестнично-лифтовой узел с двумя лифтами, лифтовым холлом и лестницей выходящей на улицу.
+На 1 этаже 4 блоке так же расположены помещения кухни и зал кафе, а так же санузлы, техническое помещение связи и лестничная клетка. Помещение временного хранения отходов имеет отдельный вход с улицы и лифт. На 2 этаже, как и в 3 блоке расположен лифтовой холл с 2 лифтами, лестничная клетка, вестибюльная зона со вторым светом на 1 этаж, рабочие кабинеты, торговое помещение и санузлы.
+На 3 этаже во 2, 3 и 4 блоках располагаются ремонтные мастерские, фотоателье, прокат и аренда спортивного инвентаря и товаров для отдыха. А так же кабинеты рукоделия и творческие мастерские, комнаты отдыха, игровые, шахматный и читательский клуб.
+В подвале 5 блоке расположены технические помещения: помещение связи, ИТП , насосная и электрощитовая, а  так же помещения хранения багажа, лифтовой тамбу-шлюз и лестничная клетка. На 1 этаже расположена вестибюльная группа помещений, санузлы, помещение дежурного, лифтовой холл. Лестничная клетка типа Н2 выходит наружу. Так же в 5 блоке располагается часть помещений СПА зоны: 3 массажных кабинета, хамам и сауна. 
+В 6 блоке на 1 этаже расположено помещение бассейна и раздевалки, а так же комната отдыха и фитобар. В подвале расположены технические помещения бассейна, венткамера и помещения прачечной: помещения зранения грязного и чистого белья, венткамера и прачечная. А так же помещение временного хранения отходов. В 6 блоке запроектировано два лифтовых холла: для посетителей и служебный, и лестничная клетка типа Н2
+На 2 этаже в 5 и 6 блоке располагаются косметологические кабинеты: скрабирования, СПА-маникюра, кабинет ухода за волосами, лазерной эпиляции; а так же вспомогательные помещения, комнаты отдыха персонала. В каждомблоке расположено по одной лестничной клетке и лифтовой холл на 2 лифта.
+На 3 этаже 5 и 6 блоке располагаются медицинские кабинеты: кабинет главного врача, терапевта, диетолога, окулиста, иммунолога, аллерголога, кинезиолога, фитотерапевта, нутрициолога, психолога, реабилитолога, остеопата. Так же кабинет медсестры, процедурная, комнаты отдыха и приёма пищи для персонала.
+С 4 этажа всех блоков начинается номерной фонд
+Запроектированы одно, двух и трёхкомнатные номера
+Расположение номеров коридорного типа. 
+Однокомнатные номера имеют в своём составе комнату, санузел и балкон.
+Двухкомнатные номера имеют в своём составе гостиную, комнату, санузел (или 2 санузла) и балкон.
+Трёхкомнатные номера имеют в составе гостиную, две спальни, санузел (или 2 санузла) и балкон.
+Общий номерной фонд корпуса 7– 278номеров(139 из них одноместные)
+в том числе: 
+- 1-но комнатных–185номера;
+- 2-х комнатных–88 номеров;
+- 3-х комнатных – 5 номеров;
+
+В том числе запроектировано 36 номеров с возможностью проживания МГН на 4 этаже всех блоков.  Номера для инвалидов колясочников (М4)  - 6 шт. Номер для инвалидов остальных групп (М1, М2, М3) – 30 шт. 
+
+Всего проживающих в корпусе 7 -417 человек.
+
+Для вертикального сообщения в каждом блоке запроектирован лестнично-лифтовой узел с двумя грузопассажирскими лифтами. Один, грузоподъемностью 1000кг с размером кабины 2100 х 1100 мм.. Второй грузоподъемностью 630кг с размером кабины 1100 х 1400 мм. В 1,3 и 6блоках предусмотрен так же лифт для перевозки пожарных подразделений. Ширина лифтового тамбур-шлюза позволяет осуществить транспортировку больного на носилках скорой помощи и составляет более 2,15м.
+Для эвакуации предусмотрены обособленные лестничные клетки, в которые можно попасть из лифтового тамбур-шлюза через открытый балкон.
+
+Кровля здания плоская не эксплуатируемая. Водосток - внутренний, организованный.
+По периметру не эксплуатируемой кровли предусмотрено ограждение (парапет) высотой не менее 0,6м.
+Выход на кровлю  обеспечен по маршам лестничной клетки через противопожарную дверь 2-го типа (ЕI30).
+Корпус 7.1 – подземная автопарковка. Корпус состоит из 2 блоков и имеет сложную форму, примыкая к 1-5 блокам корпуса 7. Заезд в паркинг осуществляется по рампе со стороны 1 блока гостиничного корпуса, так же имеются выходы по 2 лестничным клеткам на верх, на эксплуатируемую кровлю. На кровле подземного корпуса организовано благоустройство дворовой территории. Так же на кровле запроектирован бассейн, а в составе корпуса 7.1 предусмотрено техническое помещение бассейна.
+
+Все общественные помещения имеют доступ для МГН, в здании предусмотрена зона безопасности для МГН -лифтовой холл в блоках1,3,5 и 6.
+Все выходы (входы) на прилегающую территорию имеют площадки с водоотведением и козырьки.  
+</Text>
+  </DesignerNote>
+  <DesignerAssurance Title="СПРАВКА">
+    <Text>о соответствии проекта действующим нормам и правилам настоящий проект  разработан в соответствии с градостроительным планом земельного участка, заданием на проектирование, градостроительным регламентом, техническими регламентами, в том числе устанавливающими требования по обеспечению безопасной эксплуатации зданий, строений, сооружений и безопасного использования прилегающих к ним территорий и с соблюдением технических условий.</Text>
+  </DesignerAssurance>
+</ExplanatoryNote>

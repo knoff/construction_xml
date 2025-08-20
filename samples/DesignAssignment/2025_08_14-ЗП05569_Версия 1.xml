@@ -1,0 +1,1004 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="DesignAssignment-01-00-01.xsl"?>
+
+<Document SchemaVersion="01.00" VersionNumber="1" TypeCode="05.03" Id="2aF7Cd67-2462-5eE3-10EF-eC2Bf9CD3DE4" xsi:noNamespaceSchemaLocation="DesignAssignment-01-00.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Requisites>
+    <Date>2024-10-09</Date>
+    <Number>1</Number>
+    <Authors>
+      <Author>
+        <IndividualEntrepreneur FunctionalRole="1">
+          <Surname>Шипулин</Surname>
+          <Name>Максим</Name>
+          <Patronymic>Петрович</Patronymic>
+          <OGRNIP>318237500330719</OGRNIP>
+          <INN>230107929632</INN>
+          <PostAddress>
+            <RegionCode>23</RegionCode>
+            <PostIndex>353440</PostIndex>
+            <City>г. Анапа</City>
+            <Street>ул. Краснодарская</Street>
+            <Building>66В</Building>
+            <Room>36</Room>
+          </PostAddress>
+        </IndividualEntrepreneur>
+      </Author>
+      <Author>
+        <Organization>
+          <FullName>ООО УКИФ «Профит» Д.У. ЗПИФ комбинированный «СКИФ»</FullName>
+          <OGRN>1182375080766</OGRN>
+          <INN>2312275445</INN>
+          <KPP>231201001</KPP>
+          <Address>
+            <RegionCode>23</RegionCode>
+            <City>город Краснодар</City>
+            <Street>ул. Бородинская</Street>
+            <Building>д. 10</Building>
+            <Room>помещ. 16-27</Room>
+          </Address>
+        </Organization>
+        <Representatives>
+          <Representative FunctionalRole="2">
+            <Surname>Шишкин</Surname>
+            <Name>Артем</Name>
+            <Patronymic>Александрович</Patronymic>
+            <Position>Директор</Position>
+          </Representative>
+        </Representatives>
+      </Author>
+    </Authors>
+    <SecurityLabel>0</SecurityLabel>
+  </Requisites>
+  <Content>
+    <Objective>
+      <Text>Строительство Гостиничного комплекса 4* по адресу Краснодарский край, Анапский район, с. Варваровка, ул. Калинина</Text>
+    </Objective>
+    <DecisionDocuments>
+      <DocumentInfo Type="99.99" Id="b">
+        <Name>Договор на выполнение проектных работ</Name>
+        <Number>014-2024</Number>
+        <Date>2024-06-13</Date>
+        <Author>
+          <IndividualEntrepreneur>
+            <Surname>Шипулин</Surname>
+            <Name>Максим</Name>
+            <Patronymic>Петрович</Patronymic>
+            <OGRNIP>318237500330719</OGRNIP>
+            <PostAddress>
+              <RegionCode>23</RegionCode>
+              <PostIndex>353440</PostIndex>
+              <City>г. Анапа</City>
+              <Street>ул. Краснодарская</Street>
+              <Building>66В</Building>
+              <Room>оф. 36</Room>
+            </PostAddress>
+          </IndividualEntrepreneur>
+        </Author>
+        <File>
+          <Name>Договор_на_выполнение_проектных_работ_014-2024_ИП Шипулин_Частный капитал (2).pdf</Name>
+          <Format>pdf</Format>
+          <Checksum>fe12f921</Checksum>
+        </File>
+      </DocumentInfo>
+    </DecisionDocuments>
+    <Developers>
+      <Organization>
+        <FullName>ООО УКИФ «Профит» Д.У. ЗПИФ комбинированный «СКИФ»</FullName>
+        <OGRN>1182375080766</OGRN>
+        <INN>2312275445</INN>
+        <KPP>231201001</KPP>
+        <Address>
+          <RegionCode>23</RegionCode>
+          <City>город Краснодар</City>
+          <Street>ул. Бородинская</Street>
+          <Building>д. 10</Building>
+          <Room>помещ. 16-27</Room>
+        </Address>
+      </Organization>
+    </Developers>
+    <Designers>
+      <Designer IsGeneral="true">
+        <IndividualEntrepreneur>
+          <Surname>Шипулин</Surname>
+          <Name>Максим</Name>
+          <Patronymic>Петрович</Patronymic>
+          <OGRNIP>318237500330719</OGRNIP>
+          <INN>230107929632</INN>
+          <PostAddress>
+            <RegionCode>23</RegionCode>
+            <PostIndex>353440</PostIndex>
+            <City>г. Анапа</City>
+            <Street>ул. Краснодарская</Street>
+            <Building>66В</Building>
+            <Room>оф. 36</Room>
+          </PostAddress>
+        </IndividualEntrepreneur>
+      </Designer>
+    </Designers>
+    <FinanceSources>
+      <Private>
+        <Organization>
+          <FullName>ООО УКИФ «Профит» Д.У. ЗПИФ комбинированный «СКИФ»</FullName>
+          <OGRN>1182375080766</OGRN>
+          <INN>2312275445</INN>
+          <KPP>231201001</KPP>
+          <Address>
+            <RegionCode>23</RegionCode>
+            <City>город Краснодар</City>
+            <Street>ул. Бородинская</Street>
+            <Building>д. 10</Building>
+            <Room>помещ. 16-27</Room>
+          </Address>
+        </Organization>
+        <Ratio>100</Ratio>
+      </Private>
+    </FinanceSources>
+    <QualitySolutions>
+      <Text>Качество продукции должно соответствовать ГОСТам, СНиПам, техническим регламентам.</Text>
+    </QualitySolutions>
+    <MarginalCost>
+      <Text>не определена</Text>
+    </MarginalCost>
+    <DesignPhases>
+      <DesignPhase Phase="1"/>
+    </DesignPhases>
+    <ClimateConditions>
+      <Common>
+        <Text>Сейсмичность района строительства принять в соответствии с СП 14.13330.2018. Фактическую сейсмичность площадки, характеристики грунта под основанием фундаментов уточнить по результатам инженерно-геологических изысканий. Климатические характеристики района уточнить по результатам инженерных изысканий.</Text>
+      </Common>
+      <DangerousNatureProcesses>
+        <Text>Возможность опасных природных процессов, явлений и техногенных воздействий на территории уточнить по результатам инженерных изысканий</Text>
+      </DangerousNatureProcesses>
+    </ClimateConditions>
+    <Land>
+      <Common>
+        <Text>Площадь участка – 85 157 м2 Кадастровые номера ЗУ: 23:37:1006000:14934, 23:37:1006000:14935 Земельные участки расположены: в зоне отдыха (Р2), в границах 2-й зоны горной санитарной охраны курорта в водоохранной зоне Черного моря в рыбоохранной зоне в границе 7 подзоны ПАТ частично в границе зоны В (линия 3) регулирования высотности застройки частично в границе зоны Г (линия 4) регулирования высотности застройки частично в зоне противопожарных расстояний Объекты капитального строительства в границах участков отсутствуют. В границах земельного участка 23:37:1006000:14873 предусмотреть размещение террасированного парка.</Text>
+      </Common>
+      <LandCategories>
+        <LandCategory>2</LandCategory>
+      </LandCategories>
+    </Land>
+    <InitialDocuments>
+      <DocumentInfo Type="17.01" Id="c">
+        <Name>Выписка и ЕГРН на участок 23:37:1006000:14934</Name>
+        <Number>б.н.</Number>
+        <Date>2024-09-16</Date>
+        <AuthorNote>Федеральная служба государственной регистрации, кадастра и картографии</AuthorNote>
+        <File>
+          <Name>23 37 1006000 14934 Варваровка, ул Калинина.pdf</Name>
+          <Format>pdf</Format>
+          <Checksum>32e3cdbb</Checksum>
+          <SignFile>
+            <Name>23 37 1006000 14934 Варваровка, ул Калинина.pdf.sig</Name>
+            <Format>sig</Format>
+            <Checksum>d9147b64</Checksum>
+          </SignFile>
+        </File>
+      </DocumentInfo>
+      <DocumentInfo Id="d" Type="17.01">
+        <Name>Выписка и ЕГРН на участок 23:37:1006000:14935</Name>
+        <Number>б.н.</Number>
+        <Date>2024-09-16</Date>
+        <AuthorNote>Федеральная служба государственной регистрации, кадастра и картографии</AuthorNote>
+        <File>
+          <Name>23 37 1006000 14935 Варваровка, ул Калинина.pdf</Name>
+          <Format>pdf</Format>
+          <Checksum>08f859e9</Checksum>
+          <SignFile>
+            <Name>23 37 1006000 14935 Варваровка, ул Калинина.pdf.sig</Name>
+            <Format>sig</Format>
+            <Checksum>6e51f98a</Checksum>
+          </SignFile>
+        </File>
+      </DocumentInfo>
+      <DocumentInfo Type="04.01" Id="e">
+        <Name>Технические условия для присоединения к электрическим сетям</Name>
+        <Number>30/09/24ТУ</Number>
+        <Date>2024-09-30</Date>
+        <AuthorNote>ООО &quot;ЭксТех&quot;</AuthorNote>
+        <File>
+          <Name>ТУ_электрика_3084кВт_Анаполис 3.pdf</Name>
+          <Format>pdf</Format>
+          <Checksum>3eb5c6db</Checksum>
+          <SignFile>
+            <Name>ТУ_электрика_3084кВт_Анаполис 3.pdf.sig</Name>
+            <Format>sig</Format>
+            <Checksum>5917611f</Checksum>
+          </SignFile>
+        </File>
+      </DocumentInfo>
+      <DocumentInfo Id="igi" Type="06.02">
+        <Name>ТЕХНИЧЕСКИЙ ОТЧЕТ по результатам инженерно-геологических изысканий</Name>
+        <Number>115-2024-ИГИ</Number>
+        <Date>2024-08-15</Date>
+        <AuthorNote>ИП Шарин Сергее Сергеевич</AuthorNote>
+        <File>
+          <Name>Отчет-115-2024-ИГИ.pdf</Name>
+          <Format>pdf</Format>
+          <Checksum>525f1637</Checksum>
+          <SignFile>
+            <Name>Отчет-115-2024-ИГИ.pdf.sig</Name>
+            <Format>sig</Format>
+            <Checksum>d5e4ed8d</Checksum>
+          </SignFile>
+        </File>
+      </DocumentInfo>
+      <DocumentInfo Type="06.01" Id="igdi">
+        <Name>ТЕХНИЧЕСКИЙ ОТЧЕТ по результатам инженерно-геодезических изысканий</Name>
+        <Number>115-2024-ИГДИ</Number>
+        <Date>2024-08-05</Date>
+        <AuthorNote>ИП Шарин Сергей Сергеевич</AuthorNote>
+        <File>
+          <Name>Отчет 115-2024-ИГДИ.pdf</Name>
+          <Format>pdf</Format>
+          <Checksum>851e6323</Checksum>
+          <SignFile>
+            <Name>Отчет 115-2024-ИГДИ.pdf.sig</Name>
+            <Format>sig</Format>
+            <Checksum>c173ace1</Checksum>
+          </SignFile>
+        </File>
+      </DocumentInfo>
+      <DocumentInfo Type="06.03" Id="igmi">
+        <Name>ТЕХНИЧЕСКИЙ ОТЧЕТ по результатам инженерно-гидрометеорологических изысканий</Name>
+        <Number>115-2024-ИГМИ</Number>
+        <Date>2024-08-13</Date>
+        <AuthorNote>ИП Шарин Сергей Сергеевич</AuthorNote>
+        <File>
+          <Name>Отчет 115-2024-ИГМИ.pdf</Name>
+          <Format>pdf</Format>
+          <Checksum>e2381d19</Checksum>
+          <SignFile>
+            <Name>Отчет 115-2024-ИГМИ.pdf.sig</Name>
+            <Format>sig</Format>
+            <Checksum>1c3b13c0</Checksum>
+          </SignFile>
+        </File>
+      </DocumentInfo>
+      <DocumentInfo Id="iei" Type="06.04">
+        <Name>ТЕХНИЧЕСКИЙ ОТЧЕТ по результатам инженерно-экологических изысканий</Name>
+        <Number>115-2024-ИЭИ</Number>
+        <Date>2024-08-15</Date>
+        <AuthorNote>ИП Шарин Сергей Сергеевич</AuthorNote>
+        <File>
+          <Name>Отчет 115-2024-ИЭИ.pdf</Name>
+          <Format>pdf</Format>
+          <Checksum>075cd859</Checksum>
+          <SignFile>
+            <Name>Отчет 115-2024-ИЭИ.pdf.sig</Name>
+            <Format>sig</Format>
+            <Checksum>08d4f239</Checksum>
+          </SignFile>
+        </File>
+      </DocumentInfo>
+    </InitialDocuments>
+    <EngineeringSurvey>
+      <Common>
+        <Text>При разработке проекта, опираться на отчеты по инженерным изысканиям в составе исходно-разрешительной документации</Text>
+      </Common>
+      <SurveyDocuments>
+        <ReferenceToDocumentId>igi</ReferenceToDocumentId>
+        <ReferenceToDocumentId>igdi</ReferenceToDocumentId>
+        <ReferenceToDocumentId>iei</ReferenceToDocumentId>
+        <ReferenceToDocumentId>igmi</ReferenceToDocumentId>
+      </SurveyDocuments>
+    </EngineeringSurvey>
+    <Object SecurityInfluence="false" IsCulturalHeritage="false" ResponsibilityLevel="нормальный" PeoplePermanentStay="true" Placement="1" FireDangerCategory="Категория не устанавливается" DangerousIndustrialObject="Не относится к опасным производственным объектам">
+      <Name>«Гостиничный комплекс 4*», расположенный по адресу: Краснодарский край, Анапский район, село Варваровка, ул. Калинина, на земельных участках с КН 23:37:1006000:14934, 23:37:1006000:14935, 23:36:1006000:14873</Name>
+      <Address>
+        <RegionCode>23</RegionCode>
+        <District>Анапский район</District>
+        <Settlement>с. Варваровка</Settlement>
+        <Street>ул. Калинина</Street>
+        <Note>на земельных участках с КН 23:37:1006000:14934, 23:37:1006000:14935, 23:36:1006000:14873</Note>
+      </Address>
+      <ObjectType>2</ObjectType>
+      <ConstructionType>1</ConstructionType>
+      <FunctionsClass>03.02.001.005</FunctionsClass>
+      <POI>
+        <Name>Вместимость</Name>
+        <Measure>792</Measure>
+        <MinValue>1700</MinValue>
+        <MaxValue>1800</MaxValue>
+      </POI>
+      <TEI>
+        <Name>Площадь комплекса</Name>
+        <Measure>055</Measure>
+        <MinValue>-</MinValue>
+        <MaxValue>114 500 </MaxValue>
+      </TEI>
+      <TEI>
+        <Name>Площадь номерного фонда</Name>
+        <Measure>055</Measure>
+        <MinValue>-</MinValue>
+        <MaxValue>62 900 </MaxValue>
+      </TEI>
+      <TEI>
+        <Name>Этажность</Name>
+        <Measure>796</Measure>
+        <Value>переменная 8-9 эт. в зависимости от расположения корпуса в границе линии ограничения высотности застройки</Value>
+      </TEI>
+      <TEI>
+        <Name>Высота зданий корпусов </Name>
+        <Measure>006</Measure>
+        <MinValue>30</MinValue>
+        <MaxValue>35</MaxValue>
+      </TEI>
+      <TEI>
+        <Name>Количество корпусов </Name>
+        <Measure>796</Measure>
+        <Value>9</Value>
+      </TEI>
+      <TEI>
+        <Name>Площадь МОП</Name>
+        <Measure>055</Measure>
+        <MinValue>40 000</MinValue>
+        <MaxValue>-</MaxValue>
+      </TEI>
+      <TEI>
+        <Name>Соотношение МОП к общей площади здания </Name>
+        <Measure>744</Measure>
+        <MinValue>35</MinValue>
+        <MaxValue>-</MaxValue>
+      </TEI>
+      <TEI>
+        <Name>Количество м/м </Name>
+        <Measure>796</Measure>
+        <Value>принять в соответствии с МНГП муниципального образования город-курорт Анапа</Value>
+      </TEI>
+      <TEI>
+        <Name>Типы и количество номеров</Name>
+        <Measure>-</Measure>
+        <Value>размеры номеров и процентное соотношение принять в соответствии с архитектурной концепцией, разработанной ООО АПБ «Основа»</Value>
+      </TEI>
+      <ProjectSolutions>
+        <SchemePlanningOrganizationLand>
+          <Requirements>
+            <Requirement>
+              <Content>
+                <Text>Принять в соответствии с архитектурной концепцией, разработанной ООО АПБ «Основа», действующими нормами и правилами. </Text>
+              </Content>
+            </Requirement>
+            <Requirement>
+              <Content>
+                <Text>В границах земельного участка 23:37:1006000:14873 предусмотреть размещение террасированного парка.</Text>
+              </Content>
+            </Requirement>
+            <Requirement>
+              <Content>
+                <Text>Декоративное, ландшафтное освещение разрабатывается отдельным проектом.</Text>
+              </Content>
+            </Requirement>
+            <Requirement>
+              <Content>
+                <Text>Конструктивные решения уличного бассейна на данной стадии не разрабатываются. Конструктивные решение и оборудование бассейна разрабатывается в проектной документации стадии Р</Text>
+              </Content>
+            </Requirement>
+          </Requirements>
+        </SchemePlanningOrganizationLand>
+        <ArchitectSolutions>
+          <Requirements>
+            <Requirement>
+              <Content Title="Требования к архитектурным и объемно-планировочным решениям и наружной отделке корпусов">
+                <Text>Выполнить в соответствии с архитектурной концепцией, разработанной ООО АПБ «Основа», действующими нормами</Text>
+              </Content>
+            </Requirement>
+            <Requirement>
+              <Content Title="Требования к размещению стоянок и мест хранения автомобилей">
+                <Text>Предусмотреть размещение основной части м/м в подземных автостоянках в соответствии с действующими нормами и правилами, парковки для кратковременного хранения автотранспорта разместить на плоскостных площадках.</Text>
+              </Content>
+            </Requirement>
+          </Requirements>
+          <Zones>
+            <Zone Name="Первые этажи корпусов">
+              <Premise Measure="055" MinArea="1000" Name="Холл/зона ожидания"/>
+              <Premise Measure="055" MinArea="140" Name="административные помещения"/>
+              <Premise Count="1" Measure="055" Name="лобби-бар" MinArea="140"/>
+              <Premise Count="1" Measure="055" Name="ресторан/кафе" MinArea="300"/>
+              <Premise Measure="055" Name="помещения бытового обслуживания" MinArea="520"/>
+              <Premise Measure="055" MinArea="105" Name="детская комната" Count="1"/>
+              <Premise Measure="055" MinArea="1150" Count="1" Name="крытый бассейн"/>
+              <Premise Measure="055" MinArea="310" Name="СПА"/>
+              <Premise Measure="055" MinArea="2150" Name="коммерческие (торговые) помещения "/>
+              <Premise Measure="055" MinArea="1150" Name="спортивные залы "/>
+              <Premise Measure="055" Name="инженерная диспетчерская" Count="1" MinArea="50"/>
+              <Premise MinArea="50" Count="1" Name="помещение охраны" Measure="055"/>
+              <Premise Name="гостевые/служебные с/у" MinArea="100" Measure="055"/>
+            </Zone>
+            <Zone Name="2-8 этажи">
+              <Premise Name="гостевые номера"/>
+            </Zone>
+            <Zone Name="Терассированный парк">
+              <Premise MinArea="24000" Name="Терассированный парк" Measure="055"/>
+            </Zone>
+          </Zones>
+        </ArchitectSolutions>
+        <StructuralSpacePlanningSolutions>
+          <Section>
+            <Requirements>
+              <Requirement>
+                <Content>
+                  <Text>Оптимальные принципиальные конструктивные решения определить проектом на основании данных инженерно-геологических изысканий</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </Section>
+          <Section Name="BuildingStructures">
+            <Requirements>
+              <Requirement>
+                <Content>
+                  <Text>Конструктивная схема - Рамно-связевый монолитный железобетонный каркас</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </Section>
+          <Section Name="Foundations">
+            <Requirements>
+              <Requirement>
+                <Content>
+                  <Text>Фундаменты монолитные железобетонные или свайные (по результатам инженерно-геологических изысканий).</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </Section>
+          <Section Name="WallsBasementsGroundFloor">
+            <Requirements>
+              <Requirement>
+                <Content>
+                  <Text>Монолитные железобетонные.</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </Section>
+          <Section Name="ExternalWalls">
+            <Requirements>
+              <Requirement>
+                <Content>
+                  <Text>Самонесущие – толщиной 200-400 мм (толщину определить в ходе проектирования).</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content>
+                  <Text>Утеплитель – минераловатные плиты толщиной по расчёту</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content>
+                  <Text>Тип фасада – согласно концепции, разработанной ООО АПБ «Основа»</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </Section>
+          <Section Name="InternalWalls">
+            <Requirements>
+              <Requirement>
+                <Content>
+                  <Text>Монолитные железобетонные (лестнично-лифтовые узлы, диафрагмы жесткости).</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content>
+                  <Text>Керамзитобетонные блоки (толщиной 90-200 мм).</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content>
+                  <Text>Кирпичные в помещениях с мокрым режимом – кирпич глиняный М100 ГОСТ 530-2012 толщ. 120,65 мм, либо аналог.</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content>
+                  <Text>Перегородки ГКЛ КНАУФ толщ. 100, 75мм в один слой с каждой стороны, 125, 100мм в два слоя с каждой стороны.</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </Section>
+          <Section Name="Overlaps">
+            <Requirements>
+              <Requirement>
+                <Content>
+                  <Text>Монолитные железобетонные</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </Section>
+          <Section Name="Roof">
+            <Requirements>
+              <Requirement>
+                <Content>
+                  <Text>Покрытия монолитные железобетонные.</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </Section>
+          <Section Name="Stairs">
+            <Requirements>
+              <Requirement>
+                <Content>
+                  <Text>Монолитные железобетонные.</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </Section>
+          <Section Name="Windows">
+            <Requirements>
+              <Requirement>
+                <Content>
+                  <Text>Металлический профиль с однокамерным стеклопакетом.</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </Section>
+          <Section Name="Doors">
+            <Requirements>
+              <Requirement>
+                <Content Title="Входные двери">
+                  <Text>Алюминиевый профиль с однокамерным стеклопакетом</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content Title="Двери в лестничных клетках и холлах">
+                  <Text>Металлические, обеспечивающие требования пожарной безопасности, с армированным остеклением.</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </Section>
+          <Section Name="InteriorDecoration">
+            <Requirements>
+              <Requirement>
+                <Content Title="Отделка помещений">
+                  <Text>Решения по оформлению отделки помещений и интерьерам настоящим проектом не рассматриваются, подлежат разработке в рамках отдельного дизайн-проекта</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content Title="Отделка помещений общественного назначения с гибким функциональным назначением">
+                  <Text>Решения по оформлению отделки помещений и интерьерам настоящим проектом не рассматриваются, подлежат разработке в рамках отдельного дизайн-проекта</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </Section>
+        </StructuralSpacePlanningSolutions>
+        <EngineeringTechnicalSolutions>
+          <TechnologicalEquipment Name="WaterSupply">
+            <Requirements>
+              <Requirement>
+                <Content>
+                  <Text>В соответствии с требованиями действующих нормативных документов и технических условий, выданных эксплуатирующими организациями.</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content>
+                  <Text>При проектировании внутренних инженерных систем предусмотреть установку контрольно-измерительных приборов учета расхода, холодной и горячей воды.</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content>
+                  <Text>Выбор оборудования для обеспечения жизнедеятельности гостиницы согласовать с заказчиком</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </TechnologicalEquipment>
+          <TechnologicalEquipment Name="Heating">
+            <Requirements>
+              <Requirement>
+                <Content>
+                  <Text>В соответствии с требованиями действующих нормативных документов и технических условий, выданных эксплуатирующими организациями.</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content>
+                  <Text>При проектировании внутренних инженерных систем предусмотреть установку контрольно-измерительных приборов учета расхода тепла</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content>
+                  <Text>Выбор оборудования для обеспечения жизнедеятельности гостиницы согласовать с заказчиком.</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content>
+                  <Text>Система отопления – центральное отопление рассмотреть 2 варианта нагрева отопительных котлов: 1. от центральной типовой магистрали 2. от электроэнергии Выбор источника тепла осуществить на основании расчета нагрузок по электроэнергии.</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content>
+                  <Text>Выбор источника теплоснабжения согласовать с заказчиком.</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </TechnologicalEquipment>
+          <TechnologicalEquipment Name="PowerSupply">
+            <Requirements>
+              <Requirement>
+                <Content>
+                  <Text>В соответствии с требованиями действующих нормативных документов и технических условий, выданных эксплуатирующими организациями.</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </TechnologicalEquipment>
+          <TechnologicalEquipment Name="Ventilation">
+            <Requirements>
+              <Requirement>
+                <Content>
+                  <Text>В соответствии с требованиями действующих нормативных документов и технических условий, выданных эксплуатирующими организациями.</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content>
+                  <Text>Системы отопления, вентиляции и кондиционирования проектировать единым комплексом с применением мультизональной системы. Возможностью регулировки температуры в каждом номере индивидуально, каждая из систем должна работать независимо от другой.</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content>
+                  <Text>Выбор оборудования для обеспечения жизнедеятельности гостиницы согласовать с заказчиком.</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </TechnologicalEquipment>
+          <TechnologicalEquipment Name="Telephony">
+            <Requirements>
+              <Requirement>
+                <Content>
+                  <Text>В соответствии с требованиями действующих нормативных документов и технических условий, выданных эксплуатирующими организациями.</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content>
+                  <Text>Для обеспечения телефонной связью номера и сан. узлы оборудовать специальными IP -телефонами, ресепшен, помещения администратора и др. помещения – обычными IP-телефонами, конференц-зал и переговорную оснастить профессиональными системами аудио- и видеоконференцсвязи.</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content>
+                  <Text>На парковке установить всепогодные вандалозащищенные вызывные панели</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content>
+                  <Text>В помещениях гостиницы со свободным доступом посетителей, не проживающих в гостинице, защищенные телефоны общего пользования.</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </TechnologicalEquipment>
+          <TechnologicalEquipment Name="Internet">
+            <Requirements>
+              <Requirement>
+                <Content>
+                  <Text>В соответствии с требованиями действующих нормативных документов и технических условий, выданных эксплуатирующими организациями.</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content>
+                  <Text>Организовать сеть Wi-Fi</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content>
+                  <Text>Оборудование для покрытия интернетом помещений гостиницы согласовать с заказчиком</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </TechnologicalEquipment>
+          <TechnologicalEquipment Name="Television">
+            <Requirements>
+              <Requirement>
+                <Content>
+                  <Text>В соответствии с требованиями действующих нормативных документов и технических условий, выданных эксплуатирующими организациями.</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content>
+                  <Text>Организовать систему интерактивного телевидения</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content>
+                  <Text>Выбор оборудования согласовать с заказчиком</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </TechnologicalEquipment>
+          <TechnologicalEquipment Name="Other">
+            <Requirements>
+              <Requirement>
+                <Content Title="Лифты ">
+                  <Text>Согласно ТУ. Предусмотреть грузопассажирские лифты грузоподъемностью 630 кг и грузовые лифты грузоподъемностью 1000 кг. Марку лифтов согласовать с заказчиком.</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content Title="Система видеонаблюдения">
+                  <Text>Организовать систему видеонаблюдения</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content Title="СКУД">
+                  <Text>Организовать систему управления контроля доступом (СКУД) и охранной сигнализации</Text>
+                </Content>
+              </Requirement>
+              <Requirement>
+                <Content>
+                  <Text>Организовать электронные замки на входных дверях в номера</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </TechnologicalEquipment>
+          <ExternalEngineeringNetwork Name="WaterSupply">
+            <Requirements>
+              <Requirement>
+                <Content>
+                  <Text>Внутриплощадочные инженерные сети разработать согласно техническим условиям, выданным эксплуатирующими организациями.</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </ExternalEngineeringNetwork>
+          <ExternalEngineeringNetwork Name="WaterDisposal">
+            <Requirements>
+              <Requirement>
+                <Content>
+                  <Text>Внутриплощадочные инженерные сети разработать согласно техническим условиям, выданным эксплуатирующими организациями.</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </ExternalEngineeringNetwork>
+          <ExternalEngineeringNetwork Name="HeatSupply">
+            <Requirements>
+              <Requirement>
+                <Content>
+                  <Text>Внутриплощадочные инженерные сети разработать согласно техническим условиям, выданным эксплуатирующими организациями.</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </ExternalEngineeringNetwork>
+          <ExternalEngineeringNetwork Name="PowerSupply">
+            <Requirements>
+              <Requirement>
+                <Content>
+                  <Text>Внутриплощадочные инженерные сети разработать согласно техническим условиям, выданным эксплуатирующими организациями.</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </ExternalEngineeringNetwork>
+          <ExternalEngineeringNetwork Name="Other">
+            <Requirements>
+              <Requirement>
+                <Content>
+                  <Text>Внутриплощадочные инженерные сети разработать согласно техническим условиям, выданным эксплуатирующими организациями.</Text>
+                </Content>
+              </Requirement>
+            </Requirements>
+          </ExternalEngineeringNetwork>
+        </EngineeringTechnicalSolutions>
+        <EnvironmentalProtection>
+          <Requirements>
+            <Requirement>
+              <Content>
+                <Text>В соответствии с требованиями действующей нормативной документации</Text>
+              </Content>
+            </Requirement>
+          </Requirements>
+        </EnvironmentalProtection>
+        <FireSafetyMeasures>
+          <Requirements>
+            <Requirement>
+              <Content>
+                <Text>В соответствии с действующими нормативными документами</Text>
+              </Content>
+            </Requirement>
+            <Requirement>
+              <Content>
+                <Text>Система пожаротушения – спринклерная</Text>
+              </Content>
+            </Requirement>
+            <Requirement>
+              <Content Title="Инженерно-технические мероприятия гражданской обороны, мероприятия по предупреждению чрезвычайных ситуаций">
+                <Text>Согласно Перечню мероприятий на сопряжение с Региональной Автоматизированной Системой Централизованного Оповещения (далее РАСЦО) предоставленного ГКУ КК «Управление ПБ, ЧС и ГО» </Text>
+              </Content>
+            </Requirement>
+          </Requirements>
+        </FireSafetyMeasures>
+        <EnergyEfficiencyRequirements>
+          <Requirements>
+            <Requirement>
+              <Content>
+                <Text>В соответствии с требованиями действующей нормативной документации</Text>
+              </Content>
+            </Requirement>
+          </Requirements>
+        </EnergyEfficiencyRequirements>
+        <LowMobilityGroupsPopulation>
+          <Requirements>
+            <Requirement>
+              <Content>
+                <Text>В соответствии с требованиями Федерального закона от 24.11.1995 № 181-ФЗ «О социальной защите инвалидов в Российской Федерации», Федерального закона от 30.12.2009 № 384-ФЗ «Технический регламент о безопасности зданий и сооружений», Закона Краснодарского края от 27.04.2007 № 1229- КЗ «Об обеспечении беспрепятственного доступа маломобильных граждан к объектам социальной, транспортной, инженерной инфраструктур, информации и связи в Краснодарском крае», СП 59.13330.2020 «Доступность зданий и сооружений для маломобильных групп населения. Актуализированная редакция СНиП 35-01-2001», предусмотреть мероприятия по обеспечению доступности проектируемого объекта капитального строительства для маломобильных граждан в полном объеме.</Text>
+              </Content>
+            </Requirement>
+          </Requirements>
+        </LowMobilityGroupsPopulation>
+        <EngineeringTechnicalStrengthening>
+          <Requirements>
+            <Requirement>
+              <Content>
+                <Text>В соответствии с действующими нормативными документами</Text>
+              </Content>
+            </Requirement>
+          </Requirements>
+        </EngineeringTechnicalStrengthening>
+        <SafeLivingConditions>
+          <Requirements>
+            <Requirement>
+              <Content>
+                <Text>В соответствии с требованиями экологических, санитарных и строительных норм.</Text>
+              </Content>
+            </Requirement>
+          </Requirements>
+        </SafeLivingConditions>
+        <TechnicalOperation>
+          <Requirements>
+            <Requirement>
+              <Content>
+                <Text>В соответствии с требованиями действующей нормативной документации</Text>
+              </Content>
+            </Requirement>
+          </Requirements>
+        </TechnicalOperation>
+        <ConstructionOrganizationProject>
+          <Requirements>
+            <Requirement>
+              <Content>
+                <Text>В соответствии с требованиями действующей нормативной документации</Text>
+              </Content>
+            </Requirement>
+          </Requirements>
+        </ConstructionOrganizationProject>
+        <Landscaping>
+          <Requirements>
+            <Requirement>
+              <Content>
+                <Text>Благоустройство выполнить согласно: СП 42.13330.2016 «Градостроительство. Планирование и застройка городских и сельских поседений». СП 59.13330.2020 «Доступность зданий и сооружений для маломобильных групп населения». В соответствии с требованиями Градостроительного плана, местных нормативов градостроительного проектирования муниципального образования город-курорт Анапа и архитектурной концепцией, разработанной ООО АПБ «Основа» </Text>
+              </Content>
+            </Requirement>
+          </Requirements>
+        </Landscaping>
+        <StorageLocations>
+          <Requirements>
+            <Requirement>
+              <Content>
+                <Text>Не разрабатывается</Text>
+              </Content>
+            </Requirement>
+          </Requirements>
+        </StorageLocations>
+      </ProjectSolutions>
+      <ProjectDocuments>
+        <NotIndustrialObject>
+          <ProjectDocumentation>
+            <Section1>
+              <SectionRequirement>
+                <Requirement>
+                  <Text>Выполнить в соответствии с действующими требованиями в объеме достаточном для прохождения негосударственной экспертизы проектной документации</Text>
+                </Requirement>
+              </SectionRequirement>
+            </Section1>
+            <Section2>
+              <SectionRequirement>
+                <Requirement>
+                  <Text>Выполнить в соответствии с действующими требованиями в объеме достаточном для прохождения негосударственной экспертизы проектной документации</Text>
+                </Requirement>
+              </SectionRequirement>
+            </Section2>
+            <Section3>
+              <SectionRequirement>
+                <Requirement>
+                  <Text>Выполнить в соответствии с действующими требованиями в объеме достаточном для прохождения негосударственной экспертизы проектной документации</Text>
+                </Requirement>
+              </SectionRequirement>
+            </Section3>
+            <Section4>
+              <SectionRequirement>
+                <Requirement>
+                  <Text>Выполнить в соответствии с действующими требованиями в объеме достаточном для прохождения негосударственной экспертизы проектной документации</Text>
+                </Requirement>
+              </SectionRequirement>
+            </Section4>
+            <Section5>
+              <ElectricitySupply>
+                <SectionRequirement>
+                  <Requirement>
+                    <Text>Выполнить в соответствии с действующими требованиями в объеме достаточном для прохождения негосударственной экспертизы проектной документации</Text>
+                  </Requirement>
+                </SectionRequirement>
+              </ElectricitySupply>
+              <WaterSupply>
+                <SectionRequirement>
+                  <Requirement>
+                    <Text>Выполнить в соответствии с действующими требованиями в объеме достаточном для прохождения негосударственной экспертизы проектной документации</Text>
+                  </Requirement>
+                </SectionRequirement>
+                <SectionRequirement>
+                  <Requirement>
+                    <Text>Объединить с подразделом Система водоотведения</Text>
+                  </Requirement>
+                </SectionRequirement>
+              </WaterSupply>
+              <WaterRemoval>
+                <SectionRequirement>
+                  <Requirement>
+                    <Text>Выполнить в соответствии с действующими требованиями в объеме достаточном для прохождения негосударственной экспертизы проектной документации</Text>
+                  </Requirement>
+                </SectionRequirement>
+                <SectionRequirement>
+                  <Requirement>
+                    <Text>Объединить с подразделом Водоснабжение</Text>
+                  </Requirement>
+                </SectionRequirement>
+              </WaterRemoval>
+              <HeatingVentilation>
+                <SectionRequirement>
+                  <Requirement>
+                    <Text>Выполнить в соответствии с действующими требованиями в объеме достаточном для прохождения негосударственной экспертизы проектной документации</Text>
+                  </Requirement>
+                </SectionRequirement>
+              </HeatingVentilation>
+              <Communication>
+                <SectionRequirement>
+                  <Requirement>
+                    <Text>Выполнить в соответствии с действующими требованиями в объеме достаточном для прохождения негосударственной экспертизы проектной документации</Text>
+                  </Requirement>
+                </SectionRequirement>
+              </Communication>
+            </Section5>
+            <Section7>
+              <SectionRequirement>
+                <Requirement>
+                  <Text>Выполнить в соответствии с действующими требованиями в объеме достаточном для прохождения негосударственной экспертизы проектной документации</Text>
+                </Requirement>
+              </SectionRequirement>
+            </Section7>
+            <Section8>
+              <SectionRequirement>
+                <Requirement>
+                  <Text>Выполнить в соответствии с действующими требованиями в объеме достаточном для прохождения негосударственной экспертизы проектной документации</Text>
+                </Requirement>
+              </SectionRequirement>
+            </Section8>
+            <Section9>
+              <SectionRequirement>
+                <Requirement>
+                  <Text>Выполнить в соответствии с действующими требованиями в объеме достаточном для прохождения негосударственной экспертизы проектной документации</Text>
+                </Requirement>
+              </SectionRequirement>
+            </Section9>
+            <Section10>
+              <SectionRequirement>
+                <Requirement>
+                  <Text>Выполнить в соответствии с действующими требованиями в объеме достаточном для прохождения негосударственной экспертизы проектной документации</Text>
+                </Requirement>
+              </SectionRequirement>
+            </Section10>
+            <Section11>
+              <SectionRequirement>
+                <Requirement>
+                  <Text>Выполнить в соответствии с действующими требованиями в объеме достаточном для прохождения негосударственной экспертизы проектной документации</Text>
+                </Requirement>
+              </SectionRequirement>
+            </Section11>
+          </ProjectDocumentation>
+        </NotIndustrialObject>
+      </ProjectDocuments>
+      <Demonstration>
+        <Text>Вариант 3-D визуализации объекта с сохранением утвержденных фасадов без интерьеров. Фотографии с воздуха, с нескольких ракурсов с привязкой 3-D к реальной местности</Text>
+      </Demonstration>
+      <OtherRequirements>
+        <SubTitle>Сроки и очередность строительства</SubTitle>
+        <Text>Предусмотреть строительство в 1 этап Продолжительность строительства определить проектом</Text>
+        <SubTitle>Требования о необходимости ведения авторского надзора</SubTitle>
+        <Text>Ведение авторского надзора за строительством осуществляется по отдельному договору</Text>
+        <SubTitle>Количество экземпляров проекта, выдаваемых заказчику</SubTitle>
+        <Text>Предоставить выполненную проектную документацию в 4 экземплярах на бумажном носителе и дополнительно один экземпляр документации в электронном виде (в формате «pdf»).</Text>
+        <SubTitle>Проектная организация осуществляет</SubTitle>
+        <Text>техническое сопровождение проекта в органах негосударственной экспертизы</Text>
+        <Text>предоставляет пояснения, документы и обоснования по требованию Заказчика и негосударственной экспертизы</Text>
+        <Text>без дополнительной оплаты вносит в проектную документацию изменения и дополнения по результатам рассмотрения документации у Заказчика и в органах негосударственной экспертизы</Text>
+      </OtherRequirements>
+    </Object>
+  </Content>
+</Document>
