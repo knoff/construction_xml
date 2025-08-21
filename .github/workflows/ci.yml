@@ -8,6 +8,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+
     services:
       postgres:
         image: postgres:16
@@ -24,7 +25,9 @@ jobs:
 
       minio:
         image: minio/minio:latest
-        ports: ["9000:9000", "9001:9001"]
+        # В services нельзя указывать 'command', используем дефолтный CMD образа.
+        # Оставляем только порт 9000 (S3 API); консоль 9001 не нужна для CI.
+        ports: ["9000:9000"]
         env:
           MINIO_ROOT_USER: minioadmin
           MINIO_ROOT_PASSWORD: minioadmin
@@ -33,7 +36,6 @@ jobs:
           --health-interval=5s
           --health-timeout=5s
           --health-retries=20
-        command: server /data --address :9000 --console-address :9001
 
     env:
       DATABASE_URL: postgresql+psycopg://xmlsvc:xmlsvc@localhost:5432/xmlsvc
