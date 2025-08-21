@@ -57,7 +57,7 @@ jobs:
           pip install pytest
 
       - name: Alembic upgrade
-        run: alembic upgrade head
+        run: python -m alembic upgrade head
 
       - name: Run tests
         run: pytest -q
