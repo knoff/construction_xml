@@ -13,7 +13,7 @@
       formula: "Project.object.volumeTotal * 0.6"
     - field: "Project.object.volumeBelow0"
       formula: "Project.object.volumeTotal - Project.object.volumeAbove0"
-  validate:
+  condition:
     - rule: "abs(Project.object.volumeAbove0 + Project.object.volumeBelow0 - Project.object.volumeTotal) <= 0.01"
       message: "Сумма частей должна равняться общему строительному объему"
   severity: "warning"
