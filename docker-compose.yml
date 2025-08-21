@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    container_name: xmlsvc_app
+    env_file: .env
+    command: >
+      uvicorn app.main:app
+      --host 0.0.0.0
+      --port ${APP_PORT_INTERNAL}
+      --reload
+    environment:
+      # Internal service URLs (container network)
+      - DATABASE_URL=postgresql+psycopg://$PG_USER:$PG_PASSWORD@postgres:5432/$PG_DB
+      - S3_ENDPOINT=http://minio:9000
+      - S3_BUCKET=${S3_BUCKET}
+      - MAX_UPLOAD_MB=80
+    ports:
+      - "${APP_PORT}:${APP_PORT_INTERNAL}"
+    volumes:
+      - ./:/app
+    depends_on:
+      - postgres
+      - minio
+
+  postgres:
+    image: postgres:16
+    container_name: xmlsvc_pg
+    env_file: .env
+    environment:
+      - POSTGRES_DB=${PG_DB}
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+    ports:
+      - "${PG_PORT}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  minio:
+    image: minio/minio:latest
+    container_name: xmlsvc_minio
+    command: server /data --address :9000 --console-address :9001
+    env_file: .env
+    environment:
+      - MINIO_ROOT_USER=${MINIO_ROOT_USER}
+      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
+    ports:
+      - "${MINIO_PORT}:9000"
+      - "${MINIO_CONSOLE_PORT}:9001"
+    volumes:
+      - miniodata:/data
+
+volumes:
+  pgdata:
+  miniodata:

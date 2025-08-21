@@ -1,0 +1,20 @@
+- id: default_author_from_developer
+  when: "exists(Project.developer)"
+  generate:
+    - field: "Assignment.author"
+      formula: "Project.developer"  # copy reference
+  severity: "info"
+  version: "1.0"
+
+- id: volume_split
+  when: "exists(Project.object.volumeTotal)"
+  generate:
+    - field: "Project.object.volumeAbove0"
+      formula: "Project.object.volumeTotal * 0.6"
+    - field: "Project.object.volumeBelow0"
+      formula: "Project.object.volumeTotal - Project.object.volumeAbove0"
+  validate:
+    - rule: "abs(Project.object.volumeAbove0 + Project.object.volumeBelow0 - Project.object.volumeTotal) <= 0.01"
+      message: "Сумма частей должна равняться общему строительному объему"
+  severity: "warning"
+  version: "1.0"

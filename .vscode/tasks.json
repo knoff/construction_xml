@@ -1,0 +1,37 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Compose Up",
+      "type": "shell",
+      "command": "docker compose up -d --build",
+      "group": "build",
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Compose Down",
+      "type": "shell",
+      "command": "docker compose down",
+      "group": "build",
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": []
+    },
+    {
+      "label": "DB Migrate (upgrade head)",
+      "type": "shell",
+      "command": "docker compose exec -w /app app alembic upgrade head",
+      "group": "build",
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": []
+    },
+    {
+      "label": "DB Downgrade (base)",
+      "type": "shell",
+      "command": "docker compose exec -w /app app alembic downgrade base",
+      "group": "build",
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": []
+    }
+  ]
+}
