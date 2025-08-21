@@ -24,18 +24,17 @@ jobs:
           --health-retries=5
 
       minio:
-        image: minio/minio:latest
-        # В services нельзя указывать 'command', используем дефолтный CMD образа.
-        # Оставляем только порт 9000 (S3 API); консоль 9001 не нужна для CI.
-        ports: ["9000:9000"]
+        image: bitnami/minio:latest    # <-- ключевая замена
+        ports: ["9000:9000"]           # API порт
         env:
           MINIO_ROOT_USER: minioadmin
           MINIO_ROOT_PASSWORD: minioadmin
+          MINIO_DEFAULT_BUCKETS: xmlsvc  # создаст бакет автоматически
         options: >-
-          --health-cmd="curl -f http://localhost:9000/minio/health/ready || exit 1"
+          --health-cmd="curl -fsS http://localhost:9000/minio/health/ready || exit 1"
           --health-interval=5s
           --health-timeout=5s
-          --health-retries=20
+          --health-retries=30
 
     env:
       DATABASE_URL: postgresql+psycopg://xmlsvc:xmlsvc@localhost:5432/xmlsvc
@@ -50,17 +49,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Start MinIO (official image)
-        run: |
-          docker run -d --name gha-minio \
-            -e MINIO_ROOT_USER=minioadmin \
-            -e MINIO_ROOT_PASSWORD=minioadmin \
-            -p 9000:9000 \
-            minio/minio:latest server /data
-          for i in {1..60}; do
-            curl -fsS http://localhost:9000/minio/health/ready && break
-            sleep 1
-          done
+
       - name: Install deps
         run: |
           python -m pip install --upgrade pip
