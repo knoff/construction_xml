@@ -20,7 +20,11 @@ if db_url:
 
 # Logging
 if config.config_file_name is not None:
-    fileConfig(config.config_file_name)
+    try:
+        fileConfig(config.config_file_name, disable_existing_loggers=False)
+    except Exception as e:
+        # не валим миграции из-за логирования
+        pass
 
 # Import metadata
 try:
