@@ -1,4 +1,4 @@
-from sqlalchemy import String, Integer, JSON, LargeBinary, ForeignKey, DateTime, func
+from sqlalchemy import Column, String, Integer, JSON, LargeBinary, ForeignKey, DateTime, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.db import Base
 
@@ -29,3 +29,14 @@ class RuleRow(Base):
     content: Mapped[dict] = mapped_column(JSON)
     version: Mapped[str | None] = mapped_column(String(32), nullable=True)
     created_at: Mapped = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+class Schema(Base):
+    __tablename__ = "schemas"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    version = Column(String, nullable=True)
+    namespace = Column(String, nullable=True)
+    description = Column(String, nullable=True)
+    file_path = Column(String, nullable=False)
+    created_at = Column(DateTime, nullable=False)

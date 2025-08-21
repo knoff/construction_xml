@@ -1,10 +1,9 @@
-version: "3.9"
-
 services:
   app:
     build: .
     container_name: xmlsvc_app
     env_file: .env
+    working_dir: /app
     command: >
       uvicorn app.main:app
       --host 0.0.0.0
@@ -12,9 +11,12 @@ services:
       --reload
     environment:
       # Internal service URLs (container network)
+      - PYTHONPATH=/app
       - DATABASE_URL=postgresql+psycopg://$PG_USER:$PG_PASSWORD@postgres:5432/$PG_DB
       - S3_ENDPOINT=http://minio:9000
       - S3_BUCKET=${S3_BUCKET}
+      - S3_ACCESS_KEY=${MINIO_ROOT_USER}
+      - S3_SECRET_KEY=${MINIO_ROOT_PASSWORD}
       - MAX_UPLOAD_MB=80
     ports:
       - "${APP_PORT}:${APP_PORT_INTERNAL}"
