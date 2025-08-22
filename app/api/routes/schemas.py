@@ -65,11 +65,22 @@ async def upload_schema(
     # парсим метаданные из XSD
     info = schema_parser.extract_metadata(content, filename=file.filename)
 
+    # классифицируем по реестру типов
+    from app.services import schema_classifier
+    rule = schema_classifier.classify(file.filename, content)
+
+    display_name = info.get("name") or file.filename
+    description = info.get("description")
+    if rule:
+        # приоритет имени/описания — из справочника типов
+        display_name = rule.title or display_name
+        description = rule.description or description
+
     schema = Schema(
-        name=info.get("name") or file.filename,
+        name=display_name,
         version=info.get("version"),
         namespace=info.get("namespace"),
-        description=info.get("description"),
+        description=description,
         file_path=key,
         created_at=datetime.utcnow(),
     )

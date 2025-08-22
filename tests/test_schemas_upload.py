@@ -7,6 +7,21 @@ def test_upload_schema_success(client, db_session, monkeypatch):
         return f"{prefix}/fake_{filename}"
     monkeypatch.setattr("app.api.routes.schemas.save_file_minio", fake_save)
 
+    # мок реестра типов — чтобы имя/описание шли из справочника
+    from app.services import schema_classifier
+    monkeypatch.setattr(
+        schema_classifier,
+        "get_registry",
+        lambda: [
+            schema_classifier.SchemaTypeRule(
+                code="design_assignment",
+                title="Задание на проектирование",
+                description="Описание из справочника",
+                filename_pattern=r"(?i)DesignAssignment-[0-9]{2}-[0-9]{2}\.xsd",
+            )
+        ],
+    )
+
     xsd = b'''<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:annotation><xs:documentation>Test Schema</xs:documentation></xs:annotation>
                 <xs:element name="DesignAssignment" type="xs:string"/>
@@ -22,7 +37,8 @@ def test_upload_schema_success(client, db_session, monkeypatch):
     items = db_session.query(Schema).order_by(Schema.id.desc()).all()
     assert len(items) >= 1
     s = items[0]
-    assert s.name == "DesignAssignment"
+    # имя и описание — из справочника типов
+    assert s.name == "Задание на проектирование"
     assert s.version == "01.03"
-    assert "Test Schema" in (s.description or "")
+    assert "Описание из справочника" in (s.description or "")
     assert s.file_path.startswith("schemas/fake_")

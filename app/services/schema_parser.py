@@ -9,7 +9,6 @@ NS = {"xs": XS}
 def _version_from_filename(filename: Optional[str]) -> Optional[str]:
     if not filename:
         return None
-    # Ищем *-NN-MM.xsd → NN.MM
     m = re.search(r"-([0-9]{2})[-._]([0-9]{2})\.xsd$", filename, flags=re.IGNORECASE)
     if m:
         return f"{m.group(1)}.{m.group(2)}"
@@ -17,48 +16,54 @@ def _version_from_filename(filename: Optional[str]) -> Optional[str]:
 
 def extract_metadata(content: bytes, *, filename: Optional[str] = None) -> dict:
     """
-    Извлекает базовые метаданные из XSD:
-      - name: первый верхнеуровневый xs:element/@name
-      - version: xs:attribute[@name='SchemaVersion']/@fixed ИЛИ из имени файла (*-NN-MM.xsd)
+    Извлекаем базовые метаданные из XSD, устойчиво к «грязным» файлам:
+      - name: первый верхнеуровневый xs:element/@name (или любой xs:element)
+      - version: xs:attribute[@name='SchemaVersion']/@fixed (или @default),
+                 иначе — из имени файла (*-NN-MM.xsd -> NN.MM)
       - namespace: schema/@targetNamespace (если есть)
-      - description: объединённый текст xs:documentation
+      - description: ТОЛЬКО первое xs:schema/xs:annotation/xs:documentation (сжатый текст)
     """
     info: dict = {}
+
+    # Терпимый к ошибкам парсер
+    parser = etree.XMLParser(recover=True, resolve_entities=False, huge_tree=True)
     try:
-        root = etree.XML(content)
+        root = etree.fromstring(content, parser=parser)
     except Exception:
-        # невалидный XML — вернём пусто (выше по стеку решим, что с этим делать)
         return info
 
-    # namespace (если есть)
+    # namespace (если вдруг есть)
     ns_attr = root.get("targetNamespace")
     if ns_attr:
         info["namespace"] = ns_attr
 
-    # description (все документации)
-    docs_txt = []
-    for d in root.findall(".//xs:documentation", namespaces=NS):
-        if d is not None and d.text:
-            t = d.text.strip()
-            if t:
-                docs_txt.append(t)
-    if docs_txt:
-        info["description"] = " ".join(docs_txt)
+    # description: только верхнеуровневый <xs:schema><xs:annotation><xs:documentation>[1]
+    desc = None
+    try:
+        doc = root.find("./xs:annotation/xs:documentation", namespaces=NS)
+        if doc is not None and doc.text:
+            txt = " ".join(doc.text.split())
+            if txt:
+                desc = txt
+    except Exception:
+        pass
+    if desc:
+        info["description"] = desc
 
-    # имя документа — первый верхнеуровневый элемент
+    # name: сначала верхнеуровневый element, если нет — любой element
     el = root.find("./xs:element", namespaces=NS)
     if el is None:
-        # fallback — любой element в схеме
         el = root.find(".//xs:element", namespaces=NS)
-    if el is not None and el.get("name"):
-        info["name"] = el.get("name")
+    if el is not None:
+        name_attr = el.get("name")
+        if name_attr:
+            info["name"] = name_attr
 
-    # версия — сначала SchemaVersion/@fixed…
+    # version: SchemaVersion/@fixed -> @default -> из имени файла
     ver = None
     attr = root.find(".//xs:attribute[@name='SchemaVersion']", namespaces=NS)
     if attr is not None:
         ver = attr.get("fixed") or attr.get("default")
-    # …если нет — из имени файла (*-NN-MM.xsd → NN.MM)
     if not ver:
         ver = _version_from_filename(filename)
     if ver:
