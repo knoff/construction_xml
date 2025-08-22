@@ -14,13 +14,13 @@ from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 
 from app.db import get_db
-from app.models_sqlalchemy import Schema
-from app.services import schema_parser
+from app.models_sqlalchemy import Schema, SchemaType
+from app.services import schema_parser, schema_classifier
 from app.storage import save_file_minio, delete_file_minio
 
 
 router = APIRouter(prefix="/schemas", tags=["schemas"])
-templates = Jinja2Templates(directory="templates")
+from app.web.templates import templates
 
 # делаем доступной функцию now() для шаблонов
 templates.env.globals["now"] = datetime.utcnow
@@ -64,17 +64,19 @@ async def upload_schema(
 
     # парсим метаданные из XSD
     info = schema_parser.extract_metadata(content, filename=file.filename)
-
-    # классифицируем по реестру типов
-    from app.services import schema_classifier
-    rule = schema_classifier.classify(file.filename, content)
+    matched = schema_classifier.classify(file.filename, content, db=db)
 
     display_name = info.get("name") or file.filename
     description = info.get("description")
-    if rule:
-        # приоритет имени/описания — из справочника типов
-        display_name = rule.title or display_name
-        description = rule.description or description
+    type_id = None
+
+    if matched:
+        st = db.query(SchemaType).filter(SchemaType.code == matched.code).first()
+        if st:
+            type_id = st.id
+            display_name = st.title or display_name
+            if st.description:
+                description = st.description
 
     schema = Schema(
         name=display_name,
@@ -83,6 +85,7 @@ async def upload_schema(
         description=description,
         file_path=key,
         created_at=datetime.utcnow(),
+        type_id=type_id,
     )
     db.add(schema)
     db.commit()

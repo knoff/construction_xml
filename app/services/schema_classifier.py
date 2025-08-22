@@ -3,8 +3,9 @@ import os
 import re
 from dataclasses import dataclass
 from typing import List, Optional
+from sqlalchemy.orm import Session
+from app.models_sqlalchemy import SchemaType
 
-import yaml
 
 @dataclass
 class SchemaTypeRule:
@@ -13,49 +14,53 @@ class SchemaTypeRule:
     description: str = ""
     filename_pattern: Optional[str] = None
 
-_registry: Optional[List[SchemaTypeRule]] = None
+def db_registry(db: Session) -> List[SchemaTypeRule]:
+    rows = db.query(SchemaType).order_by(SchemaType.id.asc()).all()
+    return [
+        SchemaTypeRule(
+            code=r.code,
+            title=r.title,
+            description=(r.description or ""),
+            filename_pattern=(r.filename_pattern or None),
+        )
+        for r in rows
+    ]
 
-def load_registry() -> List[SchemaTypeRule]:
-    path = os.getenv("SCHEMA_TYPES_YAML", "config/schema_types.yml")
-    rules: List[SchemaTypeRule] = []
-    try:
-        with open(path, "r", encoding="utf-8") as f:
-            data = yaml.safe_load(f) or []
-        for item in data:
-            rules.append(SchemaTypeRule(**item))
-    except Exception:
-        # Фолбэк по умолчанию, если файла нет/битый
-        rules = [
-            SchemaTypeRule(
-                code="design_assignment",
-                title="Задание на проектирование",
-                description="Схема задания на проектирование (MCS).",
-                filename_pattern=r"(?i)DesignAssignment-[0-9]{2}[-_.][0-9]{2}\.xsd",
-            ),
-            SchemaTypeRule(
-                code="explanatory_note",
-                title="Пояснительная записка",
-                description="Схема пояснительной записки (Раздел 1).",
-                filename_pattern=r"(?i)ExplanatoryNote-[0-9]{2}[-_.][0-9]{2}\.xsd",
-            ),
-            SchemaTypeRule(
-                code="expert_conclusion",
-                title="Заключение экспертизы",
-                description="Схема заключения экспертизы.",
-                filename_pattern=r"(?i)(Expert|Examination)Conclusion-[0-9]{2}[-_.][0-9]{2}\.xsd",
-            ),
-        ]
-    return rules
+def classify(filename: str, content: bytes, db: Session) -> Optional[SchemaTypeRule]:
+    """
+    1) Сначала пытаемся сматчить regex из БД (case-insensitive).
+    2) Если не получилось — применяем устойчивую эвристику по префиксу имени файла.
+    """
+    fname = os.path.basename(filename or "")
 
-def get_registry() -> List[SchemaTypeRule]:
-    global _registry
-    if _registry is None:
-        _registry = load_registry()
-    return _registry
-
-def classify(filename: str, content: bytes) -> Optional[SchemaTypeRule]:
-    # Пока используем только имя файла; при необходимости добавим эвристики по содержимому
-    for rule in get_registry():
-        if rule.filename_pattern and re.search(rule.filename_pattern, filename):
+    # 1) Regex
+    for rule in db_registry(db):
+        pat = (rule.filename_pattern or "").strip()
+        if not pat:
+            continue
+        try:
+            rx = re.compile(pat, flags=re.IGNORECASE | re.UNICODE)
+        except re.error:
+            continue
+        if rx.search(fname):
             return rule
+
+    # 2) Эвристика по префиксу (без регекса)
+    low = fname.lower()
+    prefix_map = {
+        "designassignment": "design_assignment",
+        "explanatorynote": "explanatory_note",
+        "expertconclusion": "expert_conclusion",
+        "examinationconclusion": "expert_conclusion",
+    }
+    for prefix, code in prefix_map.items():
+        if low.startswith(prefix):
+            row = db.query(SchemaType).filter(SchemaType.code == code).first()
+            if row:
+                return SchemaTypeRule(
+                    code=row.code,
+                    title=row.title,
+                    description=row.description or "",
+                    filename_pattern=row.filename_pattern or None,
+                )
     return None
