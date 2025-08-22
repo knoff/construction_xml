@@ -24,6 +24,13 @@ def save_file_minio(prefix: str, filename: str, content: bytes) -> str:
     _s3.put_object(Bucket=S3_BUCKET, Key=key, Body=content)
     return key
 
+def delete_file_minio(key: str) -> None:
+    try:
+        _s3.delete_object(Bucket=S3_BUCKET, Key=key)
+    except Exception:
+        # на проде логируем; для MVP — молча
+        pass
+
 def presigned_url(key: str, expires: int = 3600) -> Optional[str]:
     try:
         return _s3.generate_presigned_url(

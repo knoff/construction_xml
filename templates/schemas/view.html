@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-xl font-semibold mb-4">{{ schema.name }}</h1>
+
+<div class="grid md:grid-cols-2 gap-4">
+  <div class="bg-white border rounded-lg p-4">
+    <dl class="text-sm">
+      <dt class="font-medium text-slate-500">Версия</dt>
+      <dd class="mb-3">{{ schema.version or "—" }}</dd>
+
+      <dt class="font-medium text-slate-500">Namespace</dt>
+      <dd class="mb-3 break-all">{{ schema.namespace or "—" }}</dd>
+
+      <dt class="font-medium text-slate-500">Описание</dt>
+      <dd class="mb-3 whitespace-pre-wrap">{{ schema.description or "—" }}</dd>
+
+      <dt class="font-medium text-slate-500">MinIO Key</dt>
+      <dd class="mb-3 break-all">{{ schema.file_path }}</dd>
+
+      <!-- Закладки под будущие поля: источник (URL Минстроя), период действия -->
+      <dt class="font-medium text-slate-500">Источник (URL)</dt>
+      <dd class="mb-3 text-slate-500">—</dd>
+
+      <dt class="font-medium text-slate-500">Действует</dt>
+      <dd class="mb-3 text-slate-500">с — по —</dd>
+    </dl>
+  </div>
+</div>
+
+<div class="mt-4 flex items-center gap-4">
+  <a href="/schemas" class="text-blue-700 hover:underline">← К списку</a>
+
+  <form action="/schemas/{{ schema.id }}/delete" method="post" onsubmit="return confirm('Удалить схему «{{ schema.name }}»? Действие необратимо.');">
+    <button type="submit" class="px-3 py-2 rounded-md bg-red-600 text-white hover:bg-red-700">
+      Удалить схему
+    </button>
+  </form>
+</div>
+{% endblock %}

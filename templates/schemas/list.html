@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-xl font-semibold mb-4">Загруженные XSD/XSL</h1>
+
+<div class="mb-4">
+  <a href="/schemas/upload" class="inline-flex items-center px-3 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700">Загрузить схему</a>
+</div>
+
+<div class="bg-white border rounded-lg">
+  <table class="w-full text-sm">
+    <thead class="bg-slate-100 border-b">
+      <tr>
+        <th class="text-left p-2">Название</th>
+        <th class="text-left p-2">Версия</th>
+        <th class="text-left p-2">Namespace</th>
+        <th class="text-left p-2">Создана</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for s in items %}
+      <tr class="border-b last:border-0 hover:bg-slate-50">
+        <td class="p-2">
+          <a class="text-blue-700 hover:underline" href="/schemas/{{ s.id }}">{{ s.name }}</a>
+        </td>
+        <td class="p-2">{{ s.version or "—" }}</td>
+        <td class="p-2 truncate max-w-[280px]" title="{{ s.namespace or '' }}">{{ s.namespace or "—" }}</td>
+        <td class="p-2">{{ s.created_at }}</td>
+      </tr>
+    {% else %}
+      <tr><td class="p-2 text-slate-500" colspan="4">Пока пусто</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
