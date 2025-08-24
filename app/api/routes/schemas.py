@@ -29,12 +29,27 @@ MAX_UPLOAD_MB = int(os.getenv("MAX_UPLOAD_MB", "80"))
 
 
 @router.get("/", response_class=HTMLResponse)
-def list_schemas(request: Request, db: Session = Depends(get_db)):
-    items = db.query(Schema).order_by(Schema.created_at.desc()).all()
+def list_schemas(
+    request: Request,
+    db: Session = Depends(get_db),
+    type_id: int | None = None,
+):
+    q = db.query(Schema).order_by(Schema.created_at.desc())
+    if type_id and type_id!=0:
+        q = q.filter(Schema.type_id == type_id)
+    items = q.all()
+
+    schema_types = db.query(SchemaType).order_by(SchemaType.title.asc()).all()
     flash = request.query_params.get("msg")
     return templates.TemplateResponse(
         "schemas/list.html",
-        {"request": request, "items": items, "flash": flash},
+        {
+            "request": request,
+            "items": items,
+            "flash": flash,
+            "schema_types": schema_types,
+            "selected_type_id": type_id,
+        },
     )
 
 

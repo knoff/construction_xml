@@ -5,6 +5,9 @@
 <div class="grid md:grid-cols-2 gap-4">
   <div class="bg-white border rounded-lg p-4">
     <dl class="text-sm">
+      <dt class="font-medium text-slate-500">Тип схемы</dt>
+      <dd class="mb-3 break-all">{{ schema.type.title or "—" }}</dd>
+      
       <dt class="font-medium text-slate-500">Версия</dt>
       <dd class="mb-3">{{ schema.version or "—" }}</dd>
 

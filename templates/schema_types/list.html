@@ -19,11 +19,12 @@
     <tbody>
     {% for t in items %}
       <tr class="border-b last:border-0 hover:bg-slate-50">
-        <td class="p-2 font-mono">{{ t.code }}</td>
+        <td class="p-2 font-mono">
+          <a class="text-blue-700 hover:underline" href="/schema-types/{{ t.id }}">{{ t.code }}</a>
+        </td>
         <td class="p-2">{{ t.title }}</td>
         <td class="p-2">{{ t.filename_pattern or "—" }}</td>
         <td class="p-2">
-          <a href="/schema-types/{{ t.id }}" class="text-blue-700 hover:underline">Изменить</a>
           <form action="/schema-types/{{ t.id }}/delete" method="post" class="inline" onsubmit="return confirm('Удалить тип?');">
             <button class="text-red-600 hover:underline ml-3" type="submit">Удалить</button>
           </form>
