@@ -1,18 +1,8 @@
 from datetime import datetime
 import os
-
-from fastapi import (
-    APIRouter,
-    UploadFile,
-    File,
-    Depends,
-    Request,
-    HTTPException,
-)
-from fastapi.responses import HTMLResponse, RedirectResponse
-from fastapi.templating import Jinja2Templates
+from typing import Any, Dict, List, Optional
+from fastapi import APIRouter, UploadFile, File, Depends, HTTPException
 from sqlalchemy.orm import Session
-
 from app.db import get_db
 from app.models_sqlalchemy import Schema, SchemaType
 from app.services import schema_parser, schema_classifier
@@ -20,55 +10,34 @@ from app.storage import save_file_minio, delete_file_minio
 
 
 router = APIRouter(prefix="/schemas", tags=["schemas"])
-from app.web.templates import templates
-
-# делаем доступной функцию now() для шаблонов
-templates.env.globals["now"] = datetime.utcnow
-
 MAX_UPLOAD_MB = int(os.getenv("MAX_UPLOAD_MB", "80"))
 
-
-@router.get("/", response_class=HTMLResponse)
-def list_schemas(
-    request: Request,
-    db: Session = Depends(get_db),
-    type_id: int | None = None,
-):
-    q = db.query(Schema).order_by(Schema.created_at.desc())
-    if type_id and type_id!=0:
-        q = q.filter(Schema.type_id == type_id)
-    items = q.all()
-
-    schema_types = db.query(SchemaType).order_by(SchemaType.title.asc()).all()
-    flash = request.query_params.get("msg")
-    return templates.TemplateResponse(
-        "schemas/list.html",
-        {
-            "request": request,
-            "items": items,
-            "flash": flash,
-            "schema_types": schema_types,
-            "selected_type_id": type_id,
-        },
-    )
+def _row_to_dict(s: Schema) -> Dict[str, Any]:
+    return {
+        "id": s.id,
+        "name": s.name,
+        "version": s.version,
+        "namespace": s.namespace,
+        "description": s.description,
+        "file_path": s.file_path,
+        "created_at": s.created_at.isoformat() if getattr(s, "created_at", None) else None,
+        "type": {
+            "id": s.type.id,
+            "code": s.type.code,
+            "title": s.type.title,
+        } if getattr(s, "type", None) else None,
+    }
 
 
-@router.get("/upload", response_class=HTMLResponse)
-def upload_form(request: Request):
-    return templates.TemplateResponse(
-        "schemas/upload.html",
-        {"request": request, "max_upload_mb": MAX_UPLOAD_MB},
-    )
+@router.get("/")
+def list_schemas(db: Session = Depends(get_db)) -> List[Dict[str, Any]]:
+    items = db.query(Schema).order_by(Schema.created_at.desc()).all()
+    return [_row_to_dict(s) for s in items]
 
-
-@router.post("/upload", response_class=HTMLResponse)
-async def upload_schema(
-    request: Request,
-    file: UploadFile = File(...),
-    db: Session = Depends(get_db),
-):
+@router.post("/upload")
+async def upload_schema(file: UploadFile = File(...), db: Session = Depends(get_db)) -> Dict[str, Any]:
     # проверки
-    if not file.filename.lower().endswith(".xsd"):
+    if not (file.filename or "").lower().endswith(".xsd"):
         raise HTTPException(status_code=400, detail="Ожидается файл .xsd")
     content = await file.read()
     if len(content) > MAX_UPLOAD_MB * 1024 * 1024:
@@ -106,22 +75,19 @@ async def upload_schema(
     db.commit()
     db.refresh(schema)
 
-    return RedirectResponse(url=f"/schemas/{schema.id}", status_code=303)
+    return {"saved": True, "schema": _row_to_dict(schema)}
 
 
-@router.get("/{schema_id}", response_class=HTMLResponse)
-def view_schema(schema_id: int, request: Request, db: Session = Depends(get_db)):
+@router.get("/{schema_id}")
+def view_schema(schema_id: int, db: Session = Depends(get_db)) -> Dict[str, Any]:
     schema = db.get(Schema, schema_id)
     if not schema:
         raise HTTPException(status_code=404, detail="Схема не найдена")
-    return templates.TemplateResponse(
-        "schemas/view.html",
-        {"request": request, "schema": schema},
-    )
+    return _row_to_dict(schema)
 
 
 @router.post("/{schema_id}/delete")
-def delete_schema(schema_id: int, request: Request, db: Session = Depends(get_db)):
+def delete_schema(schema_id: int, db: Session = Depends(get_db)) -> Dict[str, Any]:
     schema = db.get(Schema, schema_id)
     if not schema:
         raise HTTPException(status_code=404, detail="Схема не найдена")
@@ -133,4 +99,4 @@ def delete_schema(schema_id: int, request: Request, db: Session = Depends(get_db
     db.delete(schema)
     db.commit()
 
-    return RedirectResponse(url="/schemas?msg=Схема%20удалена", status_code=303)
+    return {"deleted": True, "id": schema_id}
