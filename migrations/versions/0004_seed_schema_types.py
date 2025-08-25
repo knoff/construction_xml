@@ -36,7 +36,7 @@ def upgrade() -> None:
     }
 
     to_insert = [
-        dict(code=code, name=name, filename_pattern=pattern)
+        dict(code=code, title=name, filename_pattern=pattern)
         for code, name, pattern in BASE_TYPES
         if code not in existing
     ]
