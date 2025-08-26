@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+//import { useForm } from 'react-hook-form'
 import { api } from '../lib/api'
-import { Button } from '../components/ui/button'
-import { Input } from '../components/ui/input'
+//import { Button } from '../components/ui/button'
+//import { Input } from '../components/ui/input'
 
-type Form = { file: FileList }
+//type Form = { file: FileList }
 
 export default function SchemaUpload() {
-  const { register, handleSubmit, reset } = useForm<Form>()
+/*  const { register, handleSubmit, reset } = useForm<Form>()
   const [msg, setMsg] = useState<string>('')
 
   const onSubmit = async (v: Form) => {
@@ -21,7 +21,8 @@ export default function SchemaUpload() {
     setMsg(`Uploaded: ${res.data.path}`)
     reset()
   }
-
+*/
+/*
   return (
     <div className="space-y-4">
       <h1 className="text-xl font-semibold">Загрузка XSD/XSL</h1>
@@ -30,6 +31,12 @@ export default function SchemaUpload() {
         <Button type="submit">Загрузить</Button>
       </form>
       {msg && <div className="text-sm text-green-600">{msg}</div>}
+    </div>
+  )
+*/
+  return (
+    <div className="space-y-4">
+      <h1 className="text-xl font-semibold">Загрузка XSD/XSL</h1>
     </div>
   )
 }

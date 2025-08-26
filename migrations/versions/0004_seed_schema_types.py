@@ -6,18 +6,20 @@ Create Date: 2025-08-23
 """
 from alembic import op
 import sqlalchemy as sa
+from datetime import datetime
 
 # --- Alembic identifiers ---
 revision = "0004_seed_schema_types"
 down_revision = "0003_schema_types"
 branch_labels = None
 depends_on = None
+tm = datetime.utcnow
 
 BASE_TYPES = [
     # code,               name,                         filename_pattern (regex, optional)
-    ("design_assignment", "Задание на проектирование",  r"(?i)DesignAssignment-[0-9]{2}[-_.][0-9]{2}\\.xsd"),
-    ("explanatory_note",  "Пояснительная записка",     r"(?i)ExplanatoryNote-[0-9]{2}[-_.][0-9]{2}\\.xsd"),
-    ("expert_conclusion", "Заключение экспертизы",     r"(?i)(Expert|Examination)Conclusion-[0-9]{2}[-_.][0-9]{2}\\.xsd"),
+    ("design_assignment", "Задание на проектирование",  r"(?i)DesignAssignment-[0-9]{2}[-_.][0-9]{2}\\.xsd", tm, tm),
+    ("explanatory_note",  "Пояснительная записка",     r"(?i)ExplanatoryNote-[0-9]{2}[-_.][0-9]{2}\\.xsd", tm, tm),
+    ("expert_conclusion", "Заключение экспертизы",     r"(?i)(Expert|Examination)Conclusion-[0-9]{2}[-_.][0-9]{2}\\.xsd", tm, tm),
 ]
 
 
@@ -36,8 +38,8 @@ def upgrade() -> None:
     }
 
     to_insert = [
-        dict(code=code, title=name, filename_pattern=pattern)
-        for code, name, pattern in BASE_TYPES
+        dict(code=code, title=name, filename_pattern=pattern, created_at=ct, updated_at=ut )
+        for code, name, pattern, ct, ut in BASE_TYPES
         if code not in existing
     ]
 
