@@ -1,5 +1,5 @@
-from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
+from sqlalchemy import create_engine
 import os
 
 DATABASE_URL = os.getenv("DATABASE_URL", "postgresql+psycopg://xmlsvc:xmlsvc@localhost:15433/xmlsvc")
@@ -9,3 +9,10 @@ SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False, futu
 
 class Base(DeclarativeBase):
     pass
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()

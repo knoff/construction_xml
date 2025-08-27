@@ -10,7 +10,7 @@ class Rule(BaseModel):
     id: str
     when: str | None = None
     generate: List[Dict[str, Any]] | None = None
-    validate: List[Dict[str, Any]] | None = None
+    condition: List[Dict[str, Any]] | None = None
     severity: str | None = None
     version: str | None = None
 

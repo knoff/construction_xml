@@ -18,6 +18,10 @@ venv/
 dist/
 *.egg-info/
 
+# frontend build artifacts
+frontend/node_modules/
+frontend/dist/
+
 # Local data
 data/
 uploads/

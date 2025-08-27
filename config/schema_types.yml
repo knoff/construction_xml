@@ -1,0 +1,15 @@
+# Примерный реестр типов схем Минстроя
+- code: design_assignment
+  title: "Задание на проектирование"
+  description: "Схема задания на проектирование (MCS)."
+  filename_pattern: "(?i)DesignAssignment-[0-9]{2}[-_.][0-9]{2}\\.xsd"
+
+- code: explanatory_note
+  title: "Пояснительная записка"
+  description: "Схема пояснительной записки (Раздел 1)."
+  filename_pattern: "(?i)ExplanatoryNote-[0-9]{2}[-_.][0-9]{2}\\.xsd"
+
+- code: expert_conclusion
+  title: "Заключение экспертизы"
+  description: "Схема заключения экспертизы."
+  filename_pattern: "(?i)(Expert|Examination)Conclusion-[0-9]{2}[-_.][0-9]{2}\\.xsd"

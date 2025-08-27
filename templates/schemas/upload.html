@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-xl font-semibold mb-4">Загрузить XSD</h1>
+
+<form action="/schemas/upload" method="post" enctype="multipart/form-data" class="bg-white border rounded-lg p-4 max-w-xl">
+  <div class="mb-4">
+    <label class="block text-sm mb-1">Файл XSD</label>
+    <input class="block w-full text-sm file:mr-4 file:py-2 file:px-3 file:rounded-md file:border-0 file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200"
+           type="file" name="file" accept=".xsd" required>
+    <p class="text-xs text-slate-500 mt-1">Макс. размер: {{ max_upload_mb }} МБ</p>
+  </div>
+
+  <button type="submit" class="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700">Загрузить</button>
+</form>
+{% endblock %}

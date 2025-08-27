@@ -32,6 +32,41 @@
       "group": "build",
       "presentation": { "reveal": "always", "panel": "dedicated" },
       "problemMatcher": []
-    }
+    },
+    {
+      "label": "UI Build (vite prod)",
+      "type": "shell",
+      "options": { "cwd": "${workspaceFolder}/frontend" },
+      "command": "npm run build",
+      "group": "build",
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": []
+    },
+    {
+      "label": "UI Deploy to backend static",
+      "type": "shell",
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"mkdir ${workspaceFolder}\\app\\static -ea 0 | Out-Null; robocopy ${workspaceFolder}\\frontend\\dist ${workspaceFolder}\\app\\static /MIR | Out-Null; docker compose restart app\"",
+      "group": "build",
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Dev: Build+Deploy UI",
+      "type": "shell",
+      "command": "echo Building and deploying UI to backend static...",
+      "dependsOn": ["UI Build (vite prod)", "UI Deploy to backend static"],
+      "dependsOrder": "sequence",
+      "group": "build",
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Pytest (container)",
+      "type": "shell",
+      "command": "docker compose exec -e DATABASE_URL=postgresql+psycopg://xmlsvc:xmlsvc@postgres:5432/xmlsvc -e S3_ENDPOINT=http://minio:9000 -e S3_BUCKET=xmlsvc -e S3_ACCESS_KEY=minioadmin -e S3_SECRET_KEY=minioadmin app pytest -q",
+      "group": "test",
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": []
+    },
   ]
 }
