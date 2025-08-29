@@ -2,6 +2,7 @@ from datetime import datetime
 import os
 from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, UploadFile, File, Depends, HTTPException
+from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from app.db import get_db
 from app.models_sqlalchemy import Schema, SchemaType
@@ -33,6 +34,11 @@ def _row_to_dict(s: Schema) -> Dict[str, Any]:
 def list_schemas(db: Session = Depends(get_db)) -> List[Dict[str, Any]]:
     items = db.query(Schema).order_by(Schema.created_at.desc()).all()
     return [_row_to_dict(s) for s in items]
+
+@router.get("/types")
+def list_schema_types(db: Session = Depends(get_db)) -> List[Dict[str, Any]]:
+    rows = db.query(SchemaType).order_by(SchemaType.title.asc()).all()
+    return [{"id": t.id, "code": t.code, "title": t.title} for t in rows]
 
 @router.post("/upload")
 async def upload_schema(file: UploadFile = File(...), db: Session = Depends(get_db)) -> Dict[str, Any]:
@@ -85,6 +91,35 @@ def view_schema(schema_id: int, db: Session = Depends(get_db)) -> Dict[str, Any]
         raise HTTPException(status_code=404, detail="Схема не найдена")
     return _row_to_dict(schema)
 
+class SchemaUpdate(BaseModel):
+    name: Optional[str] = None
+    version: Optional[str] = None
+    namespace: Optional[str] = None
+    description: Optional[str] = None
+    type_id: Optional[int] = None  # null/0 -> снять тип
+
+@router.put("/{schema_id}")
+def update_schema(schema_id: int, payload: SchemaUpdate, db: Session = Depends(get_db)) -> Dict[str, Any]:
+    s = db.get(Schema, schema_id)
+    if not s:
+        raise HTTPException(status_code=404, detail="Схема не найдена")
+    # type_id
+    if payload.type_id is not None:
+        if payload.type_id in (0, ):
+            s.type_id = None
+        else:
+            st = db.get(SchemaType, payload.type_id)
+            if not st:
+                raise HTTPException(status_code=400, detail="Неизвестный type_id")
+            s.type_id = st.id
+    # текстовые поля
+    for fld in ("name", "version", "namespace", "description"):
+        val = getattr(payload, fld)
+        if val is not None:
+            setattr(s, fld, val.strip() if isinstance(val, str) else val)
+    db.commit()
+    db.refresh(s)
+    return _row_to_dict(s)
 
 @router.post("/{schema_id}/delete")
 def delete_schema(schema_id: int, db: Session = Depends(get_db)) -> Dict[str, Any]:
