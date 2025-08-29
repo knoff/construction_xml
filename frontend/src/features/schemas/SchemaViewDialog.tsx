@@ -52,7 +52,7 @@ export function SchemaViewDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Просмотр схемы</DialogTitle>
+          <DialogTitle>Просмотр XSD схемы</DialogTitle>
         </DialogHeader>
         <DialogBody>
           {loading && <div className="text-sm">Загрузка…</div>}

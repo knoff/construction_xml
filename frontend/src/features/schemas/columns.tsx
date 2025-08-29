@@ -15,8 +15,12 @@ export type SchemaRow = {
   type?: { id?: number | string; title?: string; code?: string };
 };
 
-export function makeSchemaColumns(opts: { onView: (id: number | string) => void }): ColumnDef<SchemaRow>[] {
-  const { onView } = opts;
+export function makeSchemaColumns(opts: {
+  onView: (id: number | string) => void;
+  onEdit?: (id: number | string) => void;
+  onDelete?: (row: SchemaRow) => void;
+}): ColumnDef<SchemaRow>[] {
+  const { onView, onEdit, onDelete } = opts;;
   return [
   { accessorKey: "name", header: "Имя" },
   { accessorKey: "version", header: "Версия" },
@@ -59,7 +63,15 @@ export function makeSchemaColumns(opts: { onView: (id: number | string) => void 
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => onView(s.id)}>Открыть</DropdownMenuItem>
-            {/* Удаление подключим позже, когда согласуем API */}
+            {onEdit && <DropdownMenuItem onClick={() => onEdit(s.id)}>Изменить</DropdownMenuItem>}
+            {onDelete && (
+              <DropdownMenuItem
+                onClick={() => onDelete(s)}
+                className="text-red-600 focus:text-red-700"
+              >
+                Удалить
+              </DropdownMenuItem>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
       );

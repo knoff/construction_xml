@@ -3,6 +3,7 @@
 import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { cn } from "@/lib/utils";
+import { X } from "lucide-react";
 
 export const Dialog = DialogPrimitive.Root;
 export const DialogTrigger = DialogPrimitive.Trigger;
@@ -43,13 +44,16 @@ export const DialogContent = React.forwardRef<
       {/* Кнопка-крестик (закрыть диалог) */}
       <DialogPrimitive.Close
         className={cn(
-          "absolute right-3 top-3 h-8 w-8 rounded-xl text-zinc-500",
-          "hover:bg-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-         )}
+          "group absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center",
+          "rounded-lg text-zinc-500 transition",
+          "hover:bg-zinc-100 hover:text-zinc-700",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+        )}
         aria-label="Закрыть"
+        title="Закрыть"
       >
-        ×
-      </DialogPrimitive.Close>        
+        <X className="h-5 w-5 opacity-75 group-hover:opacity-100" aria-hidden="true" />
+      </DialogPrimitive.Close>       
       {children}
     </DialogPrimitive.Content>
   </DialogPortal>

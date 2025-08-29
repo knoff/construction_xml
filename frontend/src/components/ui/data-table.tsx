@@ -24,6 +24,7 @@ export function DataTable<TData, TValue>({
   initialSizing,
   initialPageSize = 10,
   pageSizeOptions = [10, 50, 100],
+  rightActions,
 }: {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -33,6 +34,7 @@ export function DataTable<TData, TValue>({
   initialSizing?: ColumnSizingState;
   initialPageSize?: number;
   pageSizeOptions?: number[];
+  rightActions?: ReactNode; // extra action buttons on the right
 }) {
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>(initialVisibility ?? {});
   const [columnSizing] = React.useState<ColumnSizingState>(initialSizing ?? {});
@@ -66,11 +68,12 @@ export function DataTable<TData, TValue>({
     <div className={cn("space-y-3", className)}>
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold">Список</h2>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <button className="h-9 rounded-2xl border px-3 text-sm hover:bg-zinc-50">{columnsTitle}</button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="max-h-80 overflow-auto">
+        <div className="flex items-center gap-2">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="h-9 rounded-2xl border px-3 text-sm hover:bg-zinc-50">{columnsTitle}</button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="max-h-80 overflow-auto">
             {leaf.filter(c => c.getCanHide()).map((c) => (
               <DropdownMenuItem key={c.id} onSelect={(e) => e.preventDefault()}>
                 <label className="flex items-center gap-2">
@@ -83,8 +86,10 @@ export function DataTable<TData, TValue>({
                 </label>
               </DropdownMenuItem>
             ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          {rightActions}
+        </div>
       </div>
 
       <div className="rounded-2xl border">
