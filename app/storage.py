@@ -40,3 +40,11 @@ def presigned_url(key: str, expires: int = 3600) -> Optional[str]:
         )
     except Exception:
         return None
+
+def load_file_minio(key: str) -> Optional[bytes]:
+    """Load object bytes from MinIO (returns None on any failure)."""
+    try:
+        resp = _s3.get_object(Bucket=S3_BUCKET, Key=key)
+        return resp["Body"].read()
+    except Exception:
+        return None

@@ -7,7 +7,8 @@ from sqlalchemy.orm import Session
 from app.db import get_db
 from app.models_sqlalchemy import Schema, SchemaType
 from app.services import schema_parser, schema_classifier
-from app.storage import save_file_minio, delete_file_minio
+from app.storage import save_file_minio, delete_file_minio, load_file_minio
+from app.services import xsd_internal
 
 
 router = APIRouter(prefix="/schemas", tags=["schemas"])
@@ -90,6 +91,24 @@ def view_schema(schema_id: int, db: Session = Depends(get_db)) -> Dict[str, Any]
     if not schema:
         raise HTTPException(status_code=404, detail="Схема не найдена")
     return _row_to_dict(schema)
+
+@router.get("/{schema_id}/internal-model")
+def schema_internal_model(schema_id: int, db: Session = Depends(get_db)) -> Dict[str, Any]:
+    """Build internal model for a schema on-the-fly (no DB persistence)."""
+    s = db.get(Schema, schema_id)
+    if not s:
+        raise HTTPException(status_code=404, detail="Схема не найдена")
+    if not s.file_path:
+        raise HTTPException(status_code=400, detail="У схемы отсутствует файл")
+    content = load_file_minio(s.file_path)
+    if not content:
+        raise HTTPException(status_code=500, detail="Не удалось прочитать XSD из хранилища")
+    model = xsd_internal.build_internal_model(content)
+    # include a small header with schema meta
+    return {
+        "schema": _row_to_dict(s),
+        "model": model,
+    }
 
 class SchemaUpdate(BaseModel):
     name: Optional[str] = None
