@@ -6,6 +6,8 @@ import App from './App'
 import SchemasList from './pages/SchemasList'
 import SchemaUpload from './pages/SchemaUpload'
 import SchemaView from './pages/SchemaView'
+import ObjectsList from './pages/ObjectsList'
+import DocumentsList from './pages/DocumentsList'
 
 const router = createBrowserRouter([
   {
@@ -15,7 +17,8 @@ const router = createBrowserRouter([
       { index: true, element: <SchemasList /> },
       { path: 'schemas', element: <SchemasList /> },
       { path: 'schemas/upload', element: <SchemaUpload /> },
-      { path: 'schemas/:id', element: <SchemaView /> }
+      { path: 'objects', element: <ObjectsList /> },
+      { path: 'documents', element: <DocumentsList /> },
     ]
   }
 ], { basename: import.meta.env.DEV ? '/' : '/ui' })

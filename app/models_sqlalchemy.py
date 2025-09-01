@@ -2,8 +2,9 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Optional
 
-from sqlalchemy import String, Integer, JSON, DateTime, ForeignKey, UniqueConstraint
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import String, Integer, JSON, DateTime, ForeignKey, UniqueConstraint, cast
+from sqlalchemy.dialects.postgresql import JSONB
+from sqlalchemy.orm import Mapped, mapped_column, relationship, foreign
 
 from app.db import Base
 
@@ -31,7 +32,39 @@ class DocumentRow(Base):
     schema_version: Mapped[Optional[str]] = mapped_column(String(32), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    # A2-0 additions (нужны для CRUD и связки):
+    object_id: Mapped[Optional[int]] = mapped_column(ForeignKey("objects.id"), nullable=True)
+    status: Mapped[str] = mapped_column(String(16), default="draft")
 
+    # ORM-отношения (оба view-only, чтобы не менять существующие FK/типы):
+    # 1) к ObjectRow — обычная FK-связь по object_id
+    object_rel = relationship("ObjectRow", lazy="joined", foreign_keys=[object_id], viewonly=True)
+    # 2) к Schema — schema_id хранится как String, а schemas.id — Integer,
+    #    поэтому кастуем id схемы к String на лету. Никаких строковых выражений,
+    #    только реальный Python-экспрешн в lambda (отложенная инициализация).
+    schema_rel = relationship(
+        "Schema",
+        # our side (documents.schema_id) is the FK-like column (stored as String),
+        # so we mark it explicitly with foreign(), and cast Schema.id -> String
+        primaryjoin=lambda: foreign(DocumentRow.schema_id) == cast(Schema.id, String),
+        viewonly=True,
+        lazy="joined",
+        uselist=False,   # many-to-one
+    )
+
+class ObjectRow(Base):
+    __tablename__ = "objects"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    obj_uid: Mapped[str] = mapped_column(String(64), unique=True, index=True)
+    name: Mapped[str] = mapped_column(String)  # user-facing name
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+
+class DocumentVersionRow(Base):
+    __tablename__ = "document_versions"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    document_id: Mapped[int] = mapped_column(ForeignKey("documents.id"), nullable=False)
+    payload: Mapped[dict] = mapped_column(JSONB)  # JSONB for GIN/jsonb_path_ops
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
 
 class FileRow(Base):
     __tablename__ = "files"

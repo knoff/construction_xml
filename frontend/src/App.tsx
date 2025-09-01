@@ -8,7 +8,8 @@ export default function App() {
           <Link to="/" className="font-semibold">XSD Registry</Link>
           <nav className="flex gap-4">
             <NavLink to="/schemas" className={({isActive}) => isActive ? 'underline' : ''}>Схемы</NavLink>
-            <NavLink to="/schemas/upload" className={({isActive}) => isActive ? 'underline' : ''}>Загрузка</NavLink>
+            <NavLink to="/objects" className={({isActive}) => isActive ? 'underline' : ''}>Объекты</NavLink>
+            <NavLink to="/documents" className={({isActive}) => isActive ? 'underline' : ''}>Документы</NavLink>
           </nav>
         </div>
       </header>
