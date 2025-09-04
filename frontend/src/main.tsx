@@ -8,6 +8,7 @@ import SchemaUpload from './pages/SchemaUpload'
 import SchemaView from './pages/SchemaView'
 import ObjectsList from './pages/ObjectsList'
 import DocumentsList from './pages/DocumentsList'
+import DocumentFill from './pages/DocumentFill'
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
       { path: 'schemas/upload', element: <SchemaUpload /> },
       { path: 'objects', element: <ObjectsList /> },
       { path: 'documents', element: <DocumentsList /> },
+      { path: 'documents/:id/fill', element: <DocumentFill /> },
     ]
   }
 ], { basename: import.meta.env.DEV ? '/' : '/ui' })

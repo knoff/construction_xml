@@ -6,7 +6,7 @@ from pathlib import Path
 from app.api.routes.health import router as health_router
 from app.api.routes.schemas import router as schemas_router
 from app.api.routes.schema_types import router as schema_types_router
-from app.api.routes.documents import router as documents_router
+# from app.api.routes.documents import router as documents_router
 from app.api.routes.objects import router as objects_router
 from app.api.routes.documents_crud import router as documents_crud_router
 from app.api.routes.document_versions import router as doc_versions_router
@@ -19,7 +19,9 @@ app = FastAPI(title="Минстрой XML Service (MVP)")
 app.include_router(health_router,       tags=["system"],       prefix="/api")
 app.include_router(schemas_router,      tags=["schemas"],      prefix="/api")
 app.include_router(schema_types_router, tags=["schema-types"], prefix="/api")
-app.include_router(documents_router,    tags=["documents"],    prefix="/api")
+# NOTE: legacy in-memory documents router disabled to avoid path conflicts
+# from app.api.routes.documents import router as documents_router
+# app.include_router(documents_router,    tags=["documents"],    prefix="/api")
 app.include_router(objects_router,      tags=["objects"],      prefix="/api")
 app.include_router(documents_crud_router, tags=["documents"],  prefix="/api")
 app.include_router(doc_versions_router, tags=["documents"],    prefix="/api")

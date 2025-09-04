@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy.orm import Session, joinedload
 from app.db import get_db
-from app.models_sqlalchemy import DocumentRow, ObjectRow, Schema
+from app.models_sqlalchemy import DocumentRow, ObjectRow, Schema, DocumentVersionRow
 
 router = APIRouter(prefix="/documents", tags=["documents"])
 
@@ -21,6 +21,10 @@ class DocumentOut(BaseModel):
     schema: dict | None
     created_at: datetime | None = None
     updated_at: datetime | None = None
+
+class DocumentWithLatestOut(DocumentOut):
+    latest_version_id: int | None = None
+    payload: dict | None = None
 
 def _pack(doc: DocumentRow, obj: ObjectRow | None, sch: Schema | None) -> DocumentOut:
     return DocumentOut(
@@ -62,13 +66,21 @@ def create_document(body: CreateDocumentIn, db: Session = Depends(get_db)):
     db.add(d); db.commit(); db.refresh(d)
     return _pack(d, obj, sch)
 
-@router.get("/{doc_id}", response_model=DocumentOut)
+@router.get("/{doc_id}", response_model=DocumentWithLatestOut)
 def get_document(doc_id: int, db: Session = Depends(get_db)):
     d = db.get(DocumentRow, doc_id)
     if not d: raise HTTPException(404, "not found")
     obj = db.get(ObjectRow, d.object_id) if d.object_id else None
     sch = db.get(Schema, int(d.schema_id)) if d.schema_id else None
-    return _pack(d, obj, sch)
+    # latest version (id + payload)
+    v = (
+        db.query(DocumentVersionRow)
+          .filter(DocumentVersionRow.document_id == d.id)
+          .order_by(DocumentVersionRow.id.desc())
+          .first()
+    )
+    base = _pack(d, obj, sch).dict()
+    return DocumentWithLatestOut(**base, latest_version_id=(v.id if v else None), payload=(v.payload if v else None))
 
 class PatchDocumentIn(BaseModel):
     status: str | None = None

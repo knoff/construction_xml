@@ -10,6 +10,9 @@ router = APIRouter(prefix="/documents", tags=["documents"])
 class SaveDraftIn(BaseModel):
     payload: dict
 
+class VersionIn(BaseModel):
+     payload: dict
+
 class VersionOut(BaseModel):
     id: int
     document_id: int
@@ -41,6 +44,56 @@ def list_versions(document_id: int, db: Session = Depends(get_db)):
         .all()
     )
     return [VersionOut(id=r.id, document_id=r.document_id, payload=r.payload, created_at=r.created_at) for r in rows]
+
+# get one version by id (primary key)
+@router.get("/{document_id}/version/{version_id}", response_model=VersionOut)
+@router.get("/{document_id}/versions/{version_id}", response_model=VersionOut)
+def get_version(document_id: int, version_id: int, db: Session = Depends(get_db)):
+    doc = db.get(DocumentRow, document_id)
+    if not doc:
+        raise HTTPException(404, "Документ не найден")
+    v = db.get(DocumentVersionRow, version_id)
+    if not v or v.document_id != document_id:
+        raise HTTPException(404, "Версия не найдена")
+    return VersionOut(id=v.id, document_id=v.document_id, payload=v.payload, created_at=v.created_at)
+
+# latest version helper
+@router.get("/{document_id}/versions/latest", response_model=VersionOut)
+def latest_version(document_id: int, db: Session = Depends(get_db)):
+    doc = db.get(DocumentRow, document_id)
+    if not doc:
+        raise HTTPException(404, "Документ не найден")
+    v = (
+        db.query(DocumentVersionRow)
+          .filter(DocumentVersionRow.document_id == document_id)
+          .order_by(DocumentVersionRow.id.desc())
+          .first()
+    )
+    if not v:
+        raise HTTPException(404, "Версии отсутствуют")
+    return VersionOut(id=v.id, document_id=v.document_id, payload=v.payload, created_at=v.created_at)
+
+@router.put("/{document_id}/versions/latest", response_model=VersionOut)
+def upsert_latest_version(document_id: int, body: VersionIn, db: Session = Depends(get_db)):
+    """
+    Create first version if none exists; otherwise update payload of the latest version.
+    """
+    doc = db.get(DocumentRow, document_id)
+    if not doc:
+        raise HTTPException(404, "Документ не найден")
+    v = (db.query(DocumentVersionRow)
+           .filter(DocumentVersionRow.document_id == document_id)
+           .order_by(DocumentVersionRow.id.desc())
+           .first())
+    if not v:
+        v = DocumentVersionRow(document_id=document_id, payload=body.payload, created_at=datetime.utcnow())
+        db.add(v)
+        db.commit(); db.refresh(v)
+        return VersionOut(id=v.id, document_id=v.document_id, payload=v.payload, created_at=v.created_at)
+    # overwrite latest
+    v.payload = body.payload
+    db.commit(); db.refresh(v)
+    return VersionOut(id=v.id, document_id=v.document_id, payload=v.payload, created_at=v.created_at)
 
 class PatchStatusIn(BaseModel):
     status: str

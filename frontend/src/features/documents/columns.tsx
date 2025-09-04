@@ -16,9 +16,10 @@ export function makeDocumentColumns(opts: {
   onView: (id: number | string) => void;
   onEdit: (id: number | string) => void;  // смена статуса — мелкое редактирование
   onDelete: (row: DocumentRow) => void;
+  onFill: (id: number | string) => void;
   onVersions: (id: number | string) => void;
 }): ColumnDef<DocumentRow>[] {
-  const { onView, onEdit, onDelete, onVersions } = opts;
+  const { onView, onEdit, onDelete, onVersions, onFill } = opts;
   return [
     { id: "object_name", header: "Объект", cell: ({ row }) => row.original.object?.name ?? "" },
     { id: "schema_name", header: "Схема", cell: ({ row }) => row.original.schema?.name ?? "" },
@@ -48,6 +49,7 @@ export function makeDocumentColumns(opts: {
               <DropdownMenuItem onClick={() => navigator.clipboard.writeText(String(d.id))}>Скопировать ID</DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={() => onView(d.id)}>Открыть</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => onFill(d.id)}>Заполнить</DropdownMenuItem>
               <DropdownMenuItem onClick={() => onVersions(d.id)}>Версии</DropdownMenuItem>
               <DropdownMenuItem onClick={() => onEdit(d.id)}>Изменить</DropdownMenuItem>
               <DropdownMenuItem onClick={() => onDelete(d)} className="text-red-600 focus:text-red-700">Удалить</DropdownMenuItem>

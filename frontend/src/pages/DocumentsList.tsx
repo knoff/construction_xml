@@ -68,6 +68,7 @@ export default function DocumentsList() {
       await loadVersions(id);
       setVersionsOpen(true);
     },
+    onFill: (id) => { window.location.assign(`/ui/documents/${id}/fill`); },
   }), []);
 
   if (err) return <div className="p-6 text-red-700">Ошибка: {err}</div>;

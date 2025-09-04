@@ -5,6 +5,8 @@ from lxml import etree
 
 XS = "http://www.w3.org/2001/XMLSchema"
 NS = {"xs": XS}
+_TYPES_REGISTRY: Dict[str, Dict[str, Any]] = {}
+_ROOT_NODE: Optional[etree._Element] = None  # to resolve global xs:group by @ref
 
 # ---- Internal model data-classes (serialized to JSON) -----------------------
 
@@ -29,9 +31,10 @@ class FieldDoc:
 @dataclass
 class FieldModel:
     # common
-    kind: str                 # "element" | "attribute"
+    kind: str                 # "element" | "attribute" | "choice"
     name: str
     dtype: str                # xs:<builtin> | QName of named type | "object" for complex
+    refType: Optional[str] = None   # when element points to a named type (simple/complex)
     minOccurs: int = 1
     maxOccurs: Optional[int] = 1  # None => unbounded
     required: Optional[bool] = None  # for attributes (use="required")
@@ -39,11 +42,18 @@ class FieldModel:
     facets: Optional[Facets] = None
     children: Optional[List["FieldModel"]] = None  # for complex/object
     attributes: Optional[List["FieldModel"]] = None
+    # для choice: варианты лежат в children, каждый вариант — это полноценный FieldModel (обычно element)
 
     def to_dict(self) -> Dict[str, Any]:
         d = asdict(self)
-        # compact None values
-        return {k: v for k, v in d.items() if v is not None}
+        # Keep maxOccurs even if None (unbounded); prune other Nones
+        out: Dict[str, Any] = {}
+        for k, v in d.items():
+            if k == "maxOccurs":
+                out[k] = v  # may be None → JSON null (means unbounded)
+            elif v is not None:
+                out[k] = v
+        return out
 
 @dataclass
 class SchemaModel:
@@ -142,13 +152,25 @@ def _parse_complex_type(ct: etree._Element) -> Dict[str, Any]:
     # Handle sequence/choice/all and attributes
     documentation = _first_doc(ct)
     children: List[FieldModel] = []
-    # Content model (sequence | choice | all)
-    for tag in ("sequence", "choice", "all"):
-        group = ct.find(f"./xs:{tag}", namespaces=NS)
-        if group is not None:
-            for el in group.findall("./xs:element", namespaces=NS):
-                children.append(_parse_element(el))
-            break
+    # Content model (sequence | choice | all | group), supports complexContent/extension
+    group = None
+    # unwrap complexContent/extension if present
+    cc = ct.find("./xs:complexContent", namespaces=NS)
+    if cc is not None:
+        ext = cc.find("./xs:extension", namespaces=NS)
+        if ext is not None:
+            # descend into its model group
+            for tag in ("sequence", "choice", "all", "group"):
+                group = ext.find(f"./xs:{tag}", namespaces=NS)
+                if group is not None:
+                    break
+    if group is None:
+        for tag in ("sequence", "choice", "all", "group"):
+            group = ct.find(f"./xs:{tag}", namespaces=NS)
+            if group is not None:
+                break
+    if group is not None:
+        children.extend(_parse_model_group(group))
     # attributes (xs:attribute)
     attrs: List[FieldModel] = []
     for a in ct.findall("./xs:attribute", namespaces=NS):
@@ -161,6 +183,67 @@ def _parse_complex_type(ct: etree._Element) -> Dict[str, Any]:
     if documentation:
         result["documentation"] = asdict(documentation)
     return result
+
+def _parse_model_group(group: etree._Element) -> List[FieldModel]:
+    """
+    Recursively parse xs:sequence|xs:choice|xs:all|xs:group, preserving nested choices.
+    For xs:group with @ref, resolve the global group and parse its content.
+    """
+    out: List[FieldModel] = []
+    if not isinstance(group.tag, str):
+        return []
+    tag_local = group.tag.split("}")[-1]
+
+    # Resolve xs:group @ref → inline referenced global group
+    if tag_local == "group":
+        ref = group.get("ref")
+        if ref and _ROOT_NODE is not None:
+            gmin, gmax = _occurs(group)  # multiplicity on the referencing <xs:group>
+            # strip prefix if any (ns:name -> name)
+            ref_name = ref.split(":")[-1]
+            gdef = _ROOT_NODE.find(f".//xs:group[@name='{ref_name}']", namespaces=NS)
+            if gdef is not None:
+                # group definition contains its own sequence/choice/all
+                for t in ("sequence","choice","all"):
+                    inner = gdef.find(f"./xs:{t}", namespaces=NS)
+                    if inner is not None:
+                        inner_fms = _parse_model_group(inner)
+                        # If the referenced group is a single CHOICE — apply occurrences from the referencing node
+                        if len(inner_fms) == 1 and inner_fms[0].kind == "choice":
+                            inner_fms[0].minOccurs = gmin
+                            inner_fms[0].maxOccurs = gmax  # None → unbounded; preserved by to_dict()
+                        out.extend(inner_fms)
+                        return out
+        # fallthrough: unknown group → ignore silently (safe default)
+        return out
+
+    if tag_local == "choice":
+        # preserve multiplicity of the CHOICE group itself
+        mi, ma = _occurs(group)   # ma == None for unbounded
+        alts = [ _parse_element(el) for el in group.findall("./xs:element", namespaces=NS) ]
+        out.append(FieldModel(
+            kind="choice",
+            name="__choice__",
+            dtype="object",
+            minOccurs=mi,
+            maxOccurs=ma,          # <-- IMPORTANT: don't normalize 1 → keep None for unbounded
+            documentation=_first_doc(group),
+            children=alts,
+        ))
+        return out
+
+    # sequence / all: iterate *children nodes*, may include comments/PIs -> guard
+    for node in list(group):
+        # lxml: for comments/PI node.tag is a cython function (etree.Comment / etree.PI)
+        if not isinstance(node.tag, str):
+            continue
+        ntag = node.tag.split("}")[-1]
+        if ntag == "element":
+            out.append(_parse_element(node))
+        elif ntag in ("sequence","choice","all","group"):
+            out.extend(_parse_model_group(node))
+        # other particles (any) are ignored for now
+    return out
 
 def _occurs(node: etree._Element) -> Tuple[int, Optional[int]]:
     mi = node.get("minOccurs")
@@ -235,6 +318,32 @@ def _parse_element(el: etree._Element) -> FieldModel:
         return fm
 
     # plain reference to named type (simple or complex)
+    if dtype and dtype in _TYPES_REGISTRY:
+        t = _TYPES_REGISTRY[dtype]
+        if t.get("kind") == "simpleType":
+            base = t.get("base") or "xs:string"
+            return FieldModel(
+                kind="element",
+                name=name,
+                dtype=base,
+                refType=dtype,
+                minOccurs=minOccurs,
+                maxOccurs=maxOccurs if maxOccurs != 1 else 1,
+                documentation=documentation,
+                facets=(Facets(**t["facets"]) if t.get("facets") else None),
+            )
+        else:
+            # complexType: keep a shallow node; renderer will resolve from types[dtype]
+            return FieldModel(
+                kind="element",
+                name=name,
+                dtype="object",
+                refType=dtype,
+                minOccurs=minOccurs,
+                maxOccurs=maxOccurs if maxOccurs != 1 else 1,
+                documentation=documentation,
+            )
+    # fallback — как было
     return FieldModel(
         kind="element",
         name=name,
@@ -251,6 +360,10 @@ def build_internal_model(content: bytes) -> Dict[str, Any]:
 
     # registry of named types
     types = _resolve_named_types(root)
+    global _TYPES_REGISTRY
+    _TYPES_REGISTRY = types
+    global _ROOT_NODE
+    _ROOT_NODE = root
 
     # root elements (top-level xs:element)
     roots: List[FieldModel] = []
