@@ -67,32 +67,8 @@ export default function DocumentFill() {
     }
   }, [model, stateCtl.state]);
 
-  // сохранить в последнюю версию
-  async function saveLatest() {
-    if (!id) return;
-    if (Object.keys(errors).length > 0) {
-      const total = Object.values(errors).reduce((n,a)=>n+a.length,0);
-      alert(`Внимание: обнаружены ошибки (${total}). Сохранение будет выполнено.`);
-    }
-    setSaving(true);
-    try {
-      const r = await fetch(`/api/documents/${id}/versions/latest`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ payload: stateCtl.state }),
-      });
-      if (!r.ok) throw new Error(await r.text());
-      alert("Сохранено");
-      await loadAll(String(id)); // подтянуть актуальный latest
-    } catch (e: any) {
-      alert(String(e?.message ?? e));
-    } finally {
-      setSaving(false);
-    }
-  }
-
-  // создать новую версию
-  async function saveAsNewVersion() {
+  // single Save: always create a new version (retention trims old unprotected)
+  async function saveNewVersion() {
     if (!id) return;
     if (Object.keys(errors).length > 0) {
       const total = Object.values(errors).reduce((n,a)=>n+a.length,0);
@@ -106,7 +82,7 @@ export default function DocumentFill() {
         body: JSON.stringify({ payload: stateCtl.state }),
       });
       if (!r.ok) throw new Error(await r.text());
-      alert("Сохранено как новая версия");
+      alert("Сохранено");
       await loadAll(String(id));
     } catch (e: any) {
       alert(String(e?.message ?? e));
@@ -125,19 +101,9 @@ export default function DocumentFill() {
           Заполнение: {doc?.schema?.name} — объект «{doc?.object?.name ?? "—"}»
         </h2>
         <div className="flex gap-2">
-          <button
-            className="h-9 rounded-[var(--radius)] border px-3 text-sm"
-            onClick={saveLatest}
-            disabled={saving}
-          >
+          <button className="h-9 rounded-[var(--radius)] border px-3 text-sm"
+                  onClick={saveNewVersion} disabled={saving}>
             Сохранить
-          </button>
-          <button
-            className="h-9 rounded-[var(--radius)] border px-3 text-sm"
-            onClick={saveAsNewVersion}
-            disabled={saving}
-          >
-            Сохранить как новую версию
           </button>
           <a
             className="h-9 rounded-[var(--radius)] border px-3 text-sm inline-flex items-center"

@@ -72,13 +72,17 @@ def get_document(doc_id: int, db: Session = Depends(get_db)):
     if not d: raise HTTPException(404, "not found")
     obj = db.get(ObjectRow, d.object_id) if d.object_id else None
     sch = db.get(Schema, int(d.schema_id)) if d.schema_id else None
-    # latest version (id + payload)
-    v = (
-        db.query(DocumentVersionRow)
-          .filter(DocumentVersionRow.document_id == d.id)
-          .order_by(DocumentVersionRow.id.desc())
-          .first()
-    )
+    
+    # chosen (is_selected) or latest
+    v = (db.query(DocumentVersionRow)
+           .filter(DocumentVersionRow.document_id == d.id, DocumentVersionRow.is_selected == True)
+           .order_by(DocumentVersionRow.id.desc())
+           .first())
+    if not v:
+        v = (db.query(DocumentVersionRow)
+               .filter(DocumentVersionRow.document_id == d.id)
+               .order_by(DocumentVersionRow.id.desc())
+               .first())
     base = _pack(d, obj, sch).dict()
     return DocumentWithLatestOut(**base, latest_version_id=(v.id if v else None), payload=(v.payload if v else None))
 

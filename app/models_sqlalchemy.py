@@ -2,7 +2,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Optional
 
-from sqlalchemy import String, Integer, JSON, DateTime, ForeignKey, UniqueConstraint, cast
+from sqlalchemy import String, Integer, JSON, DateTime, ForeignKey, UniqueConstraint, cast, Boolean, Index
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship, foreign
 
@@ -59,12 +59,27 @@ class ObjectRow(Base):
     name: Mapped[str] = mapped_column(String)  # user-facing name
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
 
+
 class DocumentVersionRow(Base):
     __tablename__ = "document_versions"
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     document_id: Mapped[int] = mapped_column(ForeignKey("documents.id"), nullable=False)
     payload: Mapped[dict] = mapped_column(JSONB)  # JSONB for GIN/jsonb_path_ops
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    # new:
+    status: Mapped[str] = mapped_column(String(16), default="draft")  # 'draft' | 'clean' | 'final'
+    errors: Mapped[dict | None] = mapped_column(JSON, nullable=True)  # {items:[...]} or None
+    errors_count: Mapped[int] = mapped_column(Integer, default=0)
+    is_protected: Mapped[bool] = mapped_column(Boolean, default=False)  # manual “freeze”; final is implicitly protected
+    is_selected: Mapped[bool] = mapped_column(Boolean, default=False)  # chosen for editing/view
+
+# one selected version per document (partial unique index)
+Index(
+    "uq_document_versions_selected_once",
+    DocumentVersionRow.document_id,
+    unique=True,
+    postgresql_where=(DocumentVersionRow.is_selected == True),
+)
 
 class FileRow(Base):
     __tablename__ = "files"
