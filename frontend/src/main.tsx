@@ -4,8 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import App from './App'
 import SchemasList from './pages/SchemasList'
-import SchemaUpload from './pages/SchemaUpload'
-import SchemaView from './pages/SchemaView'
+import FilesList from './pages/FilesList'
 import ObjectsList from './pages/ObjectsList'
 import DocumentsList from './pages/DocumentsList'
 import DocumentFill from './pages/DocumentFill'
@@ -17,7 +16,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <SchemasList /> },
       { path: 'schemas', element: <SchemasList /> },
-      { path: 'schemas/upload', element: <SchemaUpload /> },
+      { path: 'files', element: <FilesList /> },
       { path: 'objects', element: <ObjectsList /> },
       { path: 'documents', element: <DocumentsList /> },
       { path: 'documents/:id/fill', element: <DocumentFill /> },

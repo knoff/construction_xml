@@ -3,6 +3,7 @@ import uuid
 from typing import Optional
 import boto3
 from botocore.client import Config
+from urllib.parse import quote as urlquote
 
 S3_ENDPOINT = os.getenv("S3_ENDPOINT", "http://minio:9000")
 S3_BUCKET = os.getenv("S3_BUCKET", "xmlsvc")
@@ -18,10 +19,34 @@ _s3 = boto3.client(
     region_name="us-east-1",
 )
 
-def save_file_minio(prefix: str, filename: str, content: bytes) -> str:
-    # ключ вида: schemas/<uuid>_<имя>
-    key = f"{prefix}/{uuid.uuid4().hex}_{filename}"
-    _s3.put_object(Bucket=S3_BUCKET, Key=key, Body=content)
+def _safe_ext(filename: str, fallback: str = "bin") -> str:
+    ext = (filename.rsplit(".", 1)[-1].lower() if "." in filename else "").strip()
+    return (ext or fallback)[:8]
+
+def save_file_minio(prefix: str, filename: str, content: bytes, content_type: Optional[str]=None) -> str:
+    """
+    Сохраняем с гарантированно коротким ключом: <prefix>/<uuid>.<ext>
+    Игнорируем длинные/опасные имена: берём только расширение (до 8 символов).
+    """
+    ext = _safe_ext(filename)
+    key = f"{prefix}/{uuid.uuid4().hex}.{ext}"
+    kwargs = {"Bucket": S3_BUCKET, "Key": key, "Body": content}
+    if content_type:
+        kwargs["ContentType"] = content_type
+    _s3.put_object(**kwargs)
+    return key
+
+def save_file_minio_key(key: str, content: bytes, content_type: Optional[str]=None) -> str:
+    """
+    Сохраняем строго по переданному короткому ключу (когда он уже вычислен, напр. по SHA256).
+    """
+    # минимальная защита от чрезмерной длины:
+    if len(key) > 255:
+        raise ValueError(f"KeyTooLongError: {len(key)} > 255")
+    kwargs = {"Bucket": S3_BUCKET, "Key": key, "Body": content}
+    if content_type:
+        kwargs["ContentType"] = content_type
+    _s3.put_object(**kwargs)
     return key
 
 def delete_file_minio(key: str) -> None:

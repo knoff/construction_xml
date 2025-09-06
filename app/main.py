@@ -14,6 +14,8 @@ from app.api.routes.files import router as files_router
 from app.api.routes.rules import router as rules_router
 from app.api.routes.sign import router as sign_router
 
+from app.api.routes import files as files_routes
+
 app = FastAPI(title="Минстрой XML Service (MVP)")
 
 app.include_router(health_router,       tags=["system"],       prefix="/api")

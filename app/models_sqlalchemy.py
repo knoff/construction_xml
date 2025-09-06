@@ -7,6 +7,9 @@ from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship, foreign
 
 from app.db import Base
+from zlib import crc32  # для подсказки в util-слое (не в модели)
+
+
 
 class SchemaType(Base):
     __tablename__ = "schema_types"
@@ -58,6 +61,8 @@ class ObjectRow(Base):
     obj_uid: Mapped[str] = mapped_column(String(64), unique=True, index=True)
     name: Mapped[str] = mapped_column(String)  # user-facing name
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    # «один объект → много файлов»
+    files: Mapped[list["FileRow"]] = relationship("FileRow", lazy="selectin", primaryjoin="FileRow.object_id==ObjectRow.id")
 
 
 class DocumentVersionRow(Base):
@@ -81,16 +86,40 @@ Index(
     postgresql_where=(DocumentVersionRow.is_selected == True),
 )
 
+# --- Files domain ---
+
 class FileRow(Base):
     __tablename__ = "files"
-
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    filename: Mapped[str] = mapped_column(String(255))
-    sha256: Mapped[str] = mapped_column(String(64), index=True)
-    size: Mapped[int] = mapped_column(Integer)
+    # связь: один Object → много File
+    object_id: Mapped[Optional[int]] = mapped_column(ForeignKey("objects.id"), index=True, nullable=True)
+    # хранилище
+    storage_path: Mapped[str] = mapped_column(String(512), unique=True, index=True)  # ключ в MinIO
     mime: Mapped[Optional[str]] = mapped_column(String(128), nullable=True)
+    size: Mapped[int] = mapped_column(Integer)
+    sha256: Mapped[str] = mapped_column(String(64), index=True)
+    crc32: Mapped[str] = mapped_column(String(8), index=True)  # HEX, напр. "8C736521"
+    # идентификация и реквизиты документа
+    original_name: Mapped[str] = mapped_column(String(255))    # имя файла при загрузке (раньше filename)
+    title: Mapped[Optional[str]] = mapped_column(String(512), nullable=True)   # название на титуле
+    doc_number: Mapped[Optional[str]] = mapped_column(String(128), nullable=True)
+    doc_date: Mapped[Optional[str]] = mapped_column(String(32), nullable=True) # ISO YYYY-MM-DD
+    author: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
+    doc_type: Mapped[Optional[str]] = mapped_column(String(128), nullable=True) # единый «логический» тип
+    # классификация
+    group: Mapped[Optional[str]] = mapped_column(String(8), nullable=True)     # "IRD" | "PD"
+    # прочее
     meta: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    is_deleted: Mapped[bool] = mapped_column(Boolean, default=False, index=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=datetime.utcnow)
+
+class FileSignatureRow(Base):
+    __tablename__ = "file_signatures"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    file_id: Mapped[int] = mapped_column(ForeignKey("files.id"), index=True)
+    sig_file_id: Mapped[int] = mapped_column(ForeignKey("files.id"), index=True)  # .sig — отдельный FileRow
+    algo: Mapped[Optional[str]] = mapped_column(String(64), nullable=True)        # GOST/PKCS7/…
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=datetime.utcnow)
 
 class RuleRow(Base):
     __tablename__ = "rules"
