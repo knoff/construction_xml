@@ -90,34 +90,85 @@ Index(
 
 class FileRow(Base):
     __tablename__ = "files"
+
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    # связь: один Object → много File
-    object_id: Mapped[Optional[int]] = mapped_column(ForeignKey("objects.id"), index=True, nullable=True)
-    # хранилище
-    storage_path: Mapped[str] = mapped_column(String(512), unique=True, index=True)  # ключ в MinIO
-    mime: Mapped[Optional[str]] = mapped_column(String(128), nullable=True)
-    size: Mapped[int] = mapped_column(Integer)
-    sha256: Mapped[str] = mapped_column(String(64), index=True)
-    crc32: Mapped[str] = mapped_column(String(8), index=True)  # HEX, напр. "8C736521"
-    # идентификация и реквизиты документа
-    original_name: Mapped[str] = mapped_column(String(255))    # имя файла при загрузке (раньше filename)
-    title: Mapped[Optional[str]] = mapped_column(String(512), nullable=True)   # название на титуле
+    # общие метаданные (добавлены 0008, остаются в files)
+    object_id: Mapped[Optional[int]] = mapped_column(ForeignKey("objects.id"), nullable=True)
+    title: Mapped[Optional[str]] = mapped_column(String(512), nullable=True)
     doc_number: Mapped[Optional[str]] = mapped_column(String(128), nullable=True)
-    doc_date: Mapped[Optional[str]] = mapped_column(String(32), nullable=True) # ISO YYYY-MM-DD
+    doc_date: Mapped[Optional[str]] = mapped_column(String(32), nullable=True)
     author: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
-    doc_type: Mapped[Optional[str]] = mapped_column(String(128), nullable=True) # единый «логический» тип
-    # классификация
-    group: Mapped[Optional[str]] = mapped_column(String(8), nullable=True)     # "IRD" | "PD"
-    # прочее
+    doc_type: Mapped[Optional[str]] = mapped_column(String(128), nullable=True)
+    group: Mapped[Optional[str]] = mapped_column(String(8), nullable=True)
     meta: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
-    is_deleted: Mapped[bool] = mapped_column(Boolean, default=False, index=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=datetime.utcnow)
+    is_deleted: Mapped[bool] = mapped_column(Boolean, default=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+
+    # связь с версиями (file_versions)
+    versions: Mapped[list["FileVersionRow"]] = relationship(
+        "FileVersionRow", back_populates="file", lazy="selectin"
+    )
+
+    # --- совместимость со старым кодом: проксируем к последней версии (read-only) ---
+    @property
+    def _latest_version(self) -> Optional["FileVersionRow"]:
+        if not self.versions:
+            return None
+        # сначала ищем среди неудалённых
+        alive = [v for v in self.versions if not getattr(v, "is_deleted", False)]
+        pool = alive if alive else list(self.versions)
+        return max(pool, key=lambda v: (v.created_at or datetime.min))
+
+    @property
+    def filename(self) -> Optional[str]:
+        v = self._latest_version
+        return v.original_name if v else None
+
+    @property
+    def sha256(self) -> Optional[str]:
+        v = self._latest_version
+        return v.sha256 if v else None
+
+    @property
+    def size(self) -> Optional[int]:
+        v = self._latest_version
+        return v.size if v else None
+
+    @property
+    def mime(self) -> Optional[str]:
+        v = self._latest_version
+        return v.mime if v else None
+
+    @property
+    def storage_path(self) -> Optional[str]:
+        v = self._latest_version
+        return v.storage_path if v else None
+
+    @property
+    def crc32(self) -> Optional[str]:
+        v = self._latest_version
+        return v.crc32 if v else None
+
+
+class FileVersionRow(Base):
+    __tablename__ = "file_versions"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    file_id: Mapped[int] = mapped_column(ForeignKey("files.id"), nullable=False)
+    storage_path: Mapped[Optional[str]] = mapped_column(String(512), nullable=True)
+    original_name: Mapped[str] = mapped_column(String(255))
+    sha256: Mapped[str] = mapped_column(String(64), index=True)
+    crc32: Mapped[Optional[str]] = mapped_column(String(8), nullable=True)
+    size: Mapped[int] = mapped_column(Integer)
+    mime: Mapped[Optional[str]] = mapped_column(String(128), nullable=True)
+    is_deleted: Mapped[bool] = mapped_column(Boolean, default=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    file: Mapped["FileRow"] = relationship("FileRow", back_populates="versions")
 
 class FileSignatureRow(Base):
     __tablename__ = "file_signatures"
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    file_id: Mapped[int] = mapped_column(ForeignKey("files.id"), index=True)
-    sig_file_id: Mapped[int] = mapped_column(ForeignKey("files.id"), index=True)  # .sig — отдельный FileRow
+    file_version_id: Mapped[int] = mapped_column(ForeignKey("file_versions.id"), index=True)
+    sig_file_id: Mapped[int] = mapped_column(ForeignKey("files.id"), index=True)
     algo: Mapped[Optional[str]] = mapped_column(String(64), nullable=True)        # GOST/PKCS7/…
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=datetime.utcnow)
 

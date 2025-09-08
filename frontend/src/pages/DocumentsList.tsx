@@ -429,7 +429,7 @@ export default function DocumentsList() {
             </div>
           </DialogBody>
           <DialogFooter>
-            <DialogClose asChild><button className="h-9 rounded-[var(--radius)] border px-3 text-sm">Закрыть</button></DialogClose>
+            <DialogClose asChild><button className="h-9 rounded-[var(--radius)] border px-3 text-sm text-white bg-black">Закрыть</button></DialogClose>
           </DialogFooter>
         </DialogContent>
       </Dialog>

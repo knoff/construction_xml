@@ -10,6 +10,7 @@ export default function App() {
             <NavLink to="/schemas" className={({isActive}) => isActive ? 'underline' : ''}>Схемы</NavLink>
             <NavLink to="/objects" className={({isActive}) => isActive ? 'underline' : ''}>Объекты</NavLink>
             <NavLink to="/documents" className={({isActive}) => isActive ? 'underline' : ''}>Документы</NavLink>
+            <NavLink to="/files" className={({isActive}) => isActive ? 'underline' : ''}>Файлы</NavLink>
           </nav>
         </div>
       </header>

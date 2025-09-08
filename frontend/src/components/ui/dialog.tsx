@@ -45,7 +45,7 @@ export const DialogContent = React.forwardRef<
       <DialogPrimitive.Close
         className={cn(
           "group absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center",
-          "rounded-lg text-zinc-500 transition",
+          "rounded-lg text-gray-50 transition",
           "hover:bg-zinc-100 hover:text-zinc-700",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
         )}
@@ -61,10 +61,10 @@ export const DialogContent = React.forwardRef<
 DialogContent.displayName = "DialogContent";
 
 export function DialogHeader(props: React.HTMLAttributes<HTMLDivElement>) {
-    return <div className={cn("border-b px-6 py-4", props.className)} {...props} />;
+    return <div className={cn("border-b px-6 py-4 bg-gray-600", props.className)} {...props} />;
 }
 export function DialogTitle(props: React.HTMLAttributes<HTMLHeadingElement>) {
-  return <h2 className={cn("text-lg font-semibold", props.className)} {...props} />;
+  return <h2 className={cn("text-lg font-semibold text-gray-50", props.className)} {...props} />;
 }
 export function DialogDescription(props: React.HTMLAttributes<HTMLParagraphElement>) {
   return <p className={cn("text-sm text-zinc-600", props.className)} {...props} />;

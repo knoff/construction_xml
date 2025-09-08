@@ -15,6 +15,7 @@ export type FileRow = {
   size: number;
   sha256: string;
   crc32: string;
+  versions_count?: number;
   created_at?: string | null;
 };
 
@@ -24,10 +25,16 @@ type Actions = {
   onUploadSig?: (row: FileRow)=>void;
   onOpenMeta?: (row: FileRow)=>void;
   onDelete?: (row: FileRow)=>void;
+  onOpenVersions?: (row: FileRow)=>void;
 };
 
 export function makeFileColumns(actions: Actions = {}) {
   const cols = [
+    {
+      accessorKey: "versions_count",
+      header: "Версий",
+      cell: ({ row }) => <span className="tabular-nums">{row.original.versions_count ?? 0}</span>
+    },
     { accessorKey: "original_name", header: "Имя файла" },
     { accessorKey: "title", header: "Название" },
     { accessorKey: "doc_number", header: "Номер" },
@@ -62,7 +69,9 @@ export function makeFileColumns(actions: Actions = {}) {
               <DropdownMenuLabel>Действия</DropdownMenuLabel>
               <DropdownMenuItem onClick={() => actions.onCopyId?.(f.id)}>Скопировать ID</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => actions.onOpenMeta?.(f)}>Редактировать метаданные</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => actions.onOpenVersions?.(f)}>Версии</DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => actions.onOpenMeta?.(f)}>Редактировать данные</DropdownMenuItem>
               <DropdownMenuItem onClick={() => actions.onDownload?.(f)} disabled>Скачать</DropdownMenuItem>
               <DropdownMenuItem onClick={() => actions.onUploadSig?.(f)} disabled>Загрузить .sig</DropdownMenuItem>
               <DropdownMenuSeparator />
@@ -95,8 +104,9 @@ export const initialFilesVisibility = {
 };
 
 export const initialFilesSizing = {
-  // сумма первых трёх + CRC32 = 850: 330 + 300 + 120 + 100
-  original_name: 330,
+  // сумма видимых = 850: 30 + 300 + 300 + 120 + 100
+  versions_count: 30,
+  original_name: 300,
   title: 300,
   doc_number: 120,
   crc32: 100,
