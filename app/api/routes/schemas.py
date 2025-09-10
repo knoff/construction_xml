@@ -4,14 +4,61 @@ from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, UploadFile, File, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
+from contextlib import asynccontextmanager
+import logging
 from app.db import get_db
 from app.models_sqlalchemy import Schema, SchemaType
 from app.services import schema_parser, schema_classifier
 from app.storage import save_file_minio, delete_file_minio, load_file_minio
 from app.services import xsd_internal
+from app.services.xsd_files import detect_file_hints, build_file_bindings
 
 
-router = APIRouter(prefix="/schemas", tags=["schemas"])
+logger = logging.getLogger(__name__)
+
+@asynccontextmanager
+async def _schemas_lifespan(app):
+    """
+    Тихий прогрев internal-model и file-hints для всех XSD-схем,
+    чтобы первые запросы не были пустыми/неполными.
+    """
+    # защита от повторного запуска в одном процессе
+    if getattr(app.state, "schemas_warmed", False):
+        yield
+        return
+    try:
+        # берём сессию БД так же, как это делает Depends(get_db)
+        db_gen = get_db()
+        db: Session = next(db_gen)  # type: ignore
+        try:
+            schemas = db.query(Schema).order_by(Schema.created_at.desc()).all()
+            for s in schemas or []:
+                try:
+                    if not s.file_path:
+                        continue
+                    content = load_file_minio(s.file_path)
+                    if not content:
+                        continue
+                    # строим internal-model строго тем же способом, как в /{schema_id}/internal-model
+                    model = xsd_internal.build_internal_model(content)
+                    # прогоняем детектор хинтов — сам результат не сохраняем
+                    _ = detect_file_hints({"model": model})
+                except Exception as e:
+                    logger.warning("Warmup failed for schema %s: %s", getattr(s, "id", None), e)
+        finally:
+            try:
+                # корректно закрываем сессию
+                db.close()
+            except Exception:
+                pass
+        app.state.schemas_warmed = True
+    except Exception as e:
+        logger.warning("Warmup skipped: %s", e)
+    finally:
+        # обязательно продолжаем запуск приложения
+        yield
+
+router = APIRouter(prefix="/schemas", tags=["schemas"], lifespan=_schemas_lifespan)
 MAX_UPLOAD_MB = int(os.getenv("MAX_UPLOAD_MB", "80"))
 
 def _row_to_dict(s: Schema) -> Dict[str, Any]:
@@ -29,7 +76,6 @@ def _row_to_dict(s: Schema) -> Dict[str, Any]:
             "title": s.type.title,
         } if getattr(s, "type", None) else None,
     }
-
 
 @router.get("/")
 def list_schemas(db: Session = Depends(get_db)) -> List[Dict[str, Any]]:
@@ -154,3 +200,44 @@ def delete_schema(schema_id: int, db: Session = Depends(get_db)) -> Dict[str, An
     db.commit()
 
     return {"deleted": True, "id": schema_id}
+
+@router.get("/{schema_id}/file-hints")
+def schema_file_hints(schema_id: int, db: Session = Depends(get_db)) -> Dict[str, Any]:
+    """
+    Возвращает эвристические подсказки по файловым полям для данной XSD-схемы.
+    Ничего не пишет в БД; использует тот же internal-model, что и /internal-model.
+    """
+    s = db.get(Schema, schema_id)
+    if not s:
+        raise HTTPException(status_code=404, detail="Схема не найдена")
+    if not s.file_path:
+        raise HTTPException(status_code=400, detail="У схемы отсутствует файл")
+    content = load_file_minio(s.file_path)
+    if not content:
+        raise HTTPException(status_code=500, detail="Не удалось прочитать XSD из хранилища")
+    model = xsd_internal.build_internal_model(content)
+    return{
+        "schema": _row_to_dict(s),
+        "hints": detect_file_hints(model)
+    }
+
+@router.get("/{schema_id}/file-bindings")
+def schema_file_bindings(schema_id: int, db: Session = Depends(get_db)) -> Dict[str, Any]:
+    """
+    Возвращает структуру назначений файловых полей XSD-схемы.
+    Ничего не пишет в БД; использует тот же internal-model, что и /internal-model.
+    """
+    s = db.get(Schema, schema_id)
+    if not s:
+        raise HTTPException(status_code=404, detail="Схема не найдена")
+    if not s.file_path:
+        raise HTTPException(status_code=400, detail="У схемы отсутствует файл")
+    content = load_file_minio(s.file_path)
+    if not content:
+        raise HTTPException(status_code=500, detail="Не удалось прочитать XSD из хранилища")
+    model = xsd_internal.build_internal_model(content)
+    hints = detect_file_hints(model)
+    return{
+        "schema": _row_to_dict(s),
+        "bindings": build_file_bindings(model, hints)
+    }
