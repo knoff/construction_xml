@@ -2,6 +2,11 @@ import * as React from "react";
 import type { FieldModel } from "./types";
 import { inputKind, coerceValue } from "./controls";
 
+import { FileBindingsProvider } from "@/features/forms/extensions/file-bindings/context";
+import { BindingHighlight } from "@/features/forms/extensions/file-bindings/BindingHighlight";
+import { ExtensionsMappingProvider } from "@/features/forms/extensions/core/context";
+import WithExtension from "@/features/forms/extensions/core/WithExtension";
+
 // ---------- form-state ----------
 
 export function useFormState<T extends object>(initial: T) {
@@ -129,14 +134,16 @@ function BlockFrame(props:{
       <div className="space-y-2">
         <div className="flex items-center justify-between">{Label}</div>
         {open && (
-          <div className={`rounded-xl border p-3 grid gap-3 ${hasError ? "border-red-500" : ""}`}>
-            {children}
-            {errsHere && errsHere.length > 0 && (
-              <ul className="mt-1 text-xs text-red-600 list-disc pl-5">
-                {errsHere.map((e,i)=><li key={i}>{e}</li>)}
-              </ul>
-            )}
-          </div>
+          <WithExtension schemaId={schemaId!} scope="group" path={k} state={state}>
+            <div className={`rounded-xl border p-3 grid gap-3 ${hasError ? "border-red-500" : ""}`}>
+              {children}
+              {errsHere && errsHere.length > 0 && (
+                <ul className="mt-1 text-xs text-red-600 list-disc pl-5">
+                  {errsHere.map((e,i)=><li key={i}>{e}</li>)}
+                </ul>
+              )}
+            </div>
+          </WithExtension>
         )}
       </div>
     );
@@ -147,14 +154,16 @@ function BlockFrame(props:{
     <div className="space-y-2">
       <div className="flex items-center justify-between">{Label}</div>
       {open && (
-        <div className={`rounded-2xl border-2 p-4 grid gap-3 bg-[rgba(0,0,0,0.02)] ${hasError ? "border-red-500" : ""}`}>
-          {children}
-          {errsHere && errsHere.length > 0 && (
-            <ul className="mt-1 text-xs text-red-600 list-disc pl-5">
-              {errsHere.map((e,i)=><li key={i}>{e}</li>)}
-            </ul>
-          )}
-        </div>
+        <WithExtension schemaId={schemaId!} scope="group" path={k} state={state}>
+          <div className={`rounded-2xl border-2 p-4 grid gap-3 bg-[rgba(0,0,0,0.02)] ${hasError ? "border-red-500" : ""}`}>
+            {children}
+            {errsHere && errsHere.length > 0 && (
+              <ul className="mt-1 text-xs text-red-600 list-disc pl-5">
+                {errsHere.map((e,i)=><li key={i}>{e}</li>)}
+              </ul>
+            )}
+          </div>
+        </WithExtension>
       )}
     </div>
   );
@@ -563,11 +572,12 @@ function FieldBlock(props: {
 
 // ---------- root ----------
 
-export function RenderRoot({ fields, types, stateCtl }: {
+export function RenderRoot({ fields, types, stateCtl, schemaId }: {
   fields: FieldModel[];
   types: Record<string, any>;
   stateCtl: ReturnType<typeof useFormState<any>>;
   errors?: Record<string, string[]>;
+  schemaId?: number;
 }) {
   const { state, setPath, delPath } = stateCtl;
   const { errors } = (arguments as any)[0] as { errors?: Record<string,string[]> };
@@ -578,14 +588,30 @@ export function RenderRoot({ fields, types, stateCtl }: {
   const get = React.useCallback((k:string) => collapseStore.current.get(k), []);
   const set = React.useCallback((k:string, v:boolean) => { collapseStore.current.set(k, v); }, []);
 
-  return (
+  const content = (
     <CollapseCtx.Provider value={{ get, set }}>
       <div className="space-y-4">
-        {fields.map((f) =>
-          <FieldBlock key={f.name} f={f} path={[f.name]} state={state} setPath={setPath} delPath={delPath}
-            types={types} visitedTypes={visited} errors={errors}/>
-        )}
+        {fields.map((f) => (
+          <FieldBlock
+            key={f.name}
+            f={f}
+            path={[f.name]}
+            state={state}
+            setPath={setPath}
+            delPath={delPath}
+            types={types}
+            visitedTypes={visited}
+            errors={errors}
+          />
+        ))}
       </div>
     </CollapseCtx.Provider>
   );
-}
+  //const wrapped = schemaId != null
+  //  ? <FileBindingsProvider schemaId={schemaId}>{content}</FileBindingsProvider>
+  //  : content;
+  // провайдер реестра/привязок
+  return schemaId != null
+    ? <ExtensionsMappingProvider schemaId={schemaId}>{content}</ExtensionsMappingProvider>
+    : content;
+ }

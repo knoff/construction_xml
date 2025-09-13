@@ -129,6 +129,7 @@ export default function DocumentFill() {
         fields={model.root}
         types={model.types}
         stateCtl={stateCtl}
+        schemaId={doc?.schema?.id}
         errors={errors}
       />
 
