@@ -14,6 +14,9 @@ export default function DocumentFill() {
   const stateCtl = useFormState<any>({});
   const [errors, setErrors] = React.useState<Record<string, string[]>>({});
 
+  const [uiOverrides, setUiOverrides] = React.useState<Record<string, any>>({});
+  const [uiDirty, setUiDirty] = React.useState<boolean>(false);
+
   /** Загрузить мету документа, при необходимости конкретную версию и схему */
   async function loadAll(docId: string, versionId?: number) {
     setErr(null);
@@ -48,8 +51,39 @@ export default function DocumentFill() {
     const j = await r2.json();
     // сервер может вернуть {model: {...}} или саму модель
     setModel(j?.model ?? j);
+    // ui_overrides могут прийти сразу в payload
+    const fromPayload = j?.schema?.ui_overrides;
+    if (fromPayload && typeof fromPayload === "object") {
+      setUiOverrides(fromPayload);
+      setUiDirty(false);
+    } else {
+      // на всякий случай подгрузим напрямую
+      const r3 = await fetch(`/api/schemas/${schemaId}/ui-overrides`);
+      if (r3.ok) {
+        const j3 = await r3.json();
+        setUiOverrides(j3?.ui_overrides ?? {});
+        setUiDirty(false);
+      }
+    }
   }
 
+  // ----- сохранение UI-переопределений схемы -----
+  async function saveUiOverrides() {
+    if (!doc?.schema?.id) return;
+    try {
+      const r = await fetch(`/api/schemas/${doc.schema.id}/ui-overrides`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ui_overrides: uiOverrides }),
+      });
+      if (!r.ok) throw new Error(await r.text());
+      await r.json();
+      setUiDirty(false);
+      alert("UI-переопределения сохранены");
+    } catch (e:any) {
+      alert(String(e?.message ?? e));
+    }
+  }
   // первичная загрузка
   React.useEffect(() => {
     if (id) loadAll(id).catch(e => setErr(String(e)));
@@ -105,6 +139,15 @@ export default function DocumentFill() {
                   onClick={saveNewVersion} disabled={saving}>
             Сохранить
           </button>
+          <button
+            type="button"
+            className={`h-8 rounded-xl border px-3 text-sm ${uiDirty ? "bg-black text-white" : "opacity-50"}`}
+            onClick={saveUiOverrides}
+            disabled={!uiDirty}
+            title="Сохранить UI-переопределения для этой схемы"
+          >
+            Сохранить UI-правки
+          </button>
           <a
             className="h-9 rounded-[var(--radius)] border px-3 text-sm inline-flex items-center"
             href="/ui/documents"
@@ -125,13 +168,20 @@ export default function DocumentFill() {
       )}
 
       {/* Форма по internal model */}
-      <RenderRoot
-        fields={model.root}
-        types={model.types}
-        stateCtl={stateCtl}
-        errors={errors}
-      />
-
+      <UiOverridesProvider
+         value={{
+           overrides: uiOverrides,
+           setOverrides: (next: Record<string, any>) => { setUiOverrides(next); setUiDirty(true); },
+           markDirty: () => setUiDirty(true),
+         }}
+       >
+        <RenderRoot
+          fields={model.root}
+          types={model.types}
+          stateCtl={stateCtl}
+          errors={errors}
+        />
+      </UiOverridesProvider>
       <div className="flex items-center justify-between pt-2">
         <div className="text-xs text-zinc-500">
           {Object.keys(errors).length > 0
@@ -143,4 +193,19 @@ export default function DocumentFill() {
       </div>
     </div>
   );
+}
+
+type UiOverridesCtxValue = {
+  overrides: Record<string, any>;
+  setOverrides: (next: Record<string, any>) => void;
+  markDirty: () => void;
+};
+const UiOverridesCtx = React.createContext<UiOverridesCtxValue | null>(null);
+export function UiOverridesProvider({ value, children }: { value: UiOverridesCtxValue; children: React.ReactNode }) {
+  return <UiOverridesCtx.Provider value={value}>{children}</UiOverridesCtx.Provider>;
+}
+export function useUiOverrides() {
+  const ctx = React.useContext(UiOverridesCtx);
+  if (!ctx) throw new Error("useUiOverrides must be used within UiOverridesProvider");
+  return ctx;
 }

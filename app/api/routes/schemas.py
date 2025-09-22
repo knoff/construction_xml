@@ -150,11 +150,35 @@ def schema_internal_model(schema_id: int, db: Session = Depends(get_db)) -> Dict
     if not content:
         raise HTTPException(status_code=500, detail="Не удалось прочитать XSD из хранилища")
     model = xsd_internal.build_internal_model(content)
-    # include a small header with schema meta
+    # include UI overrides вместе с метаданными схемы
     return {
-        "schema": _row_to_dict(s),
+        "schema": _row_to_dict(s) | {"ui_overrides": (s.ui_overrides or {})},
         "model": model,
     }
+
+class UiOverridesPayload(BaseModel):
+    ui_overrides: Dict[str, Any]
+
+@router.get("/{schema_id}/ui-overrides", response_model=Dict[str, Any])
+def get_ui_overrides(schema_id: int, db: Session = Depends(get_db)):
+    s = db.get(Schema, schema_id)
+    if not s:
+        raise HTTPException(status_code=404, detail="Схема не найдена")
+    return {"ui_overrides": s.ui_overrides or {}}
+
+@router.put("/{schema_id}/ui-overrides", response_model=Dict[str, Any])
+def put_ui_overrides(schema_id: int, payload: UiOverridesPayload, db: Session = Depends(get_db)):
+    s = db.get(Schema, schema_id)
+    if not s:
+        raise HTTPException(status_code=404, detail="Схема не найдена")
+    # простая валидация: словарь верхнего уровня
+    if not isinstance(payload.ui_overrides, dict):
+        raise HTTPException(status_code=400, detail="ui_overrides must be an object")
+    s.ui_overrides = payload.ui_overrides
+    db.add(s)
+    db.commit()
+    db.refresh(s)
+    return {"ok": True, "ui_overrides": s.ui_overrides or {}}
 
 class SchemaUpdate(BaseModel):
     name: Optional[str] = None

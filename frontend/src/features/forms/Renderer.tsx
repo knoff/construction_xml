@@ -2,6 +2,22 @@ import * as React from "react";
 import type { FieldModel } from "./types";
 import { inputKind, coerceValue } from "./controls";
 
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogClose } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
+
+import { useUiOverrides } from "@/pages/DocumentFill"; // общий стор переопределений
+
+import { firstAllowedComponentFor, UI_COMPONENTS, canUseComponent } from "@/features/forms/ui/registry";
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
+
 // ---------- form-state ----------
 
 export function useFormState<T extends object>(initial: T) {
@@ -46,6 +62,28 @@ function isRequiredField(f: { kind: string; minOccurs?: number; required?: boole
 function pathKey(path:(string|number)[]) {
   return path.map(p=>String(p)).join(".");
 }
+
+function getAtPath(obj: any, path: (string|number)[]) {
+  return path.reduce((acc, key) => (acc == null ? acc : acc[key]), obj);
+}
+
+function normalizePathKey(pk: string): string {
+  // "A.0.B.12.C" -> "A.*.B.*.C"
+  return pk
+    .split(".")
+    .map(seg => (/^\d+$/.test(seg) ? "*" : seg))
+    .join(".");
+}
+
+type UiOverride = { path: string; ui_id: string };
+
+type UiOverridesCtxT = {
+  items: UiOverride[];
+  getUiForPath: (rawPk: string) => string | undefined; // возвращает ui_id или undefined
+  setUiForPath: (rawPk: string, ui_id: string) => void;
+  clearUiForPath: (rawPk: string) => void;
+};
+
 // DEBUG: show min/max; if max undefined or null → ∞
 function minMaxText(f: FieldModel) {
   const min = f.minOccurs ?? 0;
@@ -82,6 +120,30 @@ const CollapseCtx = React.createContext<{
 function useCollapse() {
   return React.useContext(CollapseCtx);
 }
+
+// ---------- label-overrides (in-memory) ----------
+
+type LabelOverride = { path: string; original: string; value?: string }; // path должен быть УЖЕ нормализован
+type LabelOverridesCtxT = {
+  items: LabelOverride[];
+  getLabel: (pathKey: string) => string | undefined;     // принимает сырой pk, сам нормализует
+  hasOverride: (pathKey: string) => boolean;             // для подсветки бейджа
+  editLabel: (ov: LabelOverride) => void;                // path внутри ov — нормализован
+  removeLabel: (pathKey: string) => void;                // принимает сырой pk, сам нормализует
+  openEditor: (args: { pathKey: string; original: string; current?: string }) => void;
+};
+const LabelOverridesCtx = React.createContext<LabelOverridesCtxT>({
+  items: [],
+  getLabel: () => undefined,
+  hasOverride: () => false,
+  editLabel: () => {},
+  removeLabel: () => {},
+  openEditor: () => {},
+});
+function useLabelOverrides() {
+  return React.useContext(LabelOverridesCtx);
+}
+
 function BlockFrame(props:{
   f: FieldModel;
   isBlock: boolean;
@@ -100,6 +162,49 @@ function BlockFrame(props:{
   // DEBUG: type name only for blocks (refType → complexType)
   const debugType = props.f && (props as any).f.refType ? `[type: ${(props as any).f.refType}]` : null;
 
+  // Имя типа для бейджа: сначала refType (именованный complexType), иначе dtype/“object”
+  const typeName =
+    (f as any)?.refType
+      ? String((f as any).refType)
+      : (f as any)?.dtype
+        ? String((f as any).dtype)
+        : "object";
+
+  // Кликабельный бейдж: печатает в консоль информацию о блоке и его путь
+  const TypeBadge = isBlock ? (
+    <button
+      type="button"
+      className="rounded-full border px-2 py-0.5 text-[10px] leading-none opacity-70 hover:opacity-100"
+      title="Клик — вывести информацию о блоке в консоль"
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation(); // не сворачиваем блок при клике по бейджу
+        try {
+          console.groupCollapsed(`[BLOCK] ${typeName} @ ${k}`);
+          console.log({
+            pathArray: path,
+            path: k,
+            field: f,              // узел схемы (включая children/attributes, min/maxOccurs и т.д.)
+            isBlock,
+          });
+          console.groupEnd();
+        } catch {
+          console.info("[BLOCK]", { pathArray: path, path: k, field: f, isBlock });
+        }
+      }}
+      data-path={k}
+      data-type={typeName}
+    >
+      {typeName}
+    </button>
+  ) : null;
+
+  // override для label блока
+  const { getLabel, hasOverride, openEditor } = useLabelOverrides();
+  const overriddenBlockLabel = getLabel(k);
+  const blockOriginal = (f.documentation?.label ?? f.name);
+  const labelHighlighted = hasOverride(k);
+
   const Label = (
     <div className="flex items-center gap-2">
       <button
@@ -111,7 +216,7 @@ function BlockFrame(props:{
         {open ? "−" : "+"}
       </button>
       <label className="text-sm font-semibold">
-        {(f.documentation?.label ?? f.name)}{" "}
+        {(overriddenBlockLabel ?? blockOriginal)}{" "}
         {isBlock && (
           <span className="text-[10px] text-zinc-500 ml-1">
             {minMaxText(f)} {debugType ? ` ${debugType}` : ""}
@@ -119,6 +224,23 @@ function BlockFrame(props:{
         )}
         {isBlock && isRequiredField(f) ? " *" : ""}
       </label>
+      {/* Бейдж Label для блока */}
+      <button
+        type="button"
+        className={
+          "rounded-full border px-2 py-0.5 text-[10px] leading-none " +
+          (labelHighlighted ? "bg-amber-50 border-amber-300" : "opacity-70 hover:opacity-100")
+        }
+        title="Изменить подпись (Label) блока"
+        onClick={(e)=>{
+          e.preventDefault();
+          e.stopPropagation();
+          openEditor({ pathKey: k, original: blockOriginal, current: overriddenBlockLabel });
+        }}
+      >
+        Label
+      </button>
+      {TypeBadge}
       {headerExtra}
     </div>
   );
@@ -160,20 +282,116 @@ function BlockFrame(props:{
   );
 }
 
+function UiOverrideBadge({ f, path }: { f: FieldModel; path: (string|number)[] }) {
+  const ui = useUiOverrides();
+  const isBlock = false; // для поля — false; для блока — true
+  const pk = pathKey(path);
+  const npk = normalizePathKey(pk);
+
+  // список допустимых компонентов по реестру (фильтрация по типу/блоку)
+  const allowed = UI_COMPONENTS.filter(meta => canUseComponent(meta, { f, isBlock }));
+  const current = ui.overrides?.widgets?.[npk] as (string|undefined); // meta.id или undefined
+  const highlighted = !!current;
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+          type="button"
+          className={
+            "rounded-full border px-2 py-0.5 text-[10px] leading-none " +
+            (highlighted ? "bg-amber-50 border-amber-300" : "opacity-70 hover:opacity-100")
+          }
+          title="Переопределить UI-компонент"
+        >
+          UI
+        </button>
+      </DropdownMenuTrigger>
+
+      <DropdownMenuContent align="end" sideOffset={6}>
+        {allowed.length === 0 && (
+          <DropdownMenuItem disabled>Нет доступных компонентов</DropdownMenuItem>
+        )}
+        {allowed.map(meta => (
+          <DropdownMenuItem
+            key={meta.id}
+            onSelect={(e) => {
+              e.preventDefault(); // не закрывать из-за preventDefault? (Radix закроет сам; оставим на всякий)
+              const next = { ...(ui.overrides || {}) };
+              next.widgets = { ...(next.widgets || {}) };
+              next.widgets[npk] = meta.id;
+              ui.setOverrides(next);
+              ui.markDirty();
+            }}
+          >
+            <span className="flex-1">{meta.title}</span>
+            {current === meta.id ? <span className="text-zinc-500">✓</span> : null}
+          </DropdownMenuItem>
+        ))}
+        {allowed.length > 0 && <DropdownMenuSeparator/>}
+        <DropdownMenuItem
+          onSelect={(e) => {
+            e.preventDefault();
+            const next = { ...(ui.overrides || {}) };
+            if (next.widgets && next.widgets[npk]) {
+              next.widgets = { ...next.widgets };
+              delete next.widgets[npk];
+              ui.setOverrides(next);
+              ui.markDirty();
+            }
+          }}
+        >
+          Сбросить переопределение
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
 // ---------- small parts ----------
 
-function FieldLabel({ f }: { f: FieldModel }) {
-  const base = f.documentation?.label ?? f.name;
+function FieldLabel({ f, path }: { f: FieldModel; path: (string|number)[] }) {
+  const { getLabel, hasOverride, openEditor } = useLabelOverrides();
+  const pk = pathKey(path);
+  const original = f.documentation?.label ?? f.name;
+  const overridden = getLabel(pk);
+  const txt = overridden ?? original;
   const required = isRequiredField(f);
-  return <label className="text-sm font-medium">{base}{required ? " *" : ""}</label>;
+  const highlighted = hasOverride(pk);
+  return (
+    <div className="flex items-center gap-2">
+      <label className="text-sm font-medium">
+        {txt}{required ? " *" : ""}
+      </label>
+      <button
+        type="button"
+        className={
+          "rounded-full border px-2 py-0.5 text-[10px] leading-none " +
+          (highlighted ? "bg-amber-50 border-amber-300" : "opacity-70 hover:opacity-100")
+        }
+        title="Изменить подпись (Label)"
+        onClick={(e)=>{
+          e.preventDefault();
+          e.stopPropagation();
+          openEditor({ pathKey: pk, original, current: overridden });
+        }}
+      >
+        Label
+      </button>
+      <UiOverrideBadge f={f} path={path}/>
+    </div>
+  );
 }
 function Help({ f }: { f: FieldModel }) {
   const h = f.documentation?.help;
   return h ? <div className="text-xs text-zinc-500 mt-1">{h}</div> : null;
 }
-function SimpleInput({ f, value, onChange }: {
-  f: FieldModel; value: any; onChange: (v:any)=>void;
+function SimpleInput({ f, value, onChange, path }: {
+  f: FieldModel; value: any; onChange: (v:any)=>void; path: (string|number)[];
 }) {
+  const ui = useUiOverrides();
+  const manualUi = ui.overrides?.widgets?.[normalizePathKey(pathKey(path))] as (string|undefined);
+  const manualMeta = manualUi ? UI_COMPONENTS.find(x => x.id === manualUi) ?? null : null;
   const kind = inputKind(f.dtype, f.facets);
   if (kind === "select") {
     const opts = f.facets?.enumOptions ?? (f.facets?.enum ?? []).map(v => ({ value: v }));
@@ -190,11 +408,41 @@ function SimpleInput({ f, value, onChange }: {
                   value={value ?? ""} onChange={e => onChange(coerceValue(f.dtype, e.target.value))} />;
   }
   if (kind === "date") {
+    const meta = manualMeta && canUseComponent(manualMeta, { f, isBlock: false })
+      ? manualMeta
+      : firstAllowedComponentFor(f, /* isBlock */ false);
+    if (meta) {
+      const Comp = meta.Render as React.FC<{
+        f: FieldModel;
+        path: (string|number)[];
+        value: unknown;
+        setValue: (v: unknown) => void;
+        clearValue?: () => void;
+      }>;
+      return (
+        <Comp f={f} path={path} value={value}
+          setValue={(v)=> onChange(v)} clearValue={()=> onChange(undefined)} />
+      );
+    }
+    // Fallback на нативный инпут, если подмены нет
     return <input type="date" className="h-9 rounded-[var(--radius)] border px-3 text-sm w-full"
                   value={value ?? ""} onChange={e => onChange(e.target.value)} />;
   }
-  return <input type="text" className="h-9 rounded-[var(--radius)] border px-3 text-sm w-full"
-                value={value ?? ""} onChange={e => onChange(e.target.value)} />;
+  // Проверяем ручное переопределение (например, textarea)
+  if (manualMeta && canUseComponent(manualMeta, { f, isBlock: false })) {
+    const Comp = manualMeta.Render as React.FC<{
+      f: FieldModel; path: (string|number)[]; value: unknown;
+      setValue: (v: unknown)=>void; clearValue?: ()=>void;
+    }>;
+    return (
+      <Comp f={f} path={path} value={value}
+        setValue={(v)=> onChange(v)} clearValue={()=> onChange(undefined)} />
+    );
+  }
+  return (
+    <input type="text" className="h-9 rounded-[var(--radius)] border px-3 text-sm w-full"
+      value={value ?? ""} onChange={e => onChange(e.target.value)} />
+  );
 }
 
 // ---------- main recursive block ----------
@@ -251,7 +499,7 @@ function FieldBlock(props: {
 
       return (
         <div className="space-y-2">
-          <FieldLabel f={{...f, documentation: f.documentation ?? {label: "Вариант"}} as any}/>
+          <FieldLabel f={{...f, documentation: f.documentation ?? {label: "Вариант"}} as any} path={path}/>
           <select className="h-9 rounded-[var(--radius)] border px-3 text-sm w-full"
                   value={selected ?? ""} onChange={(e)=>{
                     const next = e.target.value;
@@ -286,7 +534,7 @@ function FieldBlock(props: {
 
     return (
       <div className="space-y-2">
-        <FieldLabel f={{...f, documentation: f.documentation ?? {label: "Варианты"}} as any}/>
+        <FieldLabel f={{...f, documentation: f.documentation ?? {label: "Варианты"}} as any} path={path}/>
         <div className={`space-y-3 ${hasErrSub ? "border border-red-500 rounded-xl p-3" : ""}`}>
           {items.map((item, idx) => {
             const selected = ((): string | null => {
@@ -361,12 +609,12 @@ function FieldBlock(props: {
     }, [Array.isArray(rawAtPath)]);
     return (
       <div className={`space-y-2 ${hasErrSub ? "border border-red-500 rounded-xl p-3" : ""}`}>
-        <FieldLabel f={f}/>
+        <FieldLabel f={f} path={path}/>
         <div className="space-y-2">
           {items.map((val, idx) => (
             <div key={idx} className="flex items-center gap-2">
               <div className="flex-1">
-                <SimpleInput f={f} value={val} onChange={(v)=> setPath([...path, idx], v)} />
+                <SimpleInput f={f} value={val} onChange={(v)=> setPath([...path, idx], v)} path={path} />
               </div>
               <div className="flex items-center gap-2">
                 <button className="h-8 rounded-xl border px-3 text-sm"
@@ -413,8 +661,8 @@ function FieldBlock(props: {
     const val = path.reduce((acc,k)=> acc?.[k], state);
     return (
       <div className="space-y-1">
-        <FieldLabel f={f}/>
-        <SimpleInput f={f} value={val} onChange={(v)=> setPath(path, v)} />
+        <FieldLabel f={f} path={path}/>
+        <SimpleInput f={f} value={val} onChange={(v)=> setPath(path, v)} path={path}  />
         <Help f={f}/>
       </div>
     );
@@ -561,6 +809,69 @@ function FieldBlock(props: {
   );
 }
 
+// Вспомогательный компонент диалога для редактирования подписей
+
+function LabelEditorDialog(props: {
+  open: boolean;
+  onOpenChange: (v:boolean)=>void;
+  pathKey: string | null;
+  original: string | null;
+  current?: string | null;
+  onSave: (value: string | undefined) => void; // undefined → очистить override
+}) {
+  const [value, setValue] = React.useState<string>("");
+
+  React.useEffect(() => {
+    setValue(props.current ?? "");
+  }, [props.current, props.open]);
+
+  const showOriginal = props.original ?? "";
+
+  return (
+    <Dialog open={props.open} onOpenChange={props.onOpenChange}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Редактирование подписи поля</DialogTitle>
+        </DialogHeader>
+        <DialogBody>
+          <div className="space-y-3 text-sm">
+            <div><span className="text-zinc-500">Путь:</span> <code className="text-xs">{props.pathKey}</code></div>
+            <div>
+              <div className="text-zinc-500">Исходный текст</div>
+              <div className="rounded border px-2 py-1 bg-zinc-50">{showOriginal}</div>
+            </div>
+            <div>
+              <div className="text-zinc-500">Замещающий текст</div>
+              <input
+                type="text"
+                className="mt-1 h-9 w-full rounded-[var(--radius)] border px-3 text-sm"
+                value={value}
+                placeholder="Оставьте пустым, чтобы использовать исходный текст"
+                onChange={e => setValue(e.target.value)}
+              />
+            </div>
+          </div>
+        </DialogBody>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant="outline">Отмена</Button>
+          </DialogClose>
+          <Button
+            onClick={() => {
+              const trimmed = value.trim();
+              props.onSave(trimmed === "" ? undefined : trimmed);
+              props.onOpenChange(false);
+            }}
+          >
+            Сохранить
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+
 // ---------- root ----------
 
 export function RenderRoot({ fields, types, stateCtl }: {
@@ -578,14 +889,67 @@ export function RenderRoot({ fields, types, stateCtl }: {
   const get = React.useCallback((k:string) => collapseStore.current.get(k), []);
   const set = React.useCallback((k:string, v:boolean) => { collapseStore.current.set(k, v); }, []);
 
+  // --- АДАПТЕР к общему стору UI overrides со страницы ---
+  const ui = useUiOverrides(); // {overrides, setOverrides, markDirty}
+  const getLabel = React.useCallback((rawPk: string) => {
+    const pk = normalizePathKey(rawPk);
+    return ui.overrides?.labels?.[pk];
+  }, [ui.overrides]);
+  const hasLabel = React.useCallback((rawPk: string) => {
+    const pk = normalizePathKey(rawPk);
+    return Boolean(ui.overrides?.labels?.[pk]);
+  }, [ui.overrides]);
+  const setLabel = React.useCallback((rawPk: string, original: string, value: string | undefined) => {
+    const pk = normalizePathKey(rawPk);
+    const next = { ...(ui.overrides || {}) };
+    next.labels = { ...(next.labels || {}) };
+    if (value === undefined || value === "") {
+      delete next.labels[pk];
+    } else {
+      next.labels[pk] = value;
+    }
+    ui.setOverrides(next);
+    ui.markDirty();
+  }, [ui]);
+
+  // editor dialog (оставляем локально; хранит текущие значения формы)
+  const [dlgOpen, setDlgOpen] = React.useState(false);
+  const dlgState = React.useRef<{ pathKey: string|null; original: string|null; current?: string|null }>({ pathKey:null, original:null, current:undefined });
+  const openEditor = React.useCallback((args: { pathKey: string; original: string; current?: string }) => {
+    dlgState.current = { ...args };
+    setDlgOpen(true);
+  }, []);
+
+
   return (
     <CollapseCtx.Provider value={{ get, set }}>
-      <div className="space-y-4">
-        {fields.map((f) =>
-          <FieldBlock key={f.name} f={f} path={[f.name]} state={state} setPath={setPath} delPath={delPath}
-            types={types} visitedTypes={visited} errors={errors}/>
-        )}
-      </div>
+      <LabelOverridesCtx.Provider value={{
+        items: [], // не используем, но тип требует
+        getLabel,
+        hasOverride: hasLabel,
+        editLabel: (ov) => setLabel(ov.path, ov.original, ov.value),
+        removeLabel: (rawPk) => setLabel(rawPk, "", undefined),
+        openEditor,
+      }}>
+        <div className="space-y-4">
+          {fields.map((f) =>
+            <FieldBlock key={f.name} f={f} path={[f.name]} state={state} setPath={setPath} delPath={delPath}
+              types={types} visitedTypes={visited} errors={errors}/>
+          )}
+        </div>
+        <LabelEditorDialog
+            open={dlgOpen}
+            onOpenChange={setDlgOpen}
+            pathKey={dlgState.current.pathKey}
+            original={dlgState.current.original}
+            current={dlgState.current.current}
+            onSave={(value)=>{
+            const raw = dlgState.current.pathKey!;
+            const orig = dlgState.current.original ?? "";
+            setLabel(raw, orig, value);
+            }}
+          />
+      </LabelOverridesCtx.Provider>
     </CollapseCtx.Provider>
   );
 }

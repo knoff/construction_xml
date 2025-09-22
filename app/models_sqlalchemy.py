@@ -192,6 +192,9 @@ class Schema(Base):
     file_path: Mapped[str] = mapped_column(String, nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, nullable=False, default=datetime.utcnow)
 
+    # Новое: JSONB поле для переопределений UI (label-ы, подсказки, замены компонентов и т.д.)
+    ui_overrides: Mapped[Optional[dict]] = mapped_column(JSONB, nullable=True)
+
     # Новое: связь с типом схемы
     type_id: Mapped[Optional[int]] = mapped_column(ForeignKey("schema_types.id"), nullable=True)
     type: Mapped[Optional[SchemaType]] = relationship("SchemaType", lazy="joined")
