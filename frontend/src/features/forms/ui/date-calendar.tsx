@@ -4,7 +4,6 @@ import type { UiComponentProps } from "@/features/forms/ui/registry";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { XIcon, CalendarIcon } from "lucide-react";
-// Если VS Code ругался раньше — просто установите зависимость: npm i date-fns
 import { ru } from "date-fns/locale";
 import { cn } from "@/lib/utils";
 

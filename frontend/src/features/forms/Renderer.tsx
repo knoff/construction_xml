@@ -1,6 +1,7 @@
 import * as React from "react";
 import type { FieldModel } from "./types";
 import { inputKind, coerceValue } from "./controls";
+import { RowLayoutContext } from "@/features/forms/ui/block-row";
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -59,6 +60,100 @@ function isRequiredField(f: { kind: string; minOccurs?: number; required?: boole
   if (f.kind === "attribute") return f.required === true;
   return (f.minOccurs ?? 1) >= 1;
 }
+
+function isEmptyValue(v: any): boolean {
+  if (v == null) return true;
+  if (typeof v === "string") return v.trim() === "";
+  return false;
+}
+/** «Shallow» проверка обязательности конкретного узла по значению */
+function shallowMissingForField(f: FieldModel, valueAtPath: any): boolean {
+  if (isArrayMultiplicity(f)) {
+    const min = f.minOccurs ?? 1;
+    const arr = Array.isArray(valueAtPath) ? valueAtPath : [];
+    return min > 0 && arr.length === 0;
+  }
+  if (f.kind === "attribute" || (f.dtype !== "object" && !f.children && !f.attributes)) {
+    return isRequiredField(f) && isEmptyValue(valueAtPath);
+  }
+  if ((f.minOccurs ?? 1) > 0 && valueAtPath == null && f.dtype === "object") {
+    return true;
+  }
+  return false;
+}
+
+// --- Ошибки: утилиты "мягкого" сопоставления путей ---
+function splitKey(key: string): string[] {
+  return key ? key.split(".") : [];
+}
+function normalizeKey(key: string): string {
+  return key.split(".").map(seg => (/^\d+$/.test(seg) ? "*" : seg)).join(".");
+}
+/** Совпадение пути ключа ошибок с целевым путем, допуская пропуск ровно одного сегмента (для choice) */
+function matchesWithOneSkip(errKey: string, targetKey: string): boolean {
+  const a = splitKey(errKey);
+  const b = splitKey(targetKey);
+  let i = 0, j = 0, skips = 0;
+  while (i < a.length && j < b.length) {
+    if (a[i] === b[j]) { i++; j++; continue; }
+    if (skips < 1) { skips++; i++; continue; }
+    return false;
+  }
+  return j === b.length;
+}
+/** Вернуть список сообщений ошибок ровно для "узла" (не поддерева), с несколькими стратегиями сопоставления */
+function getLocalErrorsForPath(errors: Record<string, string[]> | undefined, path: (string|number)[]): string[] {
+  if (!errors) return [];
+  const exact = pathKey(path);
+  const exactArr = errors[exact] ?? [];
+  if (exactArr.length) return exactArr;
+  const norm = normalizeKey(exact);
+  const normArr = errors[norm] ?? [];
+  if (normArr.length) return normArr;
+  if (path.length >= 2) {
+    const noChoice = [...path.slice(0, -2), path[path.length - 1]];
+    const noChoiceKey = pathKey(noChoice);
+    const nc = errors[noChoiceKey] ?? errors[normalizeKey(noChoiceKey)] ?? [];
+    if (nc.length) return nc;
+  }
+  return [];
+}
+/** Подсчёт всех ошибок поддерева блока, допуская пропуск одного сегмента под блоком (choice) */
+function countSubtreeErrors(errors: Record<string, string[]> | undefined, baseKey: string) {
+  if (!errors) return { count: 0, preview: [] as string[] };
+  const preview: string[] = [];
+  let count = 0;
+  const baseNorm = normalizeKey(baseKey);
+  for (const [k, arr] of Object.entries(errors)) {
+    if (!arr || arr.length === 0) continue;
+    if (k === baseKey || k.startsWith(baseKey + ".")) {
+      count += arr.length;
+      for (const m of arr) if (preview.length < 3) preview.push(m);
+      continue;
+    }
+    const kn = normalizeKey(k);
+    if (kn === baseNorm || kn.startsWith(baseNorm + ".")) {
+      count += arr.length;
+      for (const m of arr) if (preview.length < 3) preview.push(m);
+      continue;
+    }
+    if (matchesWithOneSkip(k, baseKey)) {
+      count += arr.length;
+      for (const m of arr) if (preview.length < 3) preview.push(m);
+      continue;
+    }
+  }
+  return { count, preview };
+}
+
+function hasRequiredWord(msg: string) {
+  return /обязат/i.test(msg); // «обязат...» всех форм
+}
+/** Есть ли у конкретного пути локальные ошибки валидатора (мягкий матч) */
+function hasAnyValidatorErrors(errors: Record<string, string[]>|undefined, path:(string|number)[]) {
+  return getLocalErrorsForPath(errors, path).length > 0;
+}
+
 function pathKey(path:(string|number)[]) {
   return path.map(p=>String(p)).join(".");
 }
@@ -152,11 +247,19 @@ function BlockFrame(props:{
   children: React.ReactNode;
   hasError?: boolean;
   errsHere?: string[];
+  /** Общее число ошибок в поддереве (k и k.*). Если не задано — используем errsHere?.length */
+  errCount?: number;
+  /** Небольшое превью сообщений для title бейджа */
+  errPreview?: string[];
 }) {
-  const { isBlock, f, path, headerExtra, children, hasError, errsHere } = props;
+  const { isBlock, f, path, headerExtra, children, hasError, errsHere, errCount, errPreview } = props;
   const { get, set } = useCollapse();
   const k = pathKey(path);
-  const [open, setOpen] = React.useState<boolean>(get(k) ?? true);
+  // По умолчанию: блоки свернуты, обычные контейнеры раскрыты
+  const initial = get(k);
+  const [open, setOpen] = React.useState<boolean>(
+    typeof initial === "boolean" ? initial : (isBlock ? false : true)
+  );
   React.useEffect(()=> set(k, open), [k, open, set]);
 
   // DEBUG: type name only for blocks (refType → complexType)
@@ -199,6 +302,78 @@ function BlockFrame(props:{
     </button>
   ) : null;
 
+
+  // UI-бейдж для блоков (переопределение лэйаута блока) — с жёсткими дефолтами и защитами
+  const UiBadgeForBlock = isBlock ? (() => {
+    const ui = useUiOverrides?.() as ReturnType<typeof useUiOverrides> | undefined;
+    // если по какой-то причине контекст недоступен — не рисуем бейдж
+    if (!ui) return null;
+    const npk = typeof normalizePathKey === "function" ? normalizePathKey(k) : k;
+    const all = Array.isArray(UI_COMPONENTS) ? UI_COMPONENTS : [];
+    // берём только блочные компоненты
+    const blockMetas = all.filter(m => m?.kind === "block");
+    // canUseComponent может полагаться на match; страхуемся
+    const safeAllowed = blockMetas.filter(m => {
+      try { return canUseComponent(m, { f, isBlock: true }); }
+      catch { return false; }
+    });
+    if (!safeAllowed || (safeAllowed as any[]).length === 0) return null;
+    const current = (ui.overrides?.widgets && typeof ui.overrides.widgets === "object")
+      ? (ui.overrides.widgets as Record<string, string | undefined>)[npk]
+      : undefined;
+    const highlighted = Boolean(current);
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button
+            type="button"
+            className={
+              "rounded-full border px-2 py-0.5 text-[10px] leading-none " +
+              (highlighted ? "bg-amber-50 border-amber-300" : "opacity-70 hover:opacity-100")
+            }
+            title="Переопределить UI блока"
+            onClick={(e)=>{ e.preventDefault(); e.stopPropagation(); }}
+          >
+            UI
+          </button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" sideOffset={6}>
+          {safeAllowed && safeAllowed.map(meta => (
+            <DropdownMenuItem
+              key={meta.id}
+              onSelect={(e) => {
+                e.preventDefault();
+                const next = { ...(ui.overrides || {}) } as any;
+                next.widgets = { ...(next.widgets || {}) };
+                next.widgets[npk] = meta.id;
+                ui.setOverrides(next);
+                ui.markDirty();
+              }}
+            >
+              <span className="flex-1">{meta.title}</span>
+              {current === meta.id ? <span className="text-zinc-500">✓</span> : null}
+            </DropdownMenuItem>
+          ))}
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            onSelect={(e) => {
+              e.preventDefault();
+              const next = { ...(ui.overrides || {}) } as any;
+              if (next.widgets && next.widgets[npk]) {
+                next.widgets = { ...next.widgets };
+                delete next.widgets[npk];
+                ui.setOverrides(next);
+                ui.markDirty();
+              }
+            }}
+          >
+            Сбросить переопределение
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  })() : null;
+
   // override для label блока
   const { getLabel, hasOverride, openEditor } = useLabelOverrides();
   const overriddenBlockLabel = getLabel(k);
@@ -209,7 +384,7 @@ function BlockFrame(props:{
     <div className="flex items-center gap-2">
       <button
         type="button"
-        className="h-7 w-7 rounded border text-xs"
+        className="h-7 w-7 flex-none shrink-0 inline-flex items-center justify-center rounded border text-xs leading-none p-0"
         onClick={()=> setOpen(o=>!o)}
         aria-label={open ? "Свернуть" : "Развернуть"}
       >
@@ -217,13 +392,29 @@ function BlockFrame(props:{
       </button>
       <label className="text-sm font-semibold">
         {(overriddenBlockLabel ?? blockOriginal)}{" "}
+        {isBlock && isRequiredField(f) ? " *" : ""}
         {isBlock && (
           <span className="text-[10px] text-zinc-500 ml-1">
             {minMaxText(f)} {debugType ? ` ${debugType}` : ""}
           </span>
         )}
-        {isBlock && isRequiredField(f) ? " *" : ""}
       </label>
+      {/* бейдж количества ошибок у блока — виден и в свернутом состоянии */}
+      {hasError ? (
+        <span
+          className="ml-1 inline-flex items-center rounded-full border border-red-300 bg-red-50 px-2 py-0.5 text-[10px] leading-none text-red-700"
+          title={
+            (errPreview && errPreview.length > 0)
+              ? errPreview.join("\n")
+              : (errsHere && errsHere.length ? errsHere.join("\n") : "Есть ошибки в разделе")
+          }
+        >
+          Ошибки{typeof errCount === "number"
+            ? `: ${errCount}`
+            : (errsHere && errsHere.length ? `: ${errsHere.length}` : "")
+          }
+        </span>
+      ) : null}
       {/* Бейдж Label для блока */}
       <button
         type="button"
@@ -241,6 +432,7 @@ function BlockFrame(props:{
         Label
       </button>
       {TypeBadge}
+      {UiBadgeForBlock}
       {headerExtra}
     </div>
   );
@@ -289,9 +481,13 @@ function UiOverrideBadge({ f, path }: { f: FieldModel; path: (string|number)[] }
   const npk = normalizePathKey(pk);
 
   // список допустимых компонентов по реестру (фильтрация по типу/блоку)
-  const allowed = UI_COMPONENTS.filter(meta => canUseComponent(meta, { f, isBlock }));
-  const current = ui.overrides?.widgets?.[npk] as (string|undefined); // meta.id или undefined
-  const highlighted = !!current;
+  const all = Array.isArray(UI_COMPONENTS) ? UI_COMPONENTS : [];
+  const allowed = all.filter(m => {
+    try { return canUseComponent(m, { f, isBlock: false }); }
+    catch { return false; }
+  });
+  const current = ui.overrides?.widgets?.[normalizePathKey(pk)];
+  const highlighted = Boolean(current);
 
   return (
     <DropdownMenu>
@@ -309,10 +505,10 @@ function UiOverrideBadge({ f, path }: { f: FieldModel; path: (string|number)[] }
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" sideOffset={6}>
-        {allowed.length === 0 && (
+        {(!allowed || allowed.length === 0) && (
           <DropdownMenuItem disabled>Нет доступных компонентов</DropdownMenuItem>
         )}
-        {allowed.map(meta => (
+        {allowed && allowed.map(meta => (
           <DropdownMenuItem
             key={meta.id}
             onSelect={(e) => {
@@ -358,27 +554,55 @@ function FieldLabel({ f, path }: { f: FieldModel; path: (string|number)[] }) {
   const txt = overridden ?? original;
   const required = isRequiredField(f);
   const highlighted = hasOverride(pk);
+
+  // --- аккуратный кламп: 1–2 строки без “третьей тени” ---
+  // Берём число строк из контекста лэйаута (если есть), иначе 2
+  const lines = (typeof RowLayoutContext !== "undefined"
+    ? (React.useContext(RowLayoutContext as any)?.labelLines ?? 1)
+    : 2);
+
+  const lineRem = 1.25; // text-sm, leading-tight ~ 1.25rem
+  const clampStyle: React.CSSProperties = { height: `${(lines === 1 ? 1 : 2) * lineRem}rem` };
+
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex flex-col gap-1">
+      {/* Тонкая "панель" действий над заголовком */}
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          className={
+            "rounded-full border px-2 py-0.5 text-[10px] leading-none " +
+            (highlighted ? "bg-amber-50 border-amber-300" : "opacity-70 hover:opacity-100")
+          }
+          title="Изменить подпись (Label)"
+          onClick={(e)=>{
+            e.preventDefault();
+            e.stopPropagation();
+            openEditor({ pathKey: pk, original, current: overridden });
+          }}
+        >
+          Label
+        </button>
+        <UiOverrideBadge f={f} path={path}/>
+      </div>
       <label className="text-sm font-medium">
-        {txt}{required ? " *" : ""}
+        {/* В одну строку потока: текст (кламп) + звёздочка; звезда вне клампа и рядом */}
+        <span className="inline-flex max-w-full items-start gap-1 align-top">
+          <span
+            className={
+              // многострочный кламп c «…» + жёсткая высота и правильная высота строки
+              "min-w-0 overflow-hidden leading-5 " + // leading-5 = 1.25rem
+              "[display:-webkit-box] [-webkit-box-orient:vertical] " +
+              (lines === 1 ? "[-webkit-line-clamp:1]" : "[-webkit-line-clamp:2]")
+            }
+            style={clampStyle}
+            title={txt}
+          >
+            {txt}
+          </span>
+          {required ? <span aria-hidden="true" className="leading-5">*</span> : null}
+        </span>
       </label>
-      <button
-        type="button"
-        className={
-          "rounded-full border px-2 py-0.5 text-[10px] leading-none " +
-          (highlighted ? "bg-amber-50 border-amber-300" : "opacity-70 hover:opacity-100")
-        }
-        title="Изменить подпись (Label)"
-        onClick={(e)=>{
-          e.preventDefault();
-          e.stopPropagation();
-          openEditor({ pathKey: pk, original, current: overridden });
-        }}
-      >
-        Label
-      </button>
-      <UiOverrideBadge f={f} path={path}/>
     </div>
   );
 }
@@ -394,6 +618,23 @@ function SimpleInput({ f, value, onChange, path }: {
   const manualMeta = manualUi ? UI_COMPONENTS.find(x => x.id === manualUi) ?? null : null;
   const kind = inputKind(f.dtype, f.facets);
   if (kind === "select") {
+    // РЕНДЕРИМ КАСТОМНЫЙ КОМПОНЕНТ ТОЛЬКО ЕСЛИ ВЫБРАН ВРУЧНУЮ В БЕЙДЖЕ UI
+    const ui = useUiOverrides();
+    const manualUi = ui.overrides?.widgets?.[normalizePathKey(pathKey(path))] as (string|undefined);
+    const manualMeta = manualUi ? UI_COMPONENTS.find(x => x.id === manualUi) ?? null : null;
+    if (manualMeta && canUseComponent(manualMeta, { f, isBlock: false })) {
+      const Comp = manualMeta.Render as React.FC<{
+        f: FieldModel; path: (string|number)[]; value: unknown;
+        setValue: (v: unknown) => void; clearValue?: () => void;
+      }>;
+      return (
+        <Comp
+          f={f} path={path} value={value}
+          setValue={(v)=> onChange(v)} clearValue={()=> onChange(undefined)}
+        />
+      );
+    }
+    // ДЕФОЛТ — обычный <select>
     const opts = f.facets?.enumOptions ?? (f.facets?.enum ?? []).map(v => ({ value: v }));
     return (
       <select className="h-9 rounded-[var(--radius)] border px-3 text-sm w-full"
@@ -459,7 +700,35 @@ function FieldBlock(props: {
   const thisErrs: string[] = errors?.[thisKey] ?? [];
   // есть ли ошибки в этом узле или в его поддереве
   const hasErrHere = thisErrs.length > 0;
-  const hasErrSub = Object.keys(errors ?? {}).some(k => k === thisKey || k.startsWith(thisKey + "."));
+  const hasErrSub = React.useMemo(() => {
+    const { count } = countSubtreeErrors(errors ?? {}, thisKey);
+    return count > 0;
+  }, [errors, thisKey]);
+
+  const subtreeErr = React.useMemo(() => countSubtreeErrors(errors, thisKey), [errors, thisKey]);
+  // Подсчёт всех ошибок под k и k.*
+  /*
+  const subtreeErr = React.useMemo(() => {
+    if (!errors) return { count: thisErrs.length, preview: thisErrs.slice(0, 3) };
+    const pref = thisKey + ".";
+    let count = thisErrs.length;
+    const preview: string[] = [...thisErrs];
+    for (const [k, arr] of Object.entries(errors)) {
+      if (k === thisKey || k.startsWith(pref)) {
+        if (k !== thisKey) {
+          const msgs = arr ?? [];
+          count += msgs.length;
+          // ограничимся несколькими первыми сообщениями
+          for (const m of msgs) {
+            if (preview.length < 3) preview.push(m);
+            else break;
+          }
+        }
+      }
+    }
+    return { count, preview };
+  }, [errors, thisErrs, thisKey]);
+  */
   const nextVisited = React.useMemo(() => {
     const s = new Set(visitedTypes);
     if (props.f?.refType) s.add(props.f.refType);
@@ -603,6 +872,7 @@ function FieldBlock(props: {
   if (f.kind !== "attribute" && f.dtype !== "object" && isArrayMultiplicity(f)) {
     const rawAtPath = path.reduce((acc,k)=> acc?.[k], state);
     const items: any[] = Array.isArray(rawAtPath) ? rawAtPath : [];
+    const missingHere = (f.minOccurs ?? 1) > 0 && items.length === 0;
     React.useEffect(() => {
       if (rawAtPath != null && !Array.isArray(rawAtPath)) setPath(path, []);
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -647,6 +917,7 @@ function FieldBlock(props: {
           </button>
         </div>
         <Help f={f}/>
+        {missingHere && <div className="text-xs text-red-600">Нужно добавить хотя бы один элемент</div>}
         {hasErrHere && (
           <ul className="mt-1 text-xs text-red-600 list-disc pl-5">
             {thisErrs.map((e,i)=><li key={i}>{e}</li>)}
@@ -659,11 +930,28 @@ function FieldBlock(props: {
   // attribute or simple scalar (non-array)
   if (f.kind === "attribute" || (f.dtype !== "object" && !f.children && !f.attributes)) {
     const val = path.reduce((acc,k)=> acc?.[k], state);
+    const localErrs = getLocalErrorsForPath(errors, path);
+    const missingRequired = isRequiredField(f) && isEmptyValue(val);
+    // показываем синтетическое «Поле обязательно» только если валидатор ещё не отметил обязательность
+    const hasValidatorRequired = localErrs.some(hasRequiredWord);
+    const displayErrs = [
+      ...(missingRequired && !hasValidatorRequired ? ["Поле обязательно"] : []),
+      ...localErrs,
+    ];
+    // de-dup сообщений
+    const dedupErrs = Array.from(new Set(displayErrs));
     return (
       <div className="space-y-1">
         <FieldLabel f={f} path={path}/>
         <SimpleInput f={f} value={val} onChange={(v)=> setPath(path, v)} path={path}  />
+        {/*missing && (<div className="text-xs text-red-600">Поле обязательно</div>)*/}
         <Help f={f}/>
+        {/* Обязательность и ошибки валидатора */}
+        {dedupErrs.length > 0 && (
+          <ul className="mt-1 text-xs text-red-600 list-disc pl-5">
+            {dedupErrs.map((e,i)=><li key={i}>{e}</li>)}
+          </ul>
+        )}        
       </div>
     );
   }
@@ -693,26 +981,116 @@ function FieldBlock(props: {
       </button>
     );
 
+    // --- UI override для лэйаута блока-массива (применяется к каждому элементу по нормализованному пути) ---
+    const ui = useUiOverrides();
+
+
+    // локальная проверка обязательных внутри элементов (shallow) — для подсветки блока
+    const localMissing = items.some((_, idx) => {
+      const container = path.reduce((acc,k)=> acc?.[k], state)?.[idx] ?? {};
+      const children = (f.children ?? []) as FieldModel[];
+      const attrs = (f.attributes ?? []) as FieldModel[];
+      for (const ch of children) {
+        const v = container?.[ch.name];
+        if (shallowMissingForField(ch, v)) return true;
+      }
+      for (const at of attrs) {
+        const v = container?.[`@${at.name}`];
+        if (shallowMissingForField(at, v)) return true;
+      }
+      return false;
+    });
+    // Синтетические «обязательные» внутри элементов (для бейджа и подсветки, пока валидатор не отработал)
+    const synth = (() => {
+      let count = 0; const msgs: string[] = [];
+      for (let idx = 0; idx < items.length; idx++) {
+        const container = (rawAtPath ?? [])[idx] ?? {};
+        for (const ch of (f.children ?? [])) {
+          const v = container?.[ch.name];
+          const childPath = [...path, idx, ch.name];
+          const validatorHas = hasAnyValidatorErrors(errors, childPath);
+          if (!validatorHas && shallowMissingForField(ch as any, v)) {
+            count++; if (msgs.length < 3) msgs.push("Поле обязательно");
+          }
+        }
+        for (const at of (f.attributes ?? [])) {
+          const v = container?.[`@${at.name}`];
+          const attrPath = [...path, idx, `@${at.name}`];
+          const validatorHas = hasAnyValidatorErrors(errors, attrPath);
+          if (!validatorHas && shallowMissingForField(at as any, v)) {
+            count++; if (msgs.length < 3) msgs.push("Поле обязательно");
+          }
+        }
+      }
+      return { count, msgs };
+    })();
+    const subtreeErr = React.useMemo(() => countSubtreeErrors(errors ?? {}, thisKey), [errors, thisKey]);
+    const blockHasError = hasErrSub || synth.count > 0;
+
     return (
-      <BlockFrame f={f} isBlock={isBlock} path={path} headerExtra={headerExtra} hasError={hasErrSub} errsHere={thisErrs}>
+      <BlockFrame
+        f={f}
+        isBlock={isBlock}
+        path={path}
+        headerExtra={headerExtra}
+        hasError={blockHasError}
+        errsHere={thisErrs}
+        errCount={subtreeErr.count + synth.count}
+        errPreview={Array.from(new Set([...subtreeErr.preview, ...synth.msgs])).slice(0, 3)}
+      >
         {items.map((_, idx) => (
           <div key={idx} className="rounded-xl border p-3 space-y-3 bg-white">
-            {(f.children ?? []).map(child =>
-              <FieldBlock key={child.name}
-                f={child}
-                path={[...path, idx, child.name]}
-                state={state} setPath={setPath} delPath={delPath}
-                types={types} visitedTypes={nextVisited}
-              />
-            )}
-            {(f.attributes ?? []).map(attr =>
-              <FieldBlock key={`@${attr.name}`}
-                f={attr}
-                path={[...path, idx, `@${attr.name}`]}
-                state={state} setPath={setPath} delPath={delPath}
-                types={types} visitedTypes={nextVisited}
-              />
-            )}
+            {(() => {
+              const pkItem = pathKey([...path, idx]);
+              const npkItem = typeof normalizePathKey === "function" ? normalizePathKey(pkItem) : pkItem; // ....* 
+              const pkContainer = pathKey(path);
+              const npkContainer = typeof normalizePathKey === "function" ? normalizePathKey(pkContainer) : pkContainer; // без индекса
+              // Пытаемся применить override для элемента, иначе — контейнерный
+              const manualUi =
+                (ui.overrides?.widgets?.[npkItem] as (string|undefined)) ??
+                (ui.overrides?.widgets?.[npkContainer] as (string|undefined));
+              const manualMeta = manualUi ? (UI_COMPONENTS.find(x => x.id === manualUi) ?? null) : null;
+
+              const childrenJsx = (
+                <>
+                  {(f.children ?? []).map(child =>
+                    <FieldBlock key={child.name}
+                      f={child}
+                      path={[...path, idx, child.name]}
+                      state={state} setPath={setPath} delPath={delPath}
+                      types={types} visitedTypes={nextVisited}
+                      errors={errors}
+                    />
+                  )}
+                  {(f.attributes ?? []).map(attr =>
+                    <FieldBlock key={`@${attr.name}`}
+                      f={attr}
+                      path={[...path, idx, `@${attr.name}`]}
+                      state={state} setPath={setPath} delPath={delPath}
+                      types={types} visitedTypes={nextVisited}
+                      errors={errors}
+                    />
+                  )}
+                </>
+              );
+
+              if (manualMeta && canUseComponent(manualMeta, { f, isBlock: true })) {
+                const Comp = manualMeta.Render as React.FC<any>;
+                const childrenFields = (f.children ?? []) as FieldModel[];
+                const renderChild = (child: FieldModel, childPath: (string|number)[]) => (
+                  <FieldBlock
+                    key={childPath.join(".")}
+                    f={child}
+                    path={childPath}
+                    state={state} setPath={setPath} delPath={delPath}
+                    types={types} visitedTypes={nextVisited}
+                    errors={errors}
+                  />
+                );
+                return <Comp f={f} path={[...path, idx]} childrenFields={childrenFields} renderChild={(c,p)=>renderChild(c,[...path, idx, c.name])} />;
+              }
+              return childrenJsx;
+            })()}
             <div className="flex justify-end">
               <div className="flex items-center gap-2">
                 <button className="h-8 rounded-xl border px-3 text-sm"
@@ -774,39 +1152,104 @@ function FieldBlock(props: {
   }
 
   // заполненный (или обязательный) одиночный complex
-  return (
-    <BlockFrame f={f} isBlock={isBlock} path={path} hasError={hasErrSub} errsHere={thisErrs}>
-      {(f.children ?? []).map(child =>
-        <FieldBlock key={child.name}
-          f={child}
-          path={[...path, child.name]}
-          state={state} setPath={setPath} delPath={delPath}
-          types={types} visitedTypes={nextVisited}
-          errors={errors}
-        />
-      )}
-      {(f.attributes ?? []).map(attr =>
-        <FieldBlock key={`@${attr.name}`}
-          f={attr}
-          path={[...path, `@${attr.name}`]}
-          state={state} setPath={setPath} delPath={delPath}
-          types={types} visitedTypes={nextVisited}
-          errors={errors}
-        />
-      )}
-      {(f.minOccurs ?? 1) === 0 && (
-        <div className="flex justify-end">
-          <button
-            className="h-8 rounded-xl border px-3 text-sm"
-            onClick={() => delPath(path)}
-          >
-            Удалить раздел
-          </button>
-        </div>
-      )}
-      <Help f={f}/>
-    </BlockFrame>
-  );
+  {
+    // --- UI override для одиночного complex-блока (по текущему пути) ---
+    const ui = useUiOverrides();
+    const pk = pathKey(path);
+    const npk = typeof normalizePathKey === "function" ? normalizePathKey(pk) : pk;
+    const manualUi = ui.overrides?.widgets?.[npk] as (string|undefined);
+    const manualMeta = manualUi ? (UI_COMPONENTS.find(x => x.id === manualUi) ?? null) : null;
+
+    const childrenJsx = (
+      <>
+        {(f.children ?? []).map(child =>
+          <FieldBlock key={child.name}
+            f={child}
+            path={[...path, child.name]}
+            state={state} setPath={setPath} delPath={delPath}
+            types={types} visitedTypes={nextVisited}
+            errors={errors}
+          />
+        )}
+        {(f.attributes ?? []).map(attr =>
+          <FieldBlock key={`@${attr.name}`}
+            f={attr}
+            path={[...path, `@${attr.name}`]}
+            state={state} setPath={setPath} delPath={delPath}
+            types={types} visitedTypes={nextVisited}
+            errors={errors}
+          />
+        )}
+      </>
+    );
+
+    const wrappedChildren = (() => {
+      if (manualMeta && canUseComponent(manualMeta, { f, isBlock: true })) {
+        const Comp = manualMeta.Render as React.FC<any>;
+        const childrenFields = (f.children ?? []) as FieldModel[];
+        const renderChild = (child: FieldModel, childPath: (string|number)[]) => (
+          <FieldBlock
+            key={childPath.join(".")}
+            f={child}
+            path={childPath}
+            state={state} setPath={setPath} delPath={delPath}
+            types={types} visitedTypes={nextVisited}
+            errors={errors}
+          />
+        );
+        return <Comp f={f} path={path} childrenFields={childrenFields} renderChild={(c,p)=>renderChild(c,[...path, c.name])} />;
+      }
+      return childrenJsx;
+    })();
+
+    // shallow-проверка обязательных в непосредственных детях
+    const container = valueAtPath ?? {};
+    const children = (f.children ?? []) as FieldModel[];
+    const attrs = (f.attributes ?? []) as FieldModel[];
+    const synth = (() => {
+      let count = 0; const msgs: string[] = [];
+      for (const ch of children) {
+        const v = container?.[ch.name];
+        const childPath = [...path, ch.name];
+        const validatorHas = hasAnyValidatorErrors(errors, childPath);
+        if (!validatorHas && shallowMissingForField(ch, v)) { count++; if (msgs.length < 3) msgs.push("Поле обязательно"); }
+      }
+      for (const at of attrs) {
+        const v = container?.[`@${at.name}`];
+        const attrPath = [...path, `@${at.name}`];
+        const validatorHas = hasAnyValidatorErrors(errors, attrPath);
+        if (!validatorHas && shallowMissingForField(at, v)) { count++; if (msgs.length < 3) msgs.push("Поле обязательно"); }
+      }
+      return { count, msgs };
+    })();
+    const subtreeErr = React.useMemo(() => countSubtreeErrors(errors ?? {}, thisKey), [errors, thisKey]);
+    const blockHasError = hasErrSub || synth.count > 0;
+
+    return (
+      <BlockFrame
+        f={f}
+        isBlock={isBlock}
+        path={path}
+        hasError={blockHasError}
+        errsHere={thisErrs}
+        errCount={subtreeErr.count + synth.count}
+        errPreview={Array.from(new Set([...subtreeErr.preview, ...synth.msgs])).slice(0, 3)}
+      >
+        {wrappedChildren}
+        {(f.minOccurs ?? 1) === 0 && (
+          <div className="flex justify-end">
+            <button
+              className="h-8 rounded-xl border px-3 text-sm"
+              onClick={() => delPath(path)}
+            >
+              Удалить раздел
+            </button>
+          </div>
+        )}
+        <Help f={f}/>
+      </BlockFrame>
+    );
+  }
 }
 
 // Вспомогательный компонент диалога для редактирования подписей
