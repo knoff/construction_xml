@@ -21,6 +21,7 @@ dist/
 # frontend build artifacts
 frontend/node_modules/
 frontend/dist/
+frontend/stats.html
 
 # Local data
 data/
@@ -30,3 +31,4 @@ uploads/
 .env
 
 app/static
+
