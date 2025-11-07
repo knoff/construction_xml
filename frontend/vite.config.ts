@@ -27,7 +27,8 @@ export default defineConfig(({ command }) => ({
     }
   },
   build: {
-    sourcemap: false,
+    sourcemap: true, // Временно для отладки
+    minify: false,   // Временно для отладки
     rollupOptions: {
       output: {
         manualChunks(id) {

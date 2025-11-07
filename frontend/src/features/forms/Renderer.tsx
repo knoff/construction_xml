@@ -619,7 +619,11 @@ function FieldBlock(props: {
     return count > 0;
   }, [errors, thisKey]);
 
-  const subtreeErr = React.useMemo(() => countSubtreeErrors(errors, thisKey), [errors, thisKey]);
+  // единый подсчёт ошибок поддерева, доступный для всех веток
+  const subtreeErr = React.useMemo(
+    () => countSubtreeErrors(errors ?? {}, thisKey),
+    [errors, thisKey]
+  );
   // Подсчёт всех ошибок под k и k.*
   /*
   const subtreeErr = React.useMemo(() => {
@@ -938,7 +942,7 @@ function FieldBlock(props: {
       }
       return { count, msgs };
     })();
-    const subtreeErr = React.useMemo(() => countSubtreeErrors(errors ?? {}, thisKey), [errors, thisKey]);
+    // используем верхнеуровневый subtreeErr
     const blockHasError = hasErrSub || synth.count > 0;
 
     return (
@@ -1136,7 +1140,7 @@ function FieldBlock(props: {
       }
       return { count, msgs };
     })();
-    const subtreeErr = React.useMemo(() => countSubtreeErrors(errors ?? {}, thisKey), [errors, thisKey]);
+    // используем верхнеуровневый subtreeErr
     const blockHasError = hasErrSub || synth.count > 0;
 
     return (
