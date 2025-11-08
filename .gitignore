@@ -36,3 +36,5 @@ project_scan
 scan_project.py
 app/static/index.html
 frontend/stats.html
+
+samples

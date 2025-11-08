@@ -38,11 +38,11 @@ import { firstAllowedComponentFor, UI_COMPONENTS, canUseComponent } from "@/feat
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 
 // новье для дальнейшей замены JSX на готовые компоненты
-import { UiOverrideBadge } from "@/features/forms/components/Badges";
-import { ReorderRow } from "@/features/forms/components/lists/ReorderRow";
-import { BlockFrame } from "@/features/forms/components/BlockFrame";
-import { LabelEditorDialog } from "@/features/forms/dialogs/LabelEditorDialog";
-import { useUiMetaForPath } from "@/features/forms/hooks/useUiMeta";
+// import { UiOverrideBadge } from "@/features/forms/components/Badges";
+// import { ReorderRow } from "@/features/forms/components/lists/ReorderRow";
+// import { BlockFrame } from "@/features/forms/components/BlockFrame";
+// import { LabelEditorDialog } from "@/features/forms/dialogs/LabelEditorDialog";
+// import { useUiMetaForPath } from "@/features/forms/hooks/useUiMeta";
 
 // ---------- form-state ----------
 
@@ -471,9 +471,11 @@ function FieldLabel({ f, path }: { f: FieldModel; path: (string|number)[] }) {
 
   // --- аккуратный кламп: 1–2 строки без “третьей тени” ---
   // Берём число строк из контекста лэйаута (если есть), иначе 2
-  const lines = (typeof RowLayoutContext !== "undefined"
-    ? (React.useContext(RowLayoutContext as any)?.labelLines ?? 1)
-    : 2);
+ type RowLayoutCtx = { labelLines?: number };
+ const lines =
+   typeof RowLayoutContext !== "undefined"
+     ? (React.useContext(RowLayoutContext as React.Context<RowLayoutCtx>)?.labelLines ?? 1)
+     : 2;
 
   const lineRem = 1.25; // text-sm, leading-tight ~ 1.25rem
   const clampStyle: React.CSSProperties = { height: `${(lines === 1 ? 1 : 2) * lineRem}rem` };
@@ -530,7 +532,12 @@ function SimpleInput({ f, value, onChange, path }: {
   const ui = useUiOverrides();
   const manualUi = ui.overrides?.widgets?.[normalizePathKey(pathKey(path))] as (string|undefined);
   const manualMeta = manualUi ? UI_COMPONENTS.find(x => x.id === manualUi) ?? null : null;
-  const kind = inputKind(f.dtype, f.facets);
+  const facets = f.facets ?? {};
+  const hasEnum = (Array.isArray(facets.enum) && facets.enum.length > 0) ||
+                (Array.isArray((facets as any).enumOptions) && (facets as any).enumOptions.length > 0);
+  const kind = hasEnum ? "select" : inputKind(f.dtype, f.facets);
+  // eslint-disable-next-line no-console
+  console.debug("[SimpleInput]", { path: normalizePathKey(pathKey(path)), dtype: f.dtype, facets: f.facets, kind });
   if (kind === "select") {
     // РЕНДЕРИМ КАСТОМНЫЙ КОМПОНЕНТ ТОЛЬКО ЕСЛИ ВЫБРАН ВРУЧНУЮ В БЕЙДЖЕ UI
     const ui = useUiOverrides();
@@ -549,12 +556,22 @@ function SimpleInput({ f, value, onChange, path }: {
       );
     }
     // ДЕФОЛТ — обычный <select>
-    const opts = f.facets?.enumOptions ?? (f.facets?.enum ?? []).map(v => ({ value: v }));
+    type SelectOption = { value: string; label?: string };
+    const opts: SelectOption[] = React.useMemo(() => {
+      const eo = f.facets?.enumOptions as SelectOption[] | undefined;
+      if (eo?.length) return eo;
+      const en = f.facets?.enum as string[] | undefined;
+      return (en ?? []).map(v => ({ value: String(v) })); // label опционален
+    }, [f.facets]);
     return (
       <select className="h-9 rounded-[var(--radius)] border px-3 text-sm w-full"
               value={value ?? ""} onChange={e => onChange(e.target.value)}>
         <option value="">— выберите —</option>
-        {opts.map(o => <option key={o.value} value={o.value}>{o.label ?? o.value}</option>)}
+        {opts.map(o => (
+          <option key={o.value} value={o.value}>
+            {o.label ?? o.value}
+          </option>
+        ))}
       </select>
     );
   }
@@ -647,11 +664,11 @@ function FieldBlock(props: {
     return { count, preview };
   }, [errors, thisErrs, thisKey]);
   */
-  const nextVisited = React.useMemo(() => {
-    const s = new Set(visitedTypes);
-    if (props.f?.refType) s.add(props.f.refType);
-    return s;
-  }, [visitedTypes, props.f?.refType]);
+ const nextVisited = React.useMemo<Set<string>>(() => {
+   const s = new Set<string>(visitedTypes);
+   if (props.f?.refType) s.add(String(props.f.refType));
+   return s;
+ }, [visitedTypes, props.f?.refType]);
 
   const f = useResolvedField((props as any).f, types, visitedTypes);
   const { path, state, setPath, delPath } = props as any;
@@ -670,10 +687,10 @@ function FieldBlock(props: {
 
     // single-choice
     if (!isArray) {
-      const container = path.reduce((acc,k)=> acc?.[k], state);
+      const container = getAtPath(state, path);
       const selected = deriveSelected(container ?? {}) ?? options[0]?.name ?? null;
       React.useEffect(() => {
-        const cur = path.reduce((acc,k)=> acc?.[k], state);
+        const cur = getAtPath(state, path);
         if (!cur) { setPath(path, selected ? { [selected]: {} } : {}); return; }
         if (selected && !cur[selected]) { setPath(path, { ...(cur as any), [selected]: {} }); return; }
         if (cur) {
@@ -690,7 +707,7 @@ function FieldBlock(props: {
           <select className="h-9 rounded-[var(--radius)] border px-3 text-sm w-full"
                   value={selected ?? ""} onChange={(e)=>{
                     const next = e.target.value;
-                    const base = path.reduce((acc,k)=> acc?.[k], state) ?? {};
+                    const base = getAtPath(state, path) ?? {};
                     if (!base[next] || Object.keys(base).length !== 1 || !Object.prototype.hasOwnProperty.call(base, next)) {
                       const cleared: any = {}; cleared[next] = base[next] ?? {};
                       setPath(path, cleared);
@@ -712,7 +729,7 @@ function FieldBlock(props: {
     }
 
     // array-choice
-    const rawAtPath = path.reduce((acc,k)=> acc?.[k], state);
+    const rawAtPath = getAtPath(state, path);
     const items: any[] = Array.isArray(rawAtPath) ? rawAtPath : [];
     React.useEffect(() => {
       if (rawAtPath != null && !Array.isArray(rawAtPath)) setPath(path, []);
@@ -788,7 +805,7 @@ function FieldBlock(props: {
 
   // --- simple array (element of simple type with maxOccurs>1/unbounded) ---
   if (f.kind !== "attribute" && f.dtype !== "object" && isArrayMultiplicity(f)) {
-    const rawAtPath = path.reduce((acc,k)=> acc?.[k], state);
+    const rawAtPath = getAtPath(state, path);
     const items: any[] = Array.isArray(rawAtPath) ? rawAtPath : [];
     const missingHere = (f.minOccurs ?? 1) > 0 && items.length === 0;
     React.useEffect(() => {
@@ -847,7 +864,7 @@ function FieldBlock(props: {
 
   // attribute or simple scalar (non-array)
   if (f.kind === "attribute" || (f.dtype !== "object" && !f.children && !f.attributes)) {
-    const val = path.reduce((acc,k)=> acc?.[k], state);
+    const val = getAtPath(state, path);
     const localErrs = getLocalErrorsForPath(errors, path);
     const missingRequired = isRequiredField(f) && isEmptyValue(val);
     // показываем синтетическое «Поле обязательно» только если валидатор ещё не отметил обязательность
@@ -880,7 +897,7 @@ function FieldBlock(props: {
 
   // array-complex
   if (isArray) {
-    const rawAtPath = path.reduce((acc,k)=> acc?.[k], state);
+    const rawAtPath = getAtPath(state, path);
     const items: any[] = Array.isArray(rawAtPath) ? rawAtPath : [];
     React.useEffect(() => {
       if (rawAtPath != null && !Array.isArray(rawAtPath)) setPath(path, []);
@@ -905,7 +922,7 @@ function FieldBlock(props: {
 
     // локальная проверка обязательных внутри элементов (shallow) — для подсветки блока
     const localMissing = items.some((_, idx) => {
-      const container = path.reduce((acc,k)=> acc?.[k], state)?.[idx] ?? {};
+      const container = getAtPath(state, path)?.[idx] ?? {};
       const children = (f.children ?? []) as FieldModel[];
       const attrs = (f.attributes ?? []) as FieldModel[];
       for (const ch of children) {
@@ -1005,7 +1022,15 @@ function FieldBlock(props: {
                     errors={errors}
                   />
                 );
-                return <Comp f={f} path={[...path, idx]} childrenFields={childrenFields} renderChild={(c,p)=>renderChild(c,[...path, idx, c.name])} />;
+                // фикс опечаток: "[.path" → "[...path", + типы в лямбде
+                return (
+                  <Comp
+                    f={f}
+                    path={[...path, idx]}
+                    childrenFields={childrenFields}
+                    renderChild={(c: FieldModel, _p: (string|number)[])=>renderChild(c,[...path, idx, c.name])}
+                  />
+                );
               }
               return childrenJsx;
             })()}
@@ -1042,7 +1067,7 @@ function FieldBlock(props: {
   }
 
   // single complex
-  const valueAtPath = path.reduce((acc,k)=> acc?.[k], state);
+  const valueAtPath = getAtPath(state, path);
 
   // placeholder для необязательных одиночных (min=0, max=1)
   if ((min ?? 1) === 0 && (valueAtPath == null)) {
@@ -1115,7 +1140,14 @@ function FieldBlock(props: {
             errors={errors}
           />
         );
-        return <Comp f={f} path={path} childrenFields={childrenFields} renderChild={(c,p)=>renderChild(c,[...path, c.name])} />;
+        // фикс опечаток: "[.path" → "[...path", + типы в лямбде
+        return (
+          <Comp
+            f={f}
+            path={path}
+            childrenFields={childrenFields}
+            renderChild={(c: FieldModel, _p: (string|number)[])=>renderChild(c,[...path, c.name])} />
+        );
       }
       return childrenJsx;
     })();
