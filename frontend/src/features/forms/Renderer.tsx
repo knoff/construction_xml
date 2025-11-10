@@ -9,6 +9,7 @@ import {
   normalizeKey,
   splitKey,
   getAtPath,
+  setAtPath, delAtPath, Path as PathType, splitChoiceContainer, filterChoiceGroup,
 } from "@/features/forms/utils/path";
 import {
   countSubtreeErrors,
@@ -44,33 +45,70 @@ import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover
 // import { LabelEditorDialog } from "@/features/forms/dialogs/LabelEditorDialog";
 // import { useUiMetaForPath } from "@/features/forms/hooks/useUiMeta";
 
+// --- helpers for legacy migration of __choice__ → __choice__#NN ---
+function isNamedChoice(name?: string) {
+  return typeof name === "string" && /^__choice__#\d{2}$/.test(name);
+}
+function readChoiceContainer(state: any, path: (string|number)[], f: FieldModel, options: {name:string}[]) {
+  // если новый путь пуст, пытаемся прочитать legacy "__choice__" и отфильтровать только свою группу
+  const cur = getAtPath(state, path);
+  if (cur != null) return cur;
+  if (!isNamedChoice(f.name)) return cur;
+  const legacyPath = [...path.slice(0, -1), "__choice__"];
+  const legacy = getAtPath(state, legacyPath);
+  if (legacy == null) return cur;
+  // берём только элементы/ключи, чьи верхние ключи ∈ options
+  if (Array.isArray(legacy)) {
+    const allow = new Set(options.map(o => o.name));
+    return legacy.filter(it => it && typeof it === "object" && allow.has(Object.keys(it)[0]));
+  }
+  if (legacy && typeof legacy === "object") {
+    const allow = new Set(options.map(o => o.name));
+    const out: any = {};
+    for (const k of Object.keys(legacy)) if (allow.has(k)) out[k] = legacy[k];
+    return Object.keys(out).length ? out : cur;
+  }
+  return cur;
+}
+
+
+
+function composeChoiceContainer(arr: any[], obj: Record<string, any>) {
+  if (Object.keys(obj).length > 0) {
+    const out: Record<string, any> = { ...obj };
+    arr.forEach((it, i) => { out[String(i)] = it; });
+    return out;
+  }
+  return arr;
+}
+
+function clearContainerForSelect(container: any, options: any[], nextName: string) {
+  const out = { ...(container ?? {}) };
+  const seq = options.find((o: any) => o.kind === "sequence");
+  // убрать все одиночные опции, кроме выбранной
+  for (const opt of options.filter((o: any) => o.kind !== "sequence")) {
+    if (opt.name !== nextName) delete out[opt.name];
+  }
+  // если выбираем одиночную опцию — чистим детей sequence
+  if (seq && Array.isArray(seq.children) && nextName !== "__sequence__") {
+    for (const ch of seq.children) delete out[ch.name];
+  }
+  // если выбираем sequence — чистим одиночные опции (на всякий случай)
+  if (nextName === "__sequence__") {
+    for (const opt of options.filter((o: any) => o.kind !== "sequence")) delete out[opt.name];
+  }
+  return out;
+}
+
 // ---------- form-state ----------
 
 export function useFormState<T extends object>(initial: T) {
   const [state, setState] = React.useState<T>(initial);
-  const setPath = React.useCallback((path: (string|number)[], val: any) => {
-    setState(prev => {
-      const next: any = structuredClone(prev ?? {});
-      let cur = next;
-      for (let i=0; i<path.length-1; i++) {
-        const k = path[i];
-        cur[k] ??= typeof path[i+1] === "number" ? [] : {};
-        cur = cur[k];
-      }
-      cur[path[path.length-1]] = val;
-      return next;
-    });
+  const setPath = React.useCallback((path: PathType, val: any) => {
+    setState(prev => setAtPath(prev, path, val));
   }, []);
-  const delPath = React.useCallback((path: (string|number)[]) => {
-    setState(prev => {
-      const next: any = structuredClone(prev ?? {});
-      let cur = next;
-      for (let i=0; i<path.length-1; i++) cur = cur[path[i]];
-      const last = path[path.length-1];
-      if (Array.isArray(cur)) cur.splice(Number(last), 1);
-      else delete cur[last as any];
-      return next;
-    });
+  const delPath = React.useCallback((path: PathType) => {
+    setState(prev => delAtPath(prev, path));
   }, []);
   return { state, setPath, delPath, setState };
 }
@@ -681,49 +719,91 @@ function FieldBlock(props: {
     const options = (f.children ?? []).filter(x => x.kind !== "attribute");
     const deriveSelected = (container:any): string | null => {
       if (!container || typeof container !== "object") return null;
-      for (const opt of options) if (Object.prototype.hasOwnProperty.call(container, opt.name)) return opt.name;
+      // обычные варианты (element)
+      for (const opt of options.filter((o:any)=>o.kind !== "sequence")) {
+        if (Object.prototype.hasOwnProperty.call(container, opt.name)) return opt.name;
+      }
+      // sequence-вариант: если в контейнере есть хотя бы один ребёнок sequence — считаем его выбранным
+      const seq = options.find((o:any)=>o.kind === "sequence");
+      if (seq && Array.isArray((seq as any).children)) {
+        if ((seq as any).children.some((ch:any)=>Object.prototype.hasOwnProperty.call(container, ch.name))) {
+          return "__sequence__";
+        }
+      }
       return null;
     };
 
-    // single-choice
+    
+    // ---------------- single choice ----------------
     if (!isArray) {
-      const container = getAtPath(state, path);
-      const selected = deriveSelected(container ?? {}) ?? options[0]?.name ?? null;
-      React.useEffect(() => {
-        const cur = getAtPath(state, path);
-        if (!cur) { setPath(path, selected ? { [selected]: {} } : {}); return; }
-        if (selected && !cur[selected]) { setPath(path, { ...(cur as any), [selected]: {} }); return; }
-        if (cur) {
-          let changed = false; const next: any = { ...(cur as any) };
-          for (const opt of options) if (opt.name !== selected && next[opt.name]) { delete next[opt.name]; changed = true; }
-          if (changed) setPath(path, next);
+      // читаем контейнер (с поддержкой legacy "__choice__")
+      const container = readChoiceContainer(state, path, f as any, options as any) ?? {};
+      const seqOpt = options.find(o => (o as any).kind === "sequence") as any | undefined;
+      const selected: string | null = ((): string | null => {
+        // 1) обычные элемент-варианты
+        for (const opt of options.filter(o => (o as any).kind !== "sequence")) {
+          if (Object.prototype.hasOwnProperty.call(container, opt.name)) return opt.name;
         }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [selected]);
+        // 2) sequence-вариант — если в контейнере есть хотя бы один ребёнок sequence
+        if (seqOpt?.children?.some((ch: any) => Object.prototype.hasOwnProperty.call(container, ch.name))) {
+          return "__sequence__";
+        }
+        // 3) по умолчанию — первая опция
+        return options[0]?.name ?? null;
+      })();
+
+      // смена варианта: корректно чистим контейнер
+      const handleSelectChange = (nextName: string | null) => {
+        const cur = getAtPath(state, path);
+        const cleared = clearContainerForSelect(cur, options as any, nextName ?? "");
+        if (nextName && nextName !== "__sequence__") {
+          (cleared as any)[nextName] = (cleared as any)[nextName] ?? {};
+        }
+        setPath(path, cleared);
+      };
 
       return (
         <div className="space-y-2">
           <FieldLabel f={{...f, documentation: f.documentation ?? {label: "Вариант"}} as any} path={path}/>
-          <select className="h-9 rounded-[var(--radius)] border px-3 text-sm w-full"
-                  value={selected ?? ""} onChange={(e)=>{
-                    const next = e.target.value;
-                    const base = getAtPath(state, path) ?? {};
-                    if (!base[next] || Object.keys(base).length !== 1 || !Object.prototype.hasOwnProperty.call(base, next)) {
-                      const cleared: any = {}; cleared[next] = base[next] ?? {};
-                      setPath(path, cleared);
-                    }
-                  }}>
-            {options.map(o => <option key={o.name} value={o.name}>{o.documentation?.label ?? o.name}</option>)}
+          <select
+            className="h-9 rounded-[var(--radius)] border px-3 text-sm w-full"
+            value={selected ?? ""}
+            onChange={(e) => handleSelectChange(e.target.value || null)}
+          >
+            {/* элемент-варианты */}
+            {options.filter(o => (o as any).kind !== "sequence").map(o => (
+              <option key={o.name} value={o.name}>{o.documentation?.label ?? o.name}</option>
+            ))}
+            {/* виртуальный вариант для xs:sequence (если есть) */}
+            {seqOpt && <option value="__sequence__">{seqOpt.documentation?.label ?? "Группа полей"}</option>}
           </select>
-          {selected && (
-            <div className="rounded-xl border p-3 space-y-3">
-              {options.filter(o => o.name === selected).map(opt => (
-                <FieldBlock key={opt.name} f={opt}
-                  path={[...path, opt.name]} state={state} setPath={setPath} delPath={delPath}
-                  types={types} visitedTypes={nextVisited}/>
-              ))}
-            </div>
-          )}
+
+          {/* содержимое выбранного варианта */}
+          <div className="rounded-xl border p-3 space-y-3">
+            {selected === "__sequence__" && seqOpt
+              ? (seqOpt.children ?? []).map((ch: any) => (
+                  <FieldBlock
+                    key={ch.name}
+                    f={ch as FieldModel}
+                    path={[...path, ch.name]}   // sequence-дети лежат прямо в контейнере
+                    state={state} setPath={setPath} delPath={delPath}
+                    types={types} visitedTypes={nextVisited}
+                    errors={errors}
+                  />
+                ))
+              : options
+                  .filter(o => o.name === selected)
+                  .map(opt => (
+                    <FieldBlock
+                      key={opt.name}
+                      f={opt}
+                      path={[...path, opt.name]}
+                      state={state} setPath={setPath} delPath={delPath}
+                      types={types} visitedTypes={nextVisited}
+                      errors={errors}
+                    />
+                  ))}
+          </div>
         </div>
       );
     }

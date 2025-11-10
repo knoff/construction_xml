@@ -218,15 +218,67 @@ def _parse_model_group(group: etree._Element) -> List[FieldModel]:
         return out
 
     if tag_local == "choice":
-        # preserve multiplicity of the CHOICE group itself
-        mi, ma = _occurs(group)   # ma == None for unbounded
-        alts = [ _parse_element(el) for el in group.findall("./xs:element", namespaces=NS) ]
+        # Определяем порядковый номер choice среди сиблингов (стабильный в пределах родителя)
+        parent = group.getparent()
+        sibs = list(parent) if parent is not None else []
+        seen = 0
+        for n in sibs:
+            if n is group:
+                break
+            if isinstance(n.tag, str) and n.tag.split("}")[-1] == "choice":
+                seen += 1
+        choice_idx = seen + 1
+        choice_name = f"__choice__#{choice_idx:02d}"
+
+        # multiplicity сохраняем у самого choice
+        mi, ma = _occurs(group)
+        alts: List[FieldModel] = []
+
+        # Варианты choice: element | sequence | all | group
+        for node in list(group):
+            if not isinstance(node.tag, str):
+                continue
+            ntag = node.tag.split("}")[-1]
+            if ntag == "element":
+                alts.append(_parse_element(node))
+            elif ntag == "sequence":
+                seq_children: List[FieldModel] = []
+                for snode in list(node):
+                    if not isinstance(snode.tag, str):
+                        continue
+                    sntag = snode.tag.split("}")[-1]
+                    if sntag == "element":
+                        seq_children.append(_parse_element(snode))
+                    elif sntag in ("sequence", "choice", "all", "group"):
+                        seq_children.extend(_parse_model_group(snode))
+                alts.append(FieldModel(
+                    kind="sequence",
+                    name="__sequence__",
+                    dtype="object",
+                    minOccurs=1,
+                    maxOccurs=1,
+                    documentation=_first_doc(node),
+                    children=[c for c in seq_children] if seq_children else None,
+                ))
+            elif ntag in ("all", "group"):
+                seq_children: List[FieldModel] = _parse_model_group(node)
+                alts.append(FieldModel(
+                    kind="sequence",
+                    name="__sequence__",
+                    dtype="object",
+                    minOccurs=1,
+                    maxOccurs=1,
+                    documentation=_first_doc(node),
+                    children=[c for c in seq_children] if seq_children else None,
+                ))
+            # прочие — игнор
+
         out.append(FieldModel(
             kind="choice",
-            name="__choice__",
+            name=choice_name,                # ВАЖНО: уникальное имя узла
             dtype="object",
             minOccurs=mi,
-            maxOccurs=ma,          # <-- IMPORTANT: don't normalize 1 → keep None for unbounded
+            maxOccurs=ma,
             documentation=_first_doc(group),
             children=alts,
         ))
