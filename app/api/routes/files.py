@@ -22,6 +22,9 @@ def _safe_ext(filename: str, fallback: str = "") -> str:
     # ограничим до 8 символов на всякий случай
     return ext[:8]
 
+def _iso(dt: Optional[datetime]) -> Optional[str]:
+    return dt.isoformat() if dt else None
+
 def _storage_key(sha: str, ext: str | None = None) -> str:
     # максимально короткий иерархический путь; длина ~ 2 + 1 + 64 + 1 + len(ext) + префикс
     # префикс держим минимальным: "f/"
@@ -67,7 +70,7 @@ async def upload_file(
         "version": {
             "id": ver.id, "original_name": ver.original_name, "mime": ver.mime, "size": ver.size,
             "sha256": ver.sha256, "crc32": ver.crc32, "storage_path": ver.storage_path,
-            "created_at": ver.created_at.isoformat(),
+            "created_at": _iso(ver.created_at),
         }
     }
 
@@ -86,13 +89,13 @@ def get_file(file_id:int, db: Session = Depends(get_db)):
         "id": r.id, "object_id": r.object_id,
         "title": r.title, "doc_number": r.doc_number, "doc_date": r.doc_date,
         "author": r.author, "doc_type": r.doc_type, "group": r.group,
-        "created_at": r.created_at.isoformat(),
+        "created_at": _iso(r.created_at),
     }
     if ver:
         out["version"] = {
             "id": ver.id, "original_name": ver.original_name, "mime": ver.mime, "size": ver.size,
             "sha256": ver.sha256, "crc32": ver.crc32, "storage_path": ver.storage_path,
-            "created_at": ver.created_at.isoformat(),
+            "created_at": _iso(ver.created_at),
         }
     return out
 
@@ -146,7 +149,7 @@ def list_versions(file_id:int, db: Session = Depends(get_db)):
     return [{
         "id": v.id, "original_name": v.original_name, "mime": v.mime, "size": v.size,
         "sha256": v.sha256, "crc32": v.crc32, "storage_path": v.storage_path,
-        "created_at": v.created_at.isoformat() if v.created_at else None,
+        "created_at": _iso(v.created_at),
         "is_deleted": v.is_deleted,
         "is_latest": (v.id == latest_alive),
     } for v in vers]
@@ -208,7 +211,7 @@ def list_object_files(object_id: int, db: Session = Depends(get_db)):
         "storage_path": f.storage_path,
         # счётчик версий (по умолчанию считаем неудалённые)
         "versions_count": sum(1 for v in (f.versions or []) if not getattr(v, "is_deleted", False)),
-        "created_at": (f.created_at.isoformat() if getattr(f, "created_at", None) else None),
+        "created_at": _iso(f.created_at),
     } for f in rows]
 
 # Подпись .sig теперь привязываем к версии

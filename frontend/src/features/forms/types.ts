@@ -12,7 +12,7 @@ export type Facets = {
 };
 
 export type FieldModel = {
-  kind: 'element' | 'attribute' | 'choice';
+  kind: 'element' | 'attribute' | 'choice' | 'sequence';
   name: string;
   dtype: string;                // "xs:string" | "object" | named type
   refType?: string;             // when points to named type

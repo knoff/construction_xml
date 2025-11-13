@@ -38,3 +38,16 @@ export function useLabelOverrides() {
   return React.useContext(LabelOverridesCtx);
 }
 
+// Form state controller context for block overrides to read/write form values
+type FormStateCtxValue<T = any> = {
+  state: T;
+  setPath: (path: (string | number)[], value: unknown) => void;
+  delPath: (path: (string | number)[]) => void;
+};
+export const FormStateCtx = React.createContext<FormStateCtxValue | null>(null);
+export function useFormStateController<T = any>() {
+  const ctx = React.useContext(FormStateCtx);
+  if (!ctx) throw new Error("useFormStateController must be used within FormStateCtx.Provider");
+  return ctx as FormStateCtxValue<T>;
+}
+

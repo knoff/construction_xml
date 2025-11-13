@@ -130,57 +130,69 @@ export default function DocumentFill() {
 
   return (
     <div className="p-6 space-y-4">
-      <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold">
-          Заполнение: {doc?.schema?.name} — объект «{doc?.object?.name ?? "—"}»
-        </h2>
-        <div className="flex gap-2">
-          <button className="h-9 rounded-[var(--radius)] border px-3 text-sm"
-                  onClick={saveNewVersion} disabled={saving}>
-            Сохранить
-          </button>
-          <button
-            type="button"
-            className={`h-8 rounded-xl border px-3 text-sm ${uiDirty ? "bg-black text-white" : "opacity-50"}`}
-            onClick={saveUiOverrides}
-            disabled={!uiDirty}
-            title="Сохранить UI-переопределения для этой схемы"
-          >
-            Сохранить UI-правки
-          </button>
-          <a
-            className="h-9 rounded-[var(--radius)] border px-3 text-sm inline-flex items-center"
-            href="/ui/documents"
-          >
-            К списку
-          </a>
+      <div className="sticky top-0 z-20 bg-[var(--background)] pt-2 pb-2 border-b">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-semibold">
+            Заполнение: {doc?.schema?.name} — объект «{doc?.object?.name ?? "—"}»
+          </h2>
+          <div className="flex gap-2">
+            <button
+              className="h-9 rounded-[var(--radius)] border px-3 text-sm inline-flex items-center whitespace-nowrap disabled:opacity-50"
+              onClick={saveNewVersion}
+              disabled={saving}
+            >
+              Сохранить
+            </button>
+            <button
+              type="button"
+              className="h-9 rounded-[var(--radius)] border px-3 text-sm inline-flex items-center whitespace-nowrap disabled:opacity-50"
+              onClick={saveUiOverrides}
+              disabled={!uiDirty}
+              title="Сохранить UI-переопределения для этой схемы"
+            >
+              Сохранить UI-правки
+            </button>
+            <a
+              className="h-9 rounded-[var(--radius)] border px-3 text-sm inline-flex items-center whitespace-nowrap"
+              href="/ui/documents"
+            >
+              К списку
+            </a>
+          </div>
         </div>
+        {doc?.latest_version_id ? (
+          <div className="text-xs text-zinc-500 mt-1">
+            Текущая версия: #{doc.latest_version_id}
+          </div>
+        ) : (
+          <div className="text-xs text-zinc-500 mt-1">
+            Версий пока нет — первая будет создана при сохранении
+          </div>
+        )}
       </div>
-
-      {doc?.latest_version_id ? (
-        <div className="text-xs text-zinc-500">
-          Текущая версия: #{doc.latest_version_id}
-        </div>
-      ) : (
-        <div className="text-xs text-zinc-500">
-          Версий пока нет — первая будет создана при сохранении
-        </div>
-      )}
 
       {/* Форма по internal model */}
       <UiOverridesProvider
-         value={{
-           overrides: uiOverrides,
-           setOverrides: (next: Record<string, any>) => { setUiOverrides(next); setUiDirty(true); },
-           markDirty: () => setUiDirty(true),
-         }}
-       >
-        <RenderRoot
-          fields={model.root}
-          types={model.types}
-          stateCtl={stateCtl}
-          errors={errors}
-        />
+        value={{
+          overrides: uiOverrides,
+          setOverrides: (next: Record<string, any>) => { setUiOverrides(next); setUiDirty(true); },
+          markDirty: () => setUiDirty(true),
+        }}
+      >
+        <DocumentCtx.Provider value={{
+          documentId: Number(id),
+          objectId: doc?.object?.id ?? null,
+          objectName: doc?.object?.name ?? null,
+          schemaId: doc?.schema?.id ?? null,
+          schemaName: doc?.schema?.name ?? null,
+        }}>
+          <RenderRoot
+            fields={model.root}
+            types={model.types}
+            stateCtl={stateCtl}
+            errors={errors}
+          />
+        </DocumentCtx.Provider>
       </UiOverridesProvider>
       <div className="flex items-center justify-between pt-2">
         <div className="text-xs text-zinc-500">
@@ -207,5 +219,20 @@ export function UiOverridesProvider({ value, children }: { value: UiOverridesCtx
 export function useUiOverrides() {
   const ctx = React.useContext(UiOverridesCtx);
   if (!ctx) throw new Error("useUiOverrides must be used within UiOverridesProvider");
+  return ctx;
+}
+
+// ---------- Document meta context (to access document/object inside deep overrides) ----------
+type DocumentMeta = {
+  documentId: number;
+  objectId?: number | null;
+  objectName?: string | null;
+  schemaId?: number | null;
+  schemaName?: string | null;
+};
+const DocumentCtx = React.createContext<DocumentMeta | null>(null);
+export function useDocumentMeta() {
+  const ctx = React.useContext(DocumentCtx);
+  if (!ctx) throw new Error("useDocumentMeta must be used within DocumentCtx provider");
   return ctx;
 }

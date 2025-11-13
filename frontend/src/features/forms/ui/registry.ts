@@ -4,6 +4,8 @@ import DateCalendar from "@/features/forms/ui/date-calendar";
 import TextareaField from "@/features/forms/ui/textarea";
 import EnumCombobox from "@/features/forms/ui/enum-combobox";
 import BlockRow from "@/features/forms/ui/block-row";
+import { TFileBlock } from "@/features/forms/ui/files/TFileBlock";
+import { TDocumentBlock } from "@/features/forms/ui/documents/TDocumentBlock";
 
 export type UiKind = "field" | "block";
 
@@ -26,6 +28,8 @@ export type UiMatchRule = {
   isBlock?: boolean;
   // Если true — компонент применим только к полям со списком (facets.enum / facets.enumOptions)
   requiresEnum?: boolean;
+  // Ограничение по refType (например, complexType tFile)
+  refTypes?: string[];
 };
 
 export type UiComponentMeta = {
@@ -95,7 +99,21 @@ export const UI_COMPONENTS: UiComponentMeta[] = [
     match: { isBlock: true },
     Render: (props: any) => React.createElement(BlockRow, { ...props, fixedCols: 4, labelLines: 2 }),
   },
-  // сюда позже добавим «файлы», «автор», кастомные блоки и т.д.
+  // ===== Файлы / сложные блоки =====
+  {
+    id: "files.tfile-card",
+    title: "Файл: карточка выбора",
+    kind: "block",
+    match: { isBlock: true, refTypes: ["tFile"] },
+    Render: (props: any) => React.createElement(TFileBlock, props),
+  },
+  {
+    id: "documents.tdocument-card",
+    title: "Документ: карточка",
+    kind: "block",
+    match: { isBlock: true, refTypes: ["tDocument"] },
+    Render: (props: any) => React.createElement(TDocumentBlock, props),
+  },
 ];
 
 // ---------- Утилиты сопоставления ----------
@@ -116,6 +134,12 @@ export function canUseComponent(meta: UiComponentMeta, args: { f: FieldModel; is
   if (Array.isArray(xmlTypes) && xmlTypes.length > 0) {
     if (!t) return false;
     if (!xmlTypes.includes(t)) return false;
+  }
+
+  const refTypes: unknown = (match as any).refTypes;
+  if (Array.isArray(refTypes) && refTypes.length > 0) {
+    const ref = (args.f as any)?.refType;
+    if (!ref || !refTypes.includes(String(ref))) return false;
   }
 
   if ((match as any).requiresEnum) {

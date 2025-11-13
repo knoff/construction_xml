@@ -2,7 +2,7 @@ import * as React from "react";
 import type { FieldModel } from "../types";
 import { normalizePathKey } from "@/features/forms/utils/path";
 import { useUiOverrides } from "@/pages/DocumentFill";
-import { CollapseCtx, LabelOverridesCtx } from "./contexts";
+import { CollapseCtx, LabelOverridesCtx, FormStateCtx } from "./contexts";
 import { LabelEditorDialog } from "./dialogs/LabelEditorDialog";
 import { FieldBlock } from "../FieldBlock";
 import type { FormStateController } from "./hooks/useFormState";
@@ -81,35 +81,37 @@ export function RenderRoot({ fields, types, stateCtl, errors }: RenderRootProps)
           openEditor,
         }}
       >
-        <div className="space-y-4">
-          {fields.map((f) => (
-            <FieldBlock
-              key={f.name}
-              field={f}
-              path={[f.name]}
-              state={state}
-              setPath={setPath}
-              delPath={delPath}
-              types={types}
-              visitedTypes={visited}
-              errors={errors}
-            />
-          ))}
-        </div>
-        <LabelEditorDialog
-          open={dialogOpen}
-          onOpenChange={setDialogOpen}
-          pathKey={dialogState.current.pathKey}
-          original={dialogState.current.original}
-          current={dialogState.current.current}
-          onSave={(value) => {
-            const raw = dialogState.current.pathKey;
-            const original = dialogState.current.original ?? "";
-            if (raw) {
-              setLabel(raw, original, value);
-            }
-          }}
-        />
+        <FormStateCtx.Provider value={{ state, setPath, delPath }}>
+          <div className="space-y-4">
+            {fields.map((f) => (
+              <FieldBlock
+                key={f.name}
+                field={f}
+                path={[f.name]}
+                state={state}
+                setPath={setPath}
+                delPath={delPath}
+                types={types}
+                visitedTypes={visited}
+                errors={errors}
+              />
+            ))}
+          </div>
+          <LabelEditorDialog
+            open={dialogOpen}
+            onOpenChange={setDialogOpen}
+            pathKey={dialogState.current.pathKey}
+            original={dialogState.current.original}
+            current={dialogState.current.current}
+            onSave={(value) => {
+              const raw = dialogState.current.pathKey;
+              const original = dialogState.current.original ?? "";
+              if (raw) {
+                setLabel(raw, original, value);
+              }
+            }}
+          />
+        </FormStateCtx.Provider>
       </LabelOverridesCtx.Provider>
     </CollapseCtx.Provider>
   );
