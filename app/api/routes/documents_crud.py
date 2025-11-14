@@ -28,10 +28,26 @@ class DocumentWithLatestOut(DocumentOut):
 
 def _pack(doc: DocumentRow, obj: ObjectRow | None, sch: Schema | None) -> DocumentOut:
     return DocumentOut(
-        id=doc.id, doc_uid=doc.doc_uid, status=doc.status,
-        object=({ "id": obj.id, "name": obj.name } if obj else None),
-        schema=({ "id": sch.id, "name": sch.name, "version": sch.version } if sch else None),
-        created_at=doc.created_at, updated_at=doc.updated_at
+        id=doc.id,
+        doc_uid=doc.doc_uid,
+        status=doc.status,
+        object=(
+            {"id": obj.id, "uid": getattr(obj, "obj_uid", None), "name": obj.name}
+            if obj
+            else None
+        ),
+        schema=(
+            {
+                "id": sch.id,
+                "name": sch.name,
+                "version": sch.version,
+                "code": getattr(getattr(sch, "type", None), "code", None),
+            }
+            if sch
+            else None
+        ),
+        created_at=doc.created_at,
+        updated_at=doc.updated_at,
     )
 
 @router.get("/", response_model=list[DocumentOut])

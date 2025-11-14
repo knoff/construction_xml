@@ -7,6 +7,7 @@ import { HelpText } from "../components/HelpText";
 import { useUiOverrides } from "@/pages/DocumentFill";
 import { UI_COMPONENTS, canUseComponent } from "@/features/forms/ui/registry";
 import { shallowMissingForField } from "../utils";
+import { ValueLinkQuickCheck } from "@/features/forms/ui/components/ValueLinkStatus";
 
 type RenderFieldFn = (field: FieldModel, path: (string | number)[]) => React.ReactNode;
 
@@ -109,6 +110,14 @@ export function ComplexArray({
       errsHere={nodeErrors}
       errCount={subtreeMeta.count + synthetic.count}
       errPreview={errPreview}
+      headerStatus={
+        <ValueLinkQuickCheck
+          path={path}
+          value={items}
+          label="Статус сопоставления раздела"
+          variant="inline"
+        />
+      }
     >
       {items.map((_, index) => {
         const itemPath = [...path, index];
@@ -131,7 +140,7 @@ export function ComplexArray({
         const renderedChildren =
           manualMeta && canUseComponent(manualMeta, { f: field, isBlock: true })
             ? (() => {
-                const Component = manualMeta.Render as React.FC<{
+                const Component = manualMeta.Render as unknown as React.FC<{
                   f: FieldModel;
                   path: (string | number)[];
                   childrenFields: FieldModel[];
@@ -153,6 +162,14 @@ export function ComplexArray({
 
         return (
           <div key={index} className="rounded-xl border p-3 space-y-3 bg-white">
+            <div className="flex justify-end">
+              <ValueLinkQuickCheck
+                path={itemPath}
+                value={items[index]}
+                label={`Сопоставление элемента ${index + 1}`}
+                variant="inline"
+              />
+            </div>
             {renderedChildren}
             <div className="flex justify-end">
               <div className="flex items-center gap-2">

@@ -6,6 +6,11 @@ import { useDocumentMeta } from "@/pages/DocumentFill";
 import BlockRow from "@/features/forms/ui/block-row";
 import { SelectFileDialog } from "./SelectFileDialog";
 import { UploadDialog } from "@/components/ui/upload-dialog";
+import {
+  useValueLinks,
+  useValueLinkStatus,
+} from "@/features/forms/hooks/useValueLinks";
+import { ValueLinkMatches, ValueLinkStatusBadge } from "@/features/forms/ui/components/ValueLinkStatus";
 
 const OBJECT_FILES_CACHE = new Map<number, { items: ObjectFileSummary[]; fetchedAt: number }>();
 const CACHE_TTL = 30_000;
@@ -52,6 +57,7 @@ export function TFileBlock(props: TFileBlockProps) {
   const { path, childrenFields, renderChild } = props;
   const { state, setPath, delPath } = useFormStateController<any>();
   const docMeta = useDocumentMeta();
+  const valueLinks = useValueLinks();
 
   const [selectOpen, setSelectOpen] = React.useState(false);
   const [uploadOpen, setUploadOpen] = React.useState(false);
@@ -66,8 +72,18 @@ export function TFileBlock(props: TFileBlockProps) {
   const fileName = React.useMemo(() => getAtPath(state, [...path, "FileName"]), [state, path]);
   const fileFormat = React.useMemo(() => getAtPath(state, [...path, "FileFormat"]), [state, path]);
   const fileChecksum = React.useMemo(() => getAtPath(state, [...path, "FileChecksum"]), [state, path]);
+  const checksumPath = React.useMemo<(string | number)[]>(() => [...path, "FileChecksum"], [path]);
+  const mappingKey = React.useMemo(() => valueLinks.buildKey(checksumPath), [valueLinks, checksumPath]);
+  const linkStatus = useValueLinkStatus(checksumPath);
 
   const normalizedChecksum = normalizeCrc(fileChecksum);
+  const canCheckLinks = Boolean(mappingKey && normalizedChecksum);
+  const checkingLinks = linkStatus?.state === "loading";
+
+  const handleCheckLinks = React.useCallback(async () => {
+    if (!mappingKey) return;
+    await valueLinks.check(checksumPath, normalizedChecksum ?? fileChecksum ?? null);
+  }, [mappingKey, valueLinks, checksumPath, normalizedChecksum, fileChecksum]);
 
   const mainFields = React.useMemo(() => childrenFields.filter((child) => child?.name !== "SignFile"), [childrenFields]);
   const signField = React.useMemo(() => childrenFields.find((child) => child?.name === "SignFile"), [childrenFields]);
@@ -249,6 +265,15 @@ export function TFileBlock(props: TFileBlockProps) {
           )}
         </div>
         <div className="flex flex-wrap items-center gap-2">
+          <ValueLinkStatusBadge status={linkStatus} available={Boolean(mappingKey)} />
+          <button
+            type="button"
+            className="h-8 rounded-[var(--radius)] border px-3 text-sm disabled:opacity-50"
+            onClick={handleCheckLinks}
+            disabled={!canCheckLinks || checkingLinks}
+          >
+            {checkingLinks ? "Проверка…" : "Проверить совпадения"}
+          </button>
           <button
             type="button"
             className="h-8 rounded-[var(--radius)] border px-3 text-sm disabled:opacity-50"
@@ -306,6 +331,10 @@ export function TFileBlock(props: TFileBlockProps) {
             <InfoRow label="CRC32" value={normalizeCrc(entity.version.crc32)} mismatch={diff?.checksum} />
           </dl>
         </div>
+      )}
+
+      {mappingKey && linkStatus && linkStatus.matches.length > 0 && (
+        <ValueLinkMatches matches={linkStatus.matches} status={linkStatus.state} />
       )}
 
       {manualFieldsVisible && (
@@ -435,6 +464,7 @@ function InfoRow({ label, value, mismatch }: { label: string; value?: string | n
     </div>
   );
 }
+
 
 async function loadObjectFiles(objectId: number): Promise<ObjectFileSummary[]> {
   const cached = OBJECT_FILES_CACHE.get(objectId);

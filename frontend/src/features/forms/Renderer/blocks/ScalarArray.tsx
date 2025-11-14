@@ -4,6 +4,7 @@ import { getAtPath } from "@/features/forms/utils/path";
 import { FieldLabel } from "../components/FieldLabel";
 import { SimpleInput } from "../components/inputs/SimpleInput";
 import { HelpText } from "../components/HelpText";
+import { ValueLinkQuickCheck } from "@/features/forms/ui/components/ValueLinkStatus";
 
 type ScalarArrayProps = {
   field: FieldModel;
@@ -39,16 +40,22 @@ export function ScalarArray({
 
   return (
     <div className={`space-y-2 ${frameClass}`}>
-      <FieldLabel field={field} path={path} />
+      <FieldLabel field={field} path={path} value={items} />
       <div className="space-y-2">
         {items.map((item, index) => (
-          <div key={index} className="flex items-center gap-2">
-            <div className="flex-1">
+          <div key={index} className="flex items-start gap-2">
+            <div className="flex-1 space-y-1">
               <SimpleInput
                 field={field}
                 path={path}
                 value={item}
                 onChange={(next) => setPath([...path, index], next)}
+              />
+              <ValueLinkQuickCheck
+                path={[...path, index]}
+                value={item}
+                label={`Сопоставление ${index + 1}`}
+                variant="inline"
               />
             </div>
             <div className="flex items-center gap-2">

@@ -3,6 +3,7 @@ import type { FieldModel } from "@/features/forms/types";
 import BlockRow from "@/features/forms/ui/block-row";
 import { useFormStateController } from "@/features/forms/Renderer/contexts";
 import { getAtPath } from "@/features/forms/utils/path";
+import { ValueLinkQuickCheck } from "@/features/forms/ui/components/ValueLinkStatus";
 
 const CHOICE_FIELD_FALLBACK = "__choice__";
 
@@ -43,6 +44,19 @@ export function TDocumentBlock(props: TDocumentBlockProps) {
   const docNumber = getString(state, [...path, "DocNumber"]);
   const docDate = getString(state, [...path, "DocDate"]);
   const docAuthor = getString(state, [...path, "DocIssueAuthor"]);
+  const docNumberPath = React.useMemo<(string | number)[]>(() => [...path, "DocNumber"], [path]);
+  const docDatePath = React.useMemo<(string | number)[]>(() => [...path, "DocDate"], [path]);
+  const docAuthorPath = React.useMemo<(string | number)[]>(() => [...path, "DocIssueAuthor"], [path]);
+  const quickChecks = React.useMemo(
+    () => {
+      const items: { id: string; label: string; path: (string | number)[]; value: unknown }[] = [];
+      if (docNumber) items.push({ id: "DocNumber", label: "Совпадение номера", path: docNumberPath, value: docNumber });
+      if (docDate) items.push({ id: "DocDate", label: "Совпадение даты", path: docDatePath, value: docDate });
+      if (docAuthor) items.push({ id: "DocIssueAuthor", label: "Совпадение автора", path: docAuthorPath, value: docAuthor });
+      return items;
+    },
+    [docAuthor, docAuthorPath, docDate, docDatePath, docNumber, docNumberPath],
+  );
   const docChangesField = React.useMemo(
     () => metaFields.find((field) => field?.name === "DocChanges") ?? null,
     [metaFields],
@@ -105,6 +119,19 @@ export function TDocumentBlock(props: TDocumentBlockProps) {
         <div className="text-xs uppercase tracking-wide text-zinc-500">{docTypeLabel}</div>
         <div className="text-lg font-semibold text-zinc-900">{docName || "Документ"}</div>
         {summaryLine ? <div className="text-xs text-zinc-500">{summaryLine}</div> : null}
+        {quickChecks.length > 0 ? (
+          <div className="mt-2 flex flex-wrap gap-2">
+            {quickChecks.map((check) => (
+              <ValueLinkQuickCheck
+                key={check.id}
+                path={check.path}
+                value={check.value}
+                label={check.label}
+                variant="inline"
+              />
+            ))}
+          </div>
+        ) : null}
       </div>
 
       {/* Основные метаданные в виде сетки */}

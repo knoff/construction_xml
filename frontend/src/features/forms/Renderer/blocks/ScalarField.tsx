@@ -34,7 +34,7 @@ export function ScalarField({ field, path, state, setPath, errors }: ScalarField
 
   return (
     <div className="space-y-1">
-      <FieldLabel field={field} path={path} />
+      <FieldLabel field={field} path={path} value={value} />
       <SimpleInput field={field} path={path} value={value} onChange={(next) => setPath(path, next)} />
       <HelpText field={field} />
       {displayErrors.length > 0 && (

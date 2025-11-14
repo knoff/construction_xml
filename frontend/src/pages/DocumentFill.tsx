@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { RenderRoot, useFormState } from "@/features/forms/Renderer";
 import type { SchemaModel } from "@/features/forms/types";
 import { validateModel } from "@/features/forms/validate";
+import { ValueLinkProvider } from "@/features/forms/hooks/useValueLinks";
 
 /** DocumentFill: загрузка меты документа, internal-model, рендер формы и сохранение версий. */
 export default function DocumentFill() {
@@ -181,17 +182,23 @@ export default function DocumentFill() {
       >
         <DocumentCtx.Provider value={{
           documentId: Number(id),
+          documentUid: doc?.doc_uid ?? null,
           objectId: doc?.object?.id ?? null,
+          objectUid: doc?.object?.uid ?? null,
           objectName: doc?.object?.name ?? null,
           schemaId: doc?.schema?.id ?? null,
+          schemaCode: doc?.schema?.code ?? null,
           schemaName: doc?.schema?.name ?? null,
+          schemaVersion: doc?.schema?.version ?? null,
         }}>
-          <RenderRoot
-            fields={model.root}
-            types={model.types}
-            stateCtl={stateCtl}
-            errors={errors}
-          />
+          <ValueLinkProvider>
+            <RenderRoot
+              fields={model.root}
+              types={model.types}
+              stateCtl={stateCtl}
+              errors={errors}
+            />
+          </ValueLinkProvider>
         </DocumentCtx.Provider>
       </UiOverridesProvider>
       <div className="flex items-center justify-between pt-2">
@@ -225,10 +232,14 @@ export function useUiOverrides() {
 // ---------- Document meta context (to access document/object inside deep overrides) ----------
 type DocumentMeta = {
   documentId: number;
+  documentUid?: string | null;
   objectId?: number | null;
+  objectUid?: string | null;
   objectName?: string | null;
   schemaId?: number | null;
+  schemaCode?: string | null;
   schemaName?: string | null;
+  schemaVersion?: string | null;
 };
 const DocumentCtx = React.createContext<DocumentMeta | null>(null);
 export function useDocumentMeta() {

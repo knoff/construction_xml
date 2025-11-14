@@ -6,6 +6,17 @@ export function pathKey(path: Path): string {
   return path.map((k) => String(k)).join(".");
 }
 
+export function buildMappingKey(
+  schemaCode: string | null | undefined,
+  schemaVersion: string | null | undefined,
+  path: Path,
+): string | null {
+  if (!schemaCode || !schemaVersion) return null;
+  const safeVersion = schemaVersion.replace(/\./g, "~");
+  const key = pathKey(path);
+  return key ? `${schemaCode}#${safeVersion}.${key}` : `${schemaCode}#${safeVersion}`;
+}
+
 /** Split key "a.b.*.c" -> ["a","b","*","c"] */
 export function splitKey(key: string): string[] {
   return key ? key.split(".") : [];

@@ -3,6 +3,8 @@ from datetime import datetime
 from typing import Optional
 
 from sqlalchemy import String, Integer, JSON, DateTime, ForeignKey, UniqueConstraint, cast, Boolean, Index
+from sqlalchemy.sql import func
+
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship, foreign
 
@@ -171,6 +173,49 @@ class FileSignatureRow(Base):
     sig_file_id: Mapped[int] = mapped_column(ForeignKey("files.id"), index=True)
     algo: Mapped[Optional[str]] = mapped_column(String(64), nullable=True)        # GOST/PKCS7/…
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=datetime.utcnow)
+
+class ValueLinkRow(Base):
+    """Базовая связь между двумя путями значений (документ ↔ документ / документ ↔ сущность)."""
+
+    __tablename__ = "value_links"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    left_key: Mapped[str] = mapped_column(String(255), nullable=False)
+    right_key: Mapped[str] = mapped_column(String(255), nullable=False)
+    relation: Mapped[str] = mapped_column(String(16), default="eq")
+    weight: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
+    meta: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
+    )
+
+    __table_args__ = (
+        UniqueConstraint("left_key", "right_key", "relation", name="uq_value_links_pair"),
+        Index("ix_value_links_left", "left_key"),
+        Index("ix_value_links_right", "right_key"),
+    )
+
+
+class ValueLockRow(Base):
+    """Замок значения: поле подписывается на источник и синхронизируется по выбранному режиму."""
+
+    __tablename__ = "value_locks"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    locked_key: Mapped[str] = mapped_column(String(255), nullable=False, index=True)
+    source_key: Mapped[str] = mapped_column(String(255), nullable=False)
+    mode: Mapped[str] = mapped_column(String(32), default="sync_on_open")
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
+    )
+    comment: Mapped[Optional[str]] = mapped_column(String, nullable=True)
+
+    __table_args__ = (
+        UniqueConstraint("locked_key", name="uq_value_locks_locked_key"),
+        Index("ix_value_locks_source", "source_key"),
+    )
 
 class RuleRow(Base):
     __tablename__ = "rules"

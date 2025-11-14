@@ -76,6 +76,8 @@ export function ArrayChoice({
       <FieldLabel
         field={{ ...field, documentation: field.documentation ?? { label: "Варианты" } }}
         path={path}
+        value={items}
+        enableValueLink={false}
       />
       <div className={`space-y-3 ${hasSubtreeErrors ? "border border-red-500 rounded-xl p-3" : ""}`}>
         {items.map((item, index) => {

@@ -10,6 +10,7 @@ type BlockFrameProps = {
   path: (string | number)[];
   isBlock: boolean;
   headerExtra?: React.ReactNode;
+  headerStatus?: React.ReactNode;
   children: React.ReactNode;
   hasError?: boolean;
   errsHere?: string[];
@@ -22,6 +23,7 @@ export function BlockFrame({
   path,
   isBlock,
   headerExtra,
+  headerStatus,
   children,
   hasError,
   errsHere,
@@ -132,27 +134,30 @@ export function BlockFrame({
           )}
         </div>
 
-        {hasError ? (
-          <span
-            className="ml-1 inline-flex items-center rounded-full border border-red-300 bg-red-50 px-2 py-0.5 text-[10px] leading-none text-red-700"
-            title={
-              errPreview && errPreview.length > 0
-                ? errPreview.join("\n")
+        <div className="flex items-center gap-2">
+          {hasError ? (
+            <span
+              className="ml-1 inline-flex items-center rounded-full border border-red-300 bg-red-50 px-2 py-0.5 text-[10px] leading-none text-red-700"
+              title={
+                errPreview && errPreview.length > 0
+                  ? errPreview.join("\n")
+                  : errsHere && errsHere.length
+                  ? errsHere.join("\n")
+                  : "Есть ошибки в разделе"
+              }
+            >
+              Ошибки
+              {typeof errCount === "number"
+                ? `: ${errCount}`
                 : errsHere && errsHere.length
-                ? errsHere.join("\n")
-                : "Есть ошибки в разделе"
-            }
-          >
-            Ошибки
-            {typeof errCount === "number"
-              ? `: ${errCount}`
-              : errsHere && errsHere.length
-              ? `: ${errsHere.length}`
-              : ""}
-          </span>
-        ) : null}
+                ? `: ${errsHere.length}`
+                : ""}
+            </span>
+          ) : null}
 
-        {headerExtra}
+          {headerStatus}
+          {headerExtra}
+        </div>
       </div>
 
       {open && (

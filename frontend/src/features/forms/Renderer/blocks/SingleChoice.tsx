@@ -75,6 +75,8 @@ export function SingleChoice({
       <FieldLabel
         field={{ ...field, documentation: field.documentation ?? { label: "Вариант" } }}
         path={path}
+        value={container}
+        enableValueLink={false}
       />
 
       <select

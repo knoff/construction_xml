@@ -13,6 +13,7 @@ from app.api.routes.document_versions import router as doc_versions_router
 from app.api.routes.files import router as files_router
 from app.api.routes.rules import router as rules_router
 from app.api.routes.sign import router as sign_router
+from app.api.routes.value_links import router as value_links_router, locks_router as value_locks_router
 
 from app.api.routes import files as files_routes
 
@@ -30,6 +31,8 @@ app.include_router(doc_versions_router, tags=["documents"],    prefix="/api")
 app.include_router(files_router,        tags=["files"],        prefix="/api")
 app.include_router(rules_router,        tags=["rules"],        prefix="/api")
 app.include_router(sign_router,         tags=["sign"],         prefix="/api")
+app.include_router(value_links_router,  tags=["value-links"],  prefix="/api")
+app.include_router(value_locks_router,  tags=["value-locks"],  prefix="/api")
 
 # --- SPA & API separation ---
 BASE_DIR = Path(__file__).resolve().parent
