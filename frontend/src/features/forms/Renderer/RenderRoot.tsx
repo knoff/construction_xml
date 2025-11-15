@@ -6,6 +6,7 @@ import { CollapseCtx, LabelOverridesCtx, FormStateCtx } from "./contexts";
 import { LabelEditorDialog } from "./dialogs/LabelEditorDialog";
 import { FieldBlock } from "../FieldBlock";
 import type { FormStateController } from "./hooks/useFormState";
+import { MappingDialog } from "../valueMapping/components/MappingDialog";
 
 type RenderRootProps = {
   fields: FieldModel[];
@@ -113,6 +114,7 @@ export function RenderRoot({ fields, types, stateCtl, errors }: RenderRootProps)
           />
         </FormStateCtx.Provider>
       </LabelOverridesCtx.Provider>
+      <MappingDialog />
     </CollapseCtx.Provider>
   );
 }

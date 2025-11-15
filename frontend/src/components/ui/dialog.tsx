@@ -60,19 +60,19 @@ export const DialogContent = React.forwardRef<
 ));
 DialogContent.displayName = "DialogContent";
 
-export function DialogHeader(props: React.HTMLAttributes<HTMLDivElement>) {
-    return <div className={cn("border-b px-6 py-4 bg-gray-600", props.className)} {...props} />;
+export function DialogHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("border-b px-6 py-4 bg-gray-600", className)} {...props} />;
 }
-export function DialogTitle(props: React.HTMLAttributes<HTMLHeadingElement>) {
-  return <h2 className={cn("text-lg font-semibold text-gray-50", props.className)} {...props} />;
+export function DialogTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
+  return <h2 className={cn("text-lg font-semibold text-gray-50", className)} {...props} />;
 }
-export function DialogDescription(props: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <p className={cn("text-sm text-zinc-600", props.className)} {...props} />;
+export function DialogDescription({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+  return <p className={cn("text-sm text-zinc-600", className)} {...props} />;
 }
-export function DialogBody(props: React.HTMLAttributes<HTMLDivElement>) {
+export function DialogBody({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   // внутренняя прокрутка только у тела
-  return <div className={cn("px-6 py-5 flex-1 overflow-auto", props.className)} {...props} />;
+  return <div className={cn("px-6 py-5 flex-1 overflow-auto", className)} {...props} />;
 }
-export function DialogFooter(props: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("border-t px-6 py-4 flex items-center justify-end gap-2", props.className)} {...props} />;
+export function DialogFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("border-t px-6 py-4 flex items-center justify-end gap-2", className)} {...props} />;
 }

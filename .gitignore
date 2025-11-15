@@ -38,3 +38,4 @@ app/static/index.html
 frontend/stats.html
 
 samples
+frontend/vite.config.ts.*

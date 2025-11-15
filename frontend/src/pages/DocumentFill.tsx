@@ -4,6 +4,7 @@ import { RenderRoot, useFormState } from "@/features/forms/Renderer";
 import type { SchemaModel } from "@/features/forms/types";
 import { validateModel } from "@/features/forms/validate";
 import { ValueLinkProvider } from "@/features/forms/hooks/useValueLinks";
+import { MappingDialogProvider } from "@/features/forms/valueMapping/store";
 
 /** DocumentFill: загрузка меты документа, internal-model, рендер формы и сохранение версий. */
 export default function DocumentFill() {
@@ -191,14 +192,28 @@ export default function DocumentFill() {
           schemaName: doc?.schema?.name ?? null,
           schemaVersion: doc?.schema?.version ?? null,
         }}>
-          <ValueLinkProvider>
-            <RenderRoot
-              fields={model.root}
-              types={model.types}
-              stateCtl={stateCtl}
-              errors={errors}
-            />
-          </ValueLinkProvider>
+          <MappingDialogProvider
+            documentContext={{
+              documentId: Number(id),
+              documentUid: doc?.doc_uid ?? null,
+              objectId: doc?.object?.id ?? null,
+              objectUid: doc?.object?.uid ?? null,
+              objectName: doc?.object?.name ?? null,
+              schemaId: doc?.schema?.id ?? null,
+              schemaCode: doc?.schema?.code ?? null,
+              schemaName: doc?.schema?.name ?? null,
+              schemaVersion: doc?.schema?.version ?? null,
+            }}
+          >
+            <ValueLinkProvider>
+              <RenderRoot
+                fields={model.root}
+                types={model.types}
+                stateCtl={stateCtl}
+                errors={errors}
+              />
+            </ValueLinkProvider>
+          </MappingDialogProvider>
         </DocumentCtx.Provider>
       </UiOverridesProvider>
       <div className="flex items-center justify-between pt-2">
