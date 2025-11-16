@@ -3,12 +3,12 @@ from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.responses import FileResponse
 from pathlib import Path
+from app.api.routes.health import router as health_router
 from app.api.http.schemas import router as schemas_router, legacy_router as legacy_schemas_router
 from app.api.http.documents import router as documents_router, legacy_router as legacy_documents_router
-from app.api.routes.health import router as health_router
-from app.api.http.objects import router as objects_router, legacy_router as legacy_objects_router
 from app.api.http.document_versions import router as doc_versions_router, legacy_router as legacy_doc_versions_router
 from app.api.http.files import router as files_router, legacy_router as legacy_files_router
+from app.api.http.objects import router as objects_router, legacy_router as legacy_objects_router
 from app.api.http.sign import router as sign_router, legacy_router as legacy_sign_router
 from app.api.http.value_links import (
     router as value_links_router,
@@ -16,6 +16,7 @@ from app.api.http.value_links import (
     legacy_router as legacy_value_links_router,
     legacy_locks_router as legacy_value_locks_router,
 )
+from app.api.http.docs import router as docs_router
 
 app = FastAPI(title="Минстрой XML Service (MVP)")
 
@@ -28,6 +29,7 @@ app.include_router(files_router)
 app.include_router(sign_router)
 app.include_router(value_links_router)
 app.include_router(value_locks_router)
+app.include_router(docs_router)
 app.include_router(legacy_schemas_router, tags=["schemas"], prefix="/api")
 app.include_router(legacy_documents_router, tags=["documents"], prefix="/api")
 app.include_router(legacy_doc_versions_router, tags=["documents"], prefix="/api")

@@ -120,4 +120,54 @@
   body {
     @apply bg-background text-foreground;
   }
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    @apply font-semibold text-slate-900 leading-tight;
+  }
+  .prose h1 {
+    @apply text-3xl;
+  }
+  .prose h2 {
+    @apply text-2xl mt-10;
+  }
+  .prose h3 {
+    @apply text-xl mt-8;
+  }
+  .prose h4 {
+    @apply text-lg mt-6;
+  }
+  .prose p,
+  .prose ul,
+  .prose ol {
+    @apply text-slate-700 leading-relaxed;
+  }
+  .prose a {
+    @apply text-blue-600 underline hover:text-blue-700;
+  }
+  .prose ul {
+    @apply list-disc pl-6;
+  }
+  .prose ol {
+    @apply list-decimal pl-6;
+  }
+  .prose code {
+    @apply rounded bg-slate-200 px-1 py-0.5 font-mono text-sm;
+  }
+  .prose pre {
+    @apply rounded bg-slate-200 text-slate-900 p-4 overflow-auto;
+  }
+  .prose table {
+    @apply w-full table-auto border-collapse text-sm;
+  }
+  .prose th,
+  .prose td {
+    @apply border border-slate-200 px-3 py-2 text-left;
+  }
+  .prose blockquote {
+    @apply border-l-4 border-slate-300 pl-4 italic py-2 my-4 text-slate-600;
+  }
 }

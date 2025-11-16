@@ -8,6 +8,7 @@ import FilesList from './pages/FilesList'
 import ObjectsList from './pages/ObjectsList'
 import DocumentsList from './pages/DocumentsList'
 import DocumentFill from './pages/DocumentFill'
+import Docs from './pages/Docs'
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
       { path: 'objects', element: <ObjectsList /> },
       { path: 'documents', element: <DocumentsList /> },
       { path: 'documents/:id/fill', element: <DocumentFill /> },
+      { path: 'docs', element: <Docs /> },
     ]
   }
 ], { basename: import.meta.env.DEV ? '/' : '/ui' })

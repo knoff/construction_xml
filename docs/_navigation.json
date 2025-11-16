@@ -1,0 +1,53 @@
+{
+  "title": "Проектная документация",
+  "items": [
+    {
+      "title": "Пользовательская документация",
+      "path": "user/index.md",
+      "match": ["user/"],
+      "children": [
+        {"title": "Начало работы", "path": "user/getting-started.md"},
+        {"title": "Работа с интерфейсом", "path": "user/ui-guide.md"},
+        {"title": "Частые вопросы", "path": "user/faq.md"}
+      ]
+    },
+    {
+      "title": "Техническая документация",
+      "path": "technical/index.md",
+      "match": ["architecture/", "processes/", "testing/"],
+      "children": [
+        {
+          "title": "Архитектура",
+          "path": "architecture/index.md",
+          "match": ["architecture/"],
+          "children": [
+            {"title": "Backend", "path": "architecture/backend.md"},
+            {"title": "Frontend", "path": "architecture/frontend.md"},
+            {"title": "Инфраструктура и деплой", "path": "architecture/infrastructure.md"},
+            {"title": "Данные и база", "path": "architecture/data.md"}
+          ]
+        },
+        {
+          "title": "Процессы",
+          "path": "processes/development.md",
+          "match": ["processes/"],
+          "children": [
+            {"title": "Руководство по API", "path": "processes/api-guidelines.md"}
+          ]
+        },
+        {
+          "title": "Стратегия тестирования",
+          "path": "testing/index.md",
+          "match": ["testing/"],
+          "children": [
+            {"title": "Backend-тесты", "path": "testing/backend.md"},
+            {"title": "Frontend-тесты", "path": "testing/frontend.md"},
+            {"title": "Сквозные сценарии", "path": "testing/e2e.md"},
+            {"title": "CI/CD и матрица прогонов", "path": "testing/ci.md"},
+            {"title": "Инструменты и фикстуры", "path": "testing/tooling.md"}
+          ]
+        }
+      ]
+    }
+  ]
+}
