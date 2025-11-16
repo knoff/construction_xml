@@ -8,7 +8,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.db import get_db
-from app.services import value_links as svc
+from app.services.infrastructure import value_links as svc
 
 router = APIRouter(prefix="/value-links", tags=["value-links"])
 locks_router = APIRouter(prefix="/value-locks", tags=["value-locks"])

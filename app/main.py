@@ -1,40 +1,43 @@
-from fastapi import FastAPI, HTTPException, UploadFile, File, APIRouter
+from fastapi import FastAPI, HTTPException
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
-from starlette.responses import FileResponse, JSONResponse
+from starlette.responses import FileResponse
 from pathlib import Path
+from app.api.http.schemas import router as schemas_router, legacy_router as legacy_schemas_router
+from app.api.http.documents import router as documents_router, legacy_router as legacy_documents_router
 from app.api.routes.health import router as health_router
-from app.api.routes.schemas import router as schemas_router
-from app.api.routes.schema_types import router as schema_types_router
-# from app.api.routes.documents import router as documents_router
-from app.api.routes.objects import router as objects_router
-from app.api.routes.documents_crud import router as documents_crud_router
-from app.api.routes.document_versions import router as doc_versions_router
-from app.api.routes.files import router as files_router
-from app.api.routes.rules import router as rules_router
-from app.api.routes.sign import router as sign_router
-from app.api.routes.value_links import router as value_links_router, locks_router as value_locks_router
-
-from app.api.routes import files as files_routes
+from app.api.http.objects import router as objects_router, legacy_router as legacy_objects_router
+from app.api.http.document_versions import router as doc_versions_router, legacy_router as legacy_doc_versions_router
+from app.api.http.files import router as files_router, legacy_router as legacy_files_router
+from app.api.http.sign import router as sign_router, legacy_router as legacy_sign_router
+from app.api.http.value_links import (
+    router as value_links_router,
+    locks_router as value_locks_router,
+    legacy_router as legacy_value_links_router,
+    legacy_locks_router as legacy_value_locks_router,
+)
 
 app = FastAPI(title="Минстрой XML Service (MVP)")
 
-app.include_router(health_router,       tags=["system"],       prefix="/api")
-app.include_router(schemas_router,      tags=["schemas"],      prefix="/api")
-app.include_router(schema_types_router, tags=["schema-types"], prefix="/api")
-# NOTE: legacy in-memory documents router disabled to avoid path conflicts
-# from app.api.routes.documents import router as documents_router
-# app.include_router(documents_router,    tags=["documents"],    prefix="/api")
-app.include_router(objects_router,      tags=["objects"],      prefix="/api")
-app.include_router(documents_crud_router, tags=["documents"],  prefix="/api")
-app.include_router(doc_versions_router, tags=["documents"],    prefix="/api")
-app.include_router(files_router,        tags=["files"],        prefix="/api")
-app.include_router(rules_router,        tags=["rules"],        prefix="/api")
-app.include_router(sign_router,         tags=["sign"],         prefix="/api")
-app.include_router(value_links_router,  tags=["value-links"],  prefix="/api")
-app.include_router(value_locks_router,  tags=["value-locks"],  prefix="/api")
+app.include_router(health_router, tags=["system"], prefix="/api")
+app.include_router(schemas_router)
+app.include_router(objects_router)
+app.include_router(documents_router)
+app.include_router(doc_versions_router)
+app.include_router(files_router)
+app.include_router(sign_router)
+app.include_router(value_links_router)
+app.include_router(value_locks_router)
+app.include_router(legacy_schemas_router, tags=["schemas"], prefix="/api")
+app.include_router(legacy_documents_router, tags=["documents"], prefix="/api")
+app.include_router(legacy_doc_versions_router, tags=["documents"], prefix="/api")
+app.include_router(legacy_files_router,    tags=["files"],    prefix="/api")
+app.include_router(legacy_objects_router,  tags=["objects"],  prefix="/api")
+app.include_router(legacy_sign_router,     tags=["sign"],        prefix="/api")
+app.include_router(legacy_value_links_router, tags=["value-links"], prefix="/api")
+app.include_router(legacy_value_locks_router, tags=["value-locks"], prefix="/api")
 
-# --- SPA & API separation ---
+# --- Разделение SPA и API ---
 BASE_DIR = Path(__file__).resolve().parent
 SPA_DIR = BASE_DIR / "static"
 
@@ -61,34 +64,3 @@ def spa_catch_all(path: str = ""):
 @app.get("/", include_in_schema=False)
 def root_redirect():
     return RedirectResponse(url="/ui")
-'''
-# 1) JSON API под /api/*  (простой роутер для фронта)
-api = APIRouter(prefix="/api", tags=["api"])
-try:
-    # используем существующие сервисы реестра
-    from app.services.xsd_registry import list_schemas, save_schema_file  # type: ignore
-except Exception:
-    list_schemas = None
-    save_schema_file = None
-
-@api.get("/schemas")
-def api_schemas_list():
-    if not callable(list_schemas):
-        raise HTTPException(500, "list_schemas() is unavailable")
-    return JSONResponse(list_schemas())
-
-@api.post("/schemas/upload")
-async def api_schemas_upload(file: UploadFile = File(...)):
-    if not callable(save_schema_file):
-        raise HTTPException(500, "save_schema_file() is unavailable")
-    return JSONResponse(save_schema_file(file))
-
-app.include_router(api)
-
-# 2) SPA раздаём из /ui (без перехвата /api/* и прочих серверных путей)
-if SPA_DIR.is_dir():
-    # html=True включает fallback на index.html только в префиксе /ui/*
-    app.mount("/ui", StaticFiles(directory=SPA_DIR, html=True), name="ui")
-    # при желании оставить прямой доступ к ассетам:
-    app.mount("/static", StaticFiles(directory=SPA_DIR), name="static")
-'''
