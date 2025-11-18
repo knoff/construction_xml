@@ -21,10 +21,10 @@
           "path": "architecture/index.md",
           "match": ["architecture/"],
           "children": [
-            {"title": "Backend", "path": "architecture/backend.md"},
-            {"title": "Frontend", "path": "architecture/frontend.md"},
-            {"title": "Инфраструктура и деплой", "path": "architecture/infrastructure.md"},
-            {"title": "Данные и база", "path": "architecture/data.md"}
+            {"title": "Backend", "match": ["architecture/backend/"], "path": "architecture/backend.md"},
+            {"title": "Frontend", "match": ["architecture/frontend/"], "path": "architecture/frontend.md"},
+            {"title": "Инфраструктура и деплой", "match": ["architecture/infrastructure/"], "path": "architecture/infrastructure.md"},
+            {"title": "Данные и база", "match": ["architecture/data/"], "path": "architecture/data.md"}
           ]
         },
         {
