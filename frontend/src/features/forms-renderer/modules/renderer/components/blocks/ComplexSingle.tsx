@@ -2,7 +2,7 @@ import * as React from "react";
 import type { FieldModel } from "@/features/forms-renderer/core/types";
 import { getAtPath, pathKey, normalizePathKey } from "@/features/forms-renderer/core/utils/path";
 import { countSubtreeErrors, hasAnyValidatorErrors } from "@/features/forms-renderer/core/utils/errors";
-import { useUiOverrides } from "@/features/documents/context";
+import { useUiOverrides } from "@/features/documents";
 import { UI_COMPONENTS, canUseComponent } from "@/features/forms-renderer/modules/ui-overrides/runtime/registry";
 import { BlockFrame } from "../BlockFrame";
 import { HelpText } from "../HelpText";

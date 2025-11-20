@@ -47,6 +47,33 @@ function classifyLink(href: string, currentPath: string | null): LinkClassificat
   }
 }
 
+function extractText(content: React.ReactNode): string {
+  return React.Children.toArray(content)
+    .map((node) => {
+      if (typeof node === "string" || typeof node === "number") {
+        return String(node);
+      }
+      if (React.isValidElement(node)) {
+        return extractText(node.props.children);
+      }
+      return "";
+    })
+    .join(" ")
+    .trim();
+}
+
+function slugifyHeading(value: string): string {
+  const base = value
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/[\s]+/g, "-")
+    .replace(/[^\p{L}\p{N}-]+/gu, "")
+    .replace(/-+/g, "-");
+
+  return base || "section";
+}
+
 export function DocsViewer() {
   const [searchParams, setSearchParams] = useSearchParams();
   const activePath = searchParams.get("path");
@@ -220,8 +247,34 @@ export function DocsViewer() {
 
   const linkBaseClass = "inline-flex items-center gap-1 rounded-md px-2 py-1 text-sm text-slate-700 hover:bg-slate-100 transition";
 
-  const markdownComponents = React.useMemo(
-    () => ({
+  const markdownComponents = React.useMemo(() => {
+    const headingCounters = new Map<string, number>();
+
+    const ensureUniqueSlug = (slug: string) => {
+      const count = headingCounters.get(slug);
+      if (typeof count === "number") {
+        const next = count + 1;
+        headingCounters.set(slug, next);
+        return `${slug}-${next}`;
+      }
+      headingCounters.set(slug, 0);
+      return slug;
+    };
+
+    const createHeading = (Tag: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") =>
+      ({ children, id, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
+        const text = extractText(children);
+        const baseSlug = slugifyHeading(id ?? text);
+        const uniqueSlug = ensureUniqueSlug(baseSlug);
+
+        return (
+          <Tag id={uniqueSlug} {...props}>
+            {children}
+          </Tag>
+        );
+      };
+
+    return {
       a({ href, children, ...props }: { href?: string; children?: React.ReactNode }) {
         if (!href) {
           return <span {...props}>{children}</span>;
@@ -282,9 +335,14 @@ export function DocsViewer() {
           </a>
         );
       },
-    }),
-    [activePath, linkBaseClass, navigateToDoc],
-  );
+      h1: createHeading("h1"),
+      h2: createHeading("h2"),
+      h3: createHeading("h3"),
+      h4: createHeading("h4"),
+      h5: createHeading("h5"),
+      h6: createHeading("h6"),
+    };
+  }, [activePath, linkBaseClass, navigateToDoc, content]);
 
   return (
     <div className="grid gap-6 lg:grid-cols-[280px_1fr]">

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { api } from "@/lib/api";
 import { buildMappingKey, type Path } from "@/features/forms-renderer/core/utils/path";
-import { useDocumentMeta } from "@/features/documents/context";
+import { useDocumentMeta } from "@/features/documents";
 import type { ValueTypeCompatibility } from "@/features/forms-renderer/modules/mapper/runtime";
 
 export type ValueLinkMatch = {

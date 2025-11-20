@@ -6,7 +6,11 @@ import type { SchemaModel } from "@/features/forms-renderer/core/types";
 import { validateModel } from "@/features/forms-renderer/modules/validator";
 import { ValueLinkProvider } from "@/features/forms-renderer/hooks/useValueLinks";
 import { MappingDialogProvider } from "@/features/forms-renderer/modules/mapper/runtime";
-import { DocumentMetaProvider, UiOverridesProvider, type UiOverrides } from "@/features/documents/context";
+import {
+  DocumentMetaProvider,
+  UiOverridesProvider,
+  type UiOverrides,
+} from "@/features/documents";
 
 /** DocumentFill: загрузка меты документа, internal-model, рендер формы и сохранение версий. */
 export default function DocumentFillPage() {

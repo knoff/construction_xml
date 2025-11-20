@@ -4,7 +4,7 @@ import { getAtPath, pathKey, normalizePathKey } from "@/features/forms-renderer/
 import { countSubtreeErrors, hasAnyValidatorErrors } from "@/features/forms-renderer/core/utils/errors";
 import { BlockFrame } from "../BlockFrame";
 import { HelpText } from "../HelpText";
-import { useUiOverrides } from "@/features/documents/context";
+import { useUiOverrides } from "@/features/documents";
 import { UI_COMPONENTS, canUseComponent } from "@/features/forms-renderer/modules/ui-overrides/runtime/registry";
 import { shallowMissingForField } from "../../core/field-utils";
 import { ValueLinkQuickCheck } from "@/features/forms-renderer/modules/ui-overrides/components";

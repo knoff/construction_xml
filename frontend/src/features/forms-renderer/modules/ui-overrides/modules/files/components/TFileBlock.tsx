@@ -2,7 +2,7 @@ import * as React from "react";
 import type { FieldModel } from "@/features/forms-renderer/core/types";
 import { getAtPath } from "@/features/forms-renderer/core/utils/path";
 import { useFormStateController } from "@/features/forms-renderer/modules/renderer/runtime/contexts";
-import { useDocumentMeta } from "@/features/documents/context";
+import { useDocumentMeta } from "@/features/documents";
 import { BlockRow, ValueLinkMatches, ValueLinkStatusBadge } from "@/features/forms-renderer/modules/ui-overrides/components";
 import { SelectFileDialog } from "./dialogs/SelectFileDialog";
 import { UploadDialog } from "@/features/files/components/UploadDialog";

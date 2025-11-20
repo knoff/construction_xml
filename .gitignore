@@ -34,8 +34,8 @@ app/static
 
 project_scan
 scan_project.py
-app/static/index.html
 frontend/stats.html
 
 samples
 frontend/vite.config.ts.*
+app/static/index.html

@@ -2,7 +2,7 @@ import * as React from "react";
 import type { FieldModel } from "@/features/forms-renderer/core/types";
 import { pathKey, normalizePathKey } from "@/features/forms-renderer/core/utils/path";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
-import { useUiOverrides } from "@/features/documents/context";
+import { useUiOverrides } from "@/features/documents";
 import { UI_COMPONENTS, canUseComponent } from "@/features/forms-renderer/modules/ui-overrides/runtime/registry";
 
 type UiOverrideBadgeProps = {

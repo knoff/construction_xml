@@ -2,7 +2,7 @@ import * as React from "react";
 import type { FieldModel } from "@/features/forms-renderer/core/types";
 import { pathKey } from "@/features/forms-renderer/core/utils/path";
 import { useFormStateController } from "@/features/forms-renderer/modules/renderer/runtime/contexts";
-import { useDocumentMeta } from "@/features/documents/context";
+import { useDocumentMeta } from "@/features/documents";
 import { SelectFileDialog } from "../dialogs/SelectFileDialog";
 
 type FormValue = {

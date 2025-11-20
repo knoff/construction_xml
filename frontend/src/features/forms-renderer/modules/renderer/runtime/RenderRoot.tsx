@@ -1,7 +1,7 @@
 import * as React from "react";
 import type { FieldModel } from "@/features/forms-renderer/core/types";
 import { normalizePathKey } from "@/features/forms-renderer/core/utils/path";
-import { useUiOverrides } from "@/features/documents/context";
+import { useUiOverrides } from "@/features/documents";
 import { CollapseCtx, LabelOverridesCtx, FormStateCtx } from "./contexts";
 import { LabelEditorDialog } from "../components/dialogs/LabelEditorDialog";
 import { FieldBlock } from "../components/FieldBlock";

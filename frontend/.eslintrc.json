@@ -1,0 +1,69 @@
+{
+  "root": true,
+  "reportUnusedDisableDirectives": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": "."
+  },
+  "plugins": ["@typescript-eslint", "import", "boundaries"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:import/typescript"
+  ],
+  "settings": {
+    "import/resolver": {
+      "typescript": { "project": "./tsconfig.json" }
+    },
+    "boundaries/elements": [
+      { "type": "app", "pattern": "src/app/**" },
+      { "type": "components", "pattern": "src/components/**" },
+      { "type": "lib", "pattern": "src/lib/**" },
+      { "type": "types", "pattern": "src/types/**" },
+      { "type": "feature", "pattern": "src/features/*" }
+    ]
+  },
+  "rules": {
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [
+          {
+            "group": ["../../*", "../.."],
+            "message": "Используйте alias @ для модулей вне локального слоя"
+          }
+        ]
+      }
+    ],
+    "import/no-restricted-paths": [
+      "error",
+      {
+        "zones": [
+          {
+            "target": "./src/features",
+            "from": "./src/components",
+            "message": "Компоненты не могут импортировать код фич"
+          },
+          {
+            "target": "./src/features",
+            "from": "./src/app",
+            "message": "Слой app не должен тянуть фичевую внутренность — используйте фасады"
+          }
+        ]
+      }
+    ],
+    "boundaries/element-types": [
+      "error",
+      {
+        "default": "disallow",
+        "rules": [
+          { "from": ["app"], "allow": ["feature", "components", "lib", "types"] },
+          { "from": ["feature"], "allow": ["feature", "components", "lib", "types"] },
+          { "from": ["components"], "allow": ["components", "lib", "types"] }
+        ]
+      }
+    ]
+  }
+}

@@ -1,25 +1,54 @@
 import type { RouteObject } from "react-router-dom";
+import React from "react";
+import { Navigate } from "react-router-dom";
 
 import { RootLayout } from "@/app/layouts/RootLayout";
-import SchemasListPage from "@/features/schemas/pages/SchemasListPage";
-import FilesListPage from "@/features/files/pages/FilesListPage";
-import ObjectsListPage from "@/features/objects/pages/ObjectsListPage";
-import DocumentsListPage from "@/features/documents/pages/DocumentsListPage";
-import DocumentFillPage from "@/features/documents/pages/DocumentFillPage";
-import DocsPage from "@/features/docs/pages/DocsPage";
+import { resolvedRootFeatures } from "@/app/feature-registry";
+import type { FeatureRoute } from "@/lib/features/manifest";
+import { getPrimaryNavigationLinks } from "@/app/navigation";
+
+function createRouteElement(loader: FeatureRoute["component"]) {
+  const LazyComponent = React.lazy(loader);
+  return (
+    <React.Suspense fallback={null}>
+      <LazyComponent />
+    </React.Suspense>
+  );
+}
+
+function convertFeatureRoutes(routes: FeatureRoute[] = []): RouteObject[] {
+  return routes.map((route) => {
+    if (route.index) {
+      return {
+        index: true,
+        element: createRouteElement(route.component),
+      } satisfies RouteObject;
+    }
+
+    const children = route.children ? convertFeatureRoutes(route.children) : undefined;
+    return {
+      path: route.path,
+      element: createRouteElement(route.component),
+      children,
+    } satisfies RouteObject;
+  });
+}
+
+const childrenRoutes = resolvedRootFeatures.flatMap((feature) => convertFeatureRoutes(feature.manifest.routes));
+
+const defaultNavigationTarget = getPrimaryNavigationLinks()[0]?.to;
+
+if (!childrenRoutes.some((route) => route.index) && defaultNavigationTarget) {
+  childrenRoutes.unshift({
+    index: true,
+    element: <Navigate to={defaultNavigationTarget} replace />,
+  });
+}
 
 export const routes: RouteObject[] = [
   {
     path: "/",
     element: <RootLayout />,
-    children: [
-      { index: true, element: <SchemasListPage /> },
-      { path: "schemas", element: <SchemasListPage /> },
-      { path: "files", element: <FilesListPage /> },
-      { path: "objects", element: <ObjectsListPage /> },
-      { path: "documents", element: <DocumentsListPage /> },
-      { path: "documents/:id/fill", element: <DocumentFillPage /> },
-      { path: "docs", element: <DocsPage /> },
-    ],
+    children: childrenRoutes,
   },
 ];

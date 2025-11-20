@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { FieldModel } from "@/features/forms-renderer/core/types";
-import { useUiOverrides } from "@/features/documents/context";
+import { useUiOverrides } from "@/features/documents";
 import { normalizePathKey, pathKey } from "@/features/forms-renderer/core/utils/path";
 import { UI_COMPONENTS, canUseComponent, firstAllowedComponentFor } from "@/features/forms-renderer/modules/ui-overrides/runtime/registry";
 

@@ -1,6 +1,10 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 
+import { usePrimaryNavigationLinks } from "@/app/navigation";
+
 export function RootLayout() {
+  const navigationLinks = usePrimaryNavigationLinks();
+
   return (
     <div className="min-h-screen">
       <header className="border-b">
@@ -8,26 +12,13 @@ export function RootLayout() {
           <Link to="/" className="font-semibold">
             XSD Registry
           </Link>
-          <nav className="flex gap-4">
-            <NavLink to="/schemas" className={({ isActive }) => (isActive ? "underline" : "")}>
-              Схемы
-            </NavLink>
-            <NavLink to="/objects" className={({ isActive }) => (isActive ? "underline" : "")}>
-              Объекты
-            </NavLink>
-            <NavLink to="/documents" className={({ isActive }) => (isActive ? "underline" : "")}>
-              Документы
-            </NavLink>
-            <NavLink to="/files" className={({ isActive }) => (isActive ? "underline" : "")}>
-              Файлы
-            </NavLink>
+          <nav className="flex flex-1 gap-4">
+            {navigationLinks.map((link) => (
+              <NavLink key={link.id} to={link.to} className={({ isActive }) => (isActive ? "underline" : "hover:underline")}> 
+                {link.label}
+              </NavLink>
+            ))}
           </nav>
-          <NavLink
-            to="/docs"
-            className={({ isActive }) => (isActive ? "ml-auto font-medium underline" : "ml-auto font-medium hover:underline")}
-          >
-            Документация
-          </NavLink>
         </div>
       </header>
       <main className="mx-auto max-w-5xl p-4">
